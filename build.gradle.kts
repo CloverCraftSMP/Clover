@@ -46,7 +46,7 @@ dependencies {
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    accessWidenerPath = rootProject.file("src/main/resources/template.accesswidener")
+    accessWidenerPath = rootProject.file("src/main/resources/clover.accesswidener")
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
