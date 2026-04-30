@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 4205,
+    "separation": 6,
+    "spacing": 24
+  },
+  "structures": [
+    {
+      "structure": "clover:campsite",
+      "weight": 1
+    }
+  ]
+}
