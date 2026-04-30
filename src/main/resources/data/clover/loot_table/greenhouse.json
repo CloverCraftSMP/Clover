@@ -1,0 +1,271 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:air",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:sugi_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:white_wisteria_sapling",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:blue_wisteria_sapling",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:pink_wisteria_sapling",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:purple_wisteria_sapling",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:fir_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:willow_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:aspen_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:red_maple_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:orange_maple_sapling",
+          "weight": 3,
+          "quality": -2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:yellow_maple_sapling",
+          "weight": 3,
+          "quality": -2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:cypress_sapling",
+          "weight": 3,
+          "quality": -2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:olive_sapling",
+          "weight": 3,
+          "quality": -2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:ghaf_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:palo_verde_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:cedar_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:larch_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:mahogany_sapling",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "natures_spirit:saxaul_sapling",
+          "weight": 3,
+          "functions": []
+        }
+      ]
+    },
+    {
+      "rolls": 7,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone_meal",
+          "weight": 23,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 18
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:vine",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:rich_soil",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wheat_seeds",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glow_berries",
+          "weight": 11,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beetroot_seeds",
+          "weight": 9,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beetroot",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:rice",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:cabbage_seeds",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "farmersdelight:tomato_seeds",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "functions": []
+}
