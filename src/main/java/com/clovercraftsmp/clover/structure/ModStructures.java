@@ -9,6 +9,7 @@ import net.minecraft.data.worldgen.Pools;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -71,7 +72,8 @@ public class ModStructures {
                     poolRegistry.getOrThrow(s.templatePoolKey()),
                     1,
                     ConstantHeight.of(VerticalAnchor.absolute(0)),
-                    false
+                    false,
+                    Heightmap.Types.WORLD_SURFACE_WG
             ));
         }
     }
