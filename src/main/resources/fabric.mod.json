@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "com.clovercraftsmp.clover.Clover"
+    ],
+    "fabric-datagen": [
+      "com.clovercraftsmp.clover.datagen.CloverDataGenerator"
     ]
   },
   "mixins": [

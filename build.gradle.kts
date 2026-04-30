@@ -41,7 +41,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0")
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1")
 }
 
 loom {
@@ -56,6 +56,12 @@ loom {
         ideConfigGenerated(true)
         vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
         runDir = "../../run" // Shares the run directory between versions
+    }
+}
+
+fabricApi {
+    configureDataGeneration {
+        client = false
     }
 }
 
