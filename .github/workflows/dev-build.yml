@@ -41,8 +41,8 @@ jobs:
       - name: Create dev release
         uses: ncipollo/release-action@v1
         with:
-          tag: "dev-${{ steps.date.outputs.date }}-${{ needs.check.outputs.short_sha }}"
-          name: "Dev ${{ steps.date.outputs.date }} (${{ needs.check.outputs.short_sha }})"
+          tag: "dev-${{ steps.date.outputs.date }}-${{ steps.sha.outputs.short }}"
+          name: "Dev ${{ steps.date.outputs.date }} (${{ steps.sha.outputs.short }})"
           prerelease: true
           artifacts: "versions/*/build/libs/!(*-sources).jar"
           token: ${{ secrets.GITHUB_TOKEN }}
