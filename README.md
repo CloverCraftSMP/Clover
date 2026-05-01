@@ -1,25 +1,54 @@
-# Stonecutter Fabric template
-## Setup
-1. Review the supported Minecraft versions in `settings.gradle.kts`.
-   For new entries, add `versions/.../gradle.properties` with the same keys as other versions.
-2. Change `mod.group`, `mod.id` and `mod.name` properties in `gradle.properties`.
-3. Rename `com.example` package in `src/main/java`.
-4. Rename `src/main/resources/template.mixins.json` to use your mod's id.
-5. Review the `LICENSE` file. 
-   See the [license decision diagram](https://docs.codeberg.org/getting-started/licensing/#license-decision-diagram) for common options.
-6. Review `src/main/resources/fabric.mod.json` to have up-to-date properties.
+<div align="center">
+<h1>Clover</h1>
 
-## Usage
-- Use `"Set active project to ..."` Gradle tasks to update the Minecraft version
-  available in `src/` classes.
-- Use `buildAndCollect` Gradle task to store mod releases in `build/libs/`.
-- Enable `mod-publish-plugin` in `stonecutter.gradle.kts` and `build.gradle.kts`
-  and the corresponding code blocks to publish releases to Modrinth and Curseforge.
-- Enable `maven-publish` in `build.gradle.kts` and the corresponding code block
-  to publish releases to a personal maven repository.
+**Core mod for CloverCraft SMP**
 
-## Useful links
-- [Stonecutter beginner's guide](https://stonecutter.kikugie.dev/wiki/start/): *spoiler: you* ***need*** *to understand how it works!*
-- [Fabric Discord server](https://discord.gg/v6v4pMv): for mod development help.
-- [Stonecutter Discord server](https://discord.kikugie.dev/): for Stonecutter and Gradle help.
-- [How To Ask Questions - the guide](http://www.catb.org/esr/faqs/smart-questions.html): also in [video form](https://www.youtube.com/results?search_query=How+To+Ask+Questions+The+Smart+Way).
+![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
+![Fabric](https://img.shields.io/badge/Fabric-required-dbb98a?style=for-the-badge)
+![Modrinth](https://img.shields.io/modrinth/dt/SnT761HH?style=for-the-badge&logo=modrinth&color=62b47a&label=Downloads)
+![License](https://img.shields.io/github/license/CloverCraftSMP/Clover?style=for-the-badge&color=4a9eff)
+
+</div>
+
+---
+
+## About
+
+Clover adds a collection of hand-crafted structures to the overworld. Every structure was built by the CloverCraft community.
+
+Clover also serves as the coremod for the [CloverCraft SMP](https://modrinth.com/modpack/clovercraftsmp-season-3) modpack, bundling compatibility fixes and minor patches needed to keep everything running smoothly together.
+
+---
+
+## Compatibility
+
+Clover is built to play nice with other mods. If you run into an issue, please [open an issue](https://github.com/CloverCraftSMP/Clover/issues) with your mod list and a crash report or description of the problem.
+
+Known compatibility notes will be listed here as they come up.
+
+---
+
+## Development
+
+```bash
+# Clone the repo
+git clone https://github.com/CloverCraftSMP/Clover.git
+cd Clover
+ 
+# Run the dev client
+./gradlew :1.21.1:runClient
+ 
+# Run datagen (regenerates structure JSON files)
+./gradlew :1.21.1:runDatagen
+ 
+# Build
+./gradlew build
+```
+
+Dev builds are published automatically on every push to `main` and are available on the [Releases](https://github.com/CloverCraftSMP/Clover/releases) page as pre-releases.
+
+---
+
+<div align="center">
+*Part of [CloverCraft SMP](https://modrinth.com/modpack/clovercraftsmp-season-3) - Season 3 <3*
+</div>
