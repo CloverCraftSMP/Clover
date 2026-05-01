@@ -2,7 +2,7 @@ name: Publish
 on:
   push:
     tags:
-        - 'v*'
+      - "[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
     publish:
@@ -18,7 +18,49 @@ jobs:
           - name: Setup Gradle
             uses: gradle/actions/setup-gradle@v3
 
-          - name: Publish all versions
+          - name: Verify version matches tag
+            run: |
+              TAG_VERSION=${GITHUB_REF_NAME}
+              PROP_VERSION=$(grep "mod.version" gradle.properties | cut -d= -f2 | tr -d '[:space:]')
+              if [ "$TAG_VERSION" != "$PROP_VERSION" ]; then
+                echo "Tag $TAG_VERSION does not match mod.version $PROP_VERSION"
+                exit 1
+              fi
+
+          - name: Verify changelog has unreleased notes
+            run: |
+              NOTES=$(awk '/^## \[Unreleased\]/{flag=1; next} /^## \[/{flag=0} flag' CHANGELOG.md | tr -d '[:space:]')
+              if [ -z "$NOTES" ]; then
+                echo "No changelog entries found under [Unreleased]"
+                exit 1
+              fi
+
+          - name: Build
+            run: ./gradlew build
+
+          - name: Extract changelog
+            id: changelog
+            run: |
+              NOTES=$(awk '/^## \[Unreleased\]/{flag=1; next} /^## \[/{flag=0} flag' CHANGELOG.md)
+              echo "notes<<EOF" >> $GITHUB_OUTPUT
+              echo "$NOTES" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+
+          - name: Update CHANGELOG.md
+            run: |
+              DATE=$(date +'%Y-%m-%d')
+              TAG=${GITHUB_REF_NAME}
+              sed -i "s/## \[Unreleased\]/## [Unreleased]\n### Added\n### Fixed\n### Changed\n\n## [$TAG] - $DATE/" CHANGELOG.md
+
+          - name: Commit updated changelog
+            run: |
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+              git add CHANGELOG.md
+              git commit -m "chore: update changelog for ${GITHUB_REF_NAME}"
+              git push origin HEAD:main
+
+          - name: Publish all Modrinth + GitHub
             run: ./gradlew publishModrinth publishGithub
             env:
               MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
