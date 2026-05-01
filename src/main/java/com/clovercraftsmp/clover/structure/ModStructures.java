@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
 import java.util.Map;
@@ -48,13 +49,16 @@ public class ModStructures {
 
     public static void bootstrapTemplatePools(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> poolRegistry = context.lookup(Registries.TEMPLATE_POOL);
+        HolderGetter<StructureProcessorList> processorRegistry = context.lookup(Registries.PROCESSOR_LIST);
+
         Holder.Reference<StructureTemplatePool> emptyPool = poolRegistry.getOrThrow(Pools.EMPTY);
+        Holder<StructureProcessorList> clearVegetation = processorRegistry.getOrThrow(ModProcessorLists.VEGETATION_CLEARANCE);
 
         for (StructureEntry s : ALL) {
             context.register(s.templatePoolKey(), new StructureTemplatePool(
                     emptyPool,
                     List.of(Pair.of(
-                            StructurePoolElement.single(s.nbtId().toString())
+                            StructurePoolElement.single(s.nbtId().toString(), clearVegetation)
                                     .apply(StructureTemplatePool.Projection.RIGID),
                             1
                     ))
