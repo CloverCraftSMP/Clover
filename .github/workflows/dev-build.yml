@@ -8,6 +8,8 @@ on:
       - "*.md"
       - ".github/**"
       - "gradle.properties"
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -22,12 +24,19 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v3
 
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
       - name: Build
         run: ./gradlew build
 
       - name: Get date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Get short SHA
+        id: sha
+        run: echo "short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Create dev release
         uses: ncipollo/release-action@v1
