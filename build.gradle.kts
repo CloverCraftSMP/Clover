@@ -41,6 +41,8 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
+    modRuntimeOnly("maven.modrinth:WtfpyicL:qc0AtV3T") // TODO: make this dynamic by moving it to versions config
+
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1")
 }
 
