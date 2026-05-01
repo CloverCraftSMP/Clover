@@ -1,5 +1,6 @@
 plugins {
     id("net.fabricmc.fabric-loom-remap")
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 
      `maven-publish`
      id("me.modmuss50.mod-publish-plugin")
@@ -41,7 +42,9 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
-    modRuntimeOnly("maven.modrinth:WtfpyicL:qc0AtV3T") // TODO: make this dynamic by moving it to versions config
+    modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
+    modRuntimeOnly(fletchingTable.modrinth("world-preview", "1.21")) // TODO: make this dynamic by moving it to versions config
+    modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1")
 }
