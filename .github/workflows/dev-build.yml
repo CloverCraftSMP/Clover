@@ -1,0 +1,81 @@
+name: Nightly Build
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.check.outputs.should_build }}
+      short_sha: ${{ steps.check.outputs.short_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for changes since last nightly
+        id: check
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+          
+          LAST_TAG=$(gh release list --json tagName \
+            --jq '[.[] | .tagName | select(startswith("nightly-"))] | first')
+          
+          if [ -z "$LAST_TAG" ]; then
+            echo "No previous nightly found, building"
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          else
+            LAST_SHA=$(git rev-parse "$LAST_TAG" 2>/dev/null || echo "")
+            if [ "$(git rev-parse HEAD)" = "$LAST_SHA" ]; then
+              echo "No changes since last nightly, skipping"
+              echo "should_build=false" >> $GITHUB_OUTPUT
+            else
+              echo "Changes detected, building"
+              echo "should_build=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    needs: check
+    if: needs.check.outputs.should_build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 25
+          distribution: temurin
+
+      - uses: gradle/actions/setup-gradle@v3
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Get date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create nightly release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: "nightly-${{ steps.date.outputs.date }}-${{ needs.check.outputs.short_sha }}"
+          name: "Nightly ${{ steps.date.outputs.date }} (${{ needs.check.outputs.short_sha }})"
+          prerelease: true
+          artifacts: "versions/*/build/libs/*.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prune old nightly releases (keep 5)
+        run: |
+          gh release list --json tagName,isPrerelease \
+            --jq '.[] | select(.isPrerelease) | .tagName' | \
+            grep "^nightly-" | \
+            tail -n +6 | \
+            xargs -I {} sh -c 'gh release delete {} --yes --cleanup-tag'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
