@@ -1,8 +1,8 @@
 plugins {
     id("net.fabricmc.fabric-loom-remap")
 
-    // `maven-publish`
-    // id("me.modmuss50.mod-publish-plugin")
+     `maven-publish`
+     id("me.modmuss50.mod-publish-plugin")
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -100,8 +100,7 @@ tasks {
     }
 }
 
-/*
-// Publishes builds to Modrinth and Curseforge with changelog from the CHANGELOG.md file
+// Publishes builds to Modrinth with changelog from the CHANGELOG.md file
 publishMods {
     file = tasks.remapJar.map { it.archiveFile.get() }
     additionalFiles.from(tasks.remapSourcesJar.map { it.archiveFile.get() })
@@ -122,17 +121,8 @@ publishMods {
             slug = "fabric-api"
         }
     }
-
-    curseforge {
-        projectId = property("publish.curseforge") as String
-        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        minecraftVersions.addAll(property("mod.mc_targets").toString().split(' '))
-        requires {
-            slug = "fabric-api"
-        }
-    }
 }
- */
+
 /*
 // Publishes builds to a maven repository under `com.example:template:0.1.0+mc`
 publishing {
