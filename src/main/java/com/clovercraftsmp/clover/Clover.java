@@ -32,4 +32,8 @@ public class Clover implements ModInitializer {
         *///?} else
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
+
+    public static ResourceLocation id(String path) {
+        return id(MOD_ID, path);
+    }
 }
