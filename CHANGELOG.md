@@ -1,0 +1,2 @@
+- Redo structure spread and separation
+- Pipeline for publishing
