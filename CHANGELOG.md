@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+
+## [0.2.2] - 2026-05-01
+### Added
 - Changelog template
 ### Fixed
 - Changelog generation
