@@ -26,25 +26,36 @@ import java.util.List;
 import java.util.Map;
 
 public class ModStructures {
+    private static final int SALT_BASE = 420100;
+    
+    private static final int COMMON_SPACING = 72;
+    private static final int COMMON_SEPARATION = 16;
+    
+    private static final int UNCOMMON_SPACING = 120;
+    private static final int UNCOMMON_SEPARATION = 24;
+    
+    private static final int RARE_SPACING = 160;
+    private static final int RARE_SEPARATION = 20;
+
     public static final List<StructureEntry> ALL = List.of(
             // common structures
-            new StructureEntry("wagon", BiomeTags.IS_FOREST, TerrainAdjustment.NONE, 48, 8, 4213),
-            new StructureEntry("campsite", BiomeTags.IS_TAIGA, TerrainAdjustment.NONE, 48, 8, 4205),
-            new StructureEntry("haystorage", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 48, 8, 4209),
+            new StructureEntry("wagon", BiomeTags.IS_FOREST, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
+            new StructureEntry("campsite", BiomeTags.IS_TAIGA, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
+            new StructureEntry("haystorage", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 3),
 
             // uncommon structures
-            new StructureEntry("barn", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, 72, 12, 4201),
-            new StructureEntry("cabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 72, 12, 4204),
-            new StructureEntry("greenhouse", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, 72, 12, 4208),
-            new StructureEntry("berrycabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 72, 12, 4203),
-            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 72, 12, 4206),
-            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 72, 12, 4207),
+            new StructureEntry("barn", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 4),
+            new StructureEntry("cabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
+            new StructureEntry("greenhouse", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 6),
+            new StructureEntry("berrycabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 7),
+            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 8),
+            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 9),
+            new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
 
             // rare structures
-            new StructureEntry("lightning_tree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, 120, 24, 4210),
-            new StructureEntry("stonehenge", BiomeTags.HAS_VILLAGE_PLAINS, TerrainAdjustment.BEARD_THIN, 120, 24, 4212),
-            new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 120, 24, 4211),
-            new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, 120, 24, 4214)
+            new StructureEntry("lightning_tree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 10),
+            new StructureEntry("stonehenge", BiomeTags.HAS_VILLAGE_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 11),
+            new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 12)
     );
 
     public static void bootstrapTemplatePools(BootstrapContext<StructureTemplatePool> context) {
