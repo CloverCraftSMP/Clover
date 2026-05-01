@@ -26,19 +26,24 @@ import java.util.Map;
 
 public class ModStructures {
     public static final List<StructureEntry> ALL = List.of(
-            new StructureEntry("barn", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4201),
-            new StructureEntry("berrycabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4203),
-            new StructureEntry("cabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4204),
-            new StructureEntry("campsite", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, 24, 6, 4205),
-            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 24, 6, 4206),
-            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 24, 6, 4207),
-            new StructureEntry("greenhouse", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4208),
-            new StructureEntry("haystorage", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4209),
-            new StructureEntry("lightning_tree", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4210),
-            new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4211),
-            new StructureEntry("stonehenge", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4212),
-            new StructureEntry("wagon", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 24, 6, 4213),
-            new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, 24, 6, 4214)
+            // common structures
+            new StructureEntry("wagon", BiomeTags.IS_FOREST, TerrainAdjustment.NONE, 48, 8, 4213),
+            new StructureEntry("campsite", BiomeTags.IS_TAIGA, TerrainAdjustment.NONE, 48, 8, 4205),
+            new StructureEntry("haystorage", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 48, 8, 4209),
+
+            // uncommon structures
+            new StructureEntry("barn", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, 72, 12, 4201),
+            new StructureEntry("cabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 72, 12, 4204),
+            new StructureEntry("greenhouse", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, 72, 12, 4208),
+            new StructureEntry("berrycabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 72, 12, 4203),
+            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 72, 12, 4206),
+            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, 72, 12, 4207),
+
+            // rare structures
+            new StructureEntry("lightning_tree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, 120, 24, 4210),
+            new StructureEntry("stonehenge", BiomeTags.HAS_VILLAGE_PLAINS, TerrainAdjustment.BEARD_THIN, 120, 24, 4212),
+            new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, 120, 24, 4211),
+            new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, 120, 24, 4214)
     );
 
     public static void bootstrapTemplatePools(BootstrapContext<StructureTemplatePool> context) {
