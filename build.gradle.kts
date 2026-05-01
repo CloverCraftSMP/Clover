@@ -120,6 +120,12 @@ publishMods {
             slug = "fabric-api"
         }
     }
+
+    github {
+        repository = property("publish.github_repo") as String
+        accessToken = providers.environmentVariable("GITHUB_TOKEN")
+        commitish = "main"
+    }
 }
 
 /*

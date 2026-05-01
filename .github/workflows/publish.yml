@@ -19,6 +19,7 @@ jobs:
             uses: gradle/actions/setup-gradle@v3
 
           - name: Publish all versions
-            run: ./gradlew publishModrinth
+            run: ./gradlew publishModrinth publishGithub
             env:
               MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
