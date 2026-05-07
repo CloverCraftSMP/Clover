@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.structure;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -29,7 +30,7 @@ public class ModStructures {
     private static final int SALT_BASE = 420100;
     
     private static final int COMMON_SPACING = 72;
-    private static final int COMMON_SEPARATION = 16;
+    private static final int COMMON_SEPARATION = 36;
     
     private static final int UNCOMMON_SPACING = 120;
     private static final int UNCOMMON_SEPARATION = 24;
@@ -39,37 +40,35 @@ public class ModStructures {
 
     public static final List<StructureEntry> ALL = List.of(
             // common structures
-            new StructureEntry("wagon", BiomeTags.IS_FOREST, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
-            new StructureEntry("campsite", BiomeTags.IS_TAIGA, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
-            new StructureEntry("haystorage", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 3),
+            new StructureEntry("wagon", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
+            new StructureEntry("campsite", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
+            new StructureEntry("haystorage", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 3),
 
             // uncommon structures
-            new StructureEntry("barn", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 4),
-            new StructureEntry("cabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
-            new StructureEntry("greenhouse", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 6),
-            new StructureEntry("berrycabin", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 7),
+            new StructureEntry("barn", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 4),
+            new StructureEntry("cabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
+            new StructureEntry("greenhouse", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 6),
+            new StructureEntry("berrycabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 7),
             new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 8),
             new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 9),
-            new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
+            new StructureEntry("wizardtower", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
 
             // rare structures
-            new StructureEntry("lightningtree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 10),
-            new StructureEntry("stonehenge", BiomeTags.HAS_VILLAGE_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 11),
-            new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 12)
+            new StructureEntry("lightningtree", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 10),
+            new StructureEntry("stonehenge", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 11),
+            new StructureEntry("statue", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 12)
     );
 
     public static void bootstrapTemplatePools(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> poolRegistry = context.lookup(Registries.TEMPLATE_POOL);
-        HolderGetter<StructureProcessorList> processorRegistry = context.lookup(Registries.PROCESSOR_LIST);
 
         Holder.Reference<StructureTemplatePool> emptyPool = poolRegistry.getOrThrow(Pools.EMPTY);
-        Holder<StructureProcessorList> clearVegetation = processorRegistry.getOrThrow(ModProcessorLists.VEGETATION_CLEARANCE);
 
         for (StructureEntry s : ALL) {
             context.register(s.templatePoolKey(), new StructureTemplatePool(
                     emptyPool,
                     List.of(Pair.of(
-                            StructurePoolElement.single(s.nbtId().toString(), clearVegetation)
+                            StructurePoolElement.single(s.nbtId().toString())
                                     .apply(StructureTemplatePool.Projection.RIGID),
                             1
                     ))
