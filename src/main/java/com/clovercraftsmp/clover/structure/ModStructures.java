@@ -29,28 +29,28 @@ import java.util.Map;
 public class ModStructures {
     private static final int SALT_BASE = 420100;
     
-    private static final int COMMON_SPACING = 72;
-    private static final int COMMON_SEPARATION = 36;
+    private static final int COMMON_SPACING = 64;
+    private static final int COMMON_SEPARATION = 6;
     
-    private static final int UNCOMMON_SPACING = 120;
-    private static final int UNCOMMON_SEPARATION = 24;
+    private static final int UNCOMMON_SPACING = 96;
+    private static final int UNCOMMON_SEPARATION = 18;
     
-    private static final int RARE_SPACING = 160;
-    private static final int RARE_SEPARATION = 20;
+    private static final int RARE_SPACING = 128;
+    private static final int RARE_SEPARATION = 24;
 
     public static final List<StructureEntry> ALL = List.of(
             // common structures
             new StructureEntry("wagon", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
             new StructureEntry("campsite", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
             new StructureEntry("haystorage", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 3),
+            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 8),
+            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 9),
 
             // uncommon structures
             new StructureEntry("barn", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 4),
             new StructureEntry("cabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
             new StructureEntry("greenhouse", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 6),
             new StructureEntry("berrycabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 7),
-            new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 8),
-            new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 9),
             new StructureEntry("wizardtower", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
 
             // rare structures
