@@ -53,7 +53,7 @@ public class ModStructures {
             new StructureEntry("wizardtower", BiomeTags.IS_TAIGA, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
 
             // rare structures
-            new StructureEntry("lightning_tree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 10),
+            new StructureEntry("lightningtree", BiomeTags.IS_OVERWORLD, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 10),
             new StructureEntry("stonehenge", BiomeTags.HAS_VILLAGE_PLAINS, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 11),
             new StructureEntry("statue", BiomeTags.IS_FOREST, TerrainAdjustment.BEARD_THIN, RARE_SPACING, RARE_SEPARATION, SALT_BASE + 12)
     );
