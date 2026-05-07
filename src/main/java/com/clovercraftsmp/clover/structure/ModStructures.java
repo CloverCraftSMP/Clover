@@ -21,7 +21,6 @@ import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
 import java.util.Map;
@@ -32,10 +31,10 @@ public class ModStructures {
     private static final int COMMON_SPACING = 64;
     private static final int COMMON_SEPARATION = 6;
     
-    private static final int UNCOMMON_SPACING = 96;
+    private static final int UNCOMMON_SPACING = 80;
     private static final int UNCOMMON_SEPARATION = 18;
     
-    private static final int RARE_SPACING = 128;
+    private static final int RARE_SPACING = 96;
     private static final int RARE_SEPARATION = 24;
 
     public static final List<StructureEntry> ALL = List.of(
