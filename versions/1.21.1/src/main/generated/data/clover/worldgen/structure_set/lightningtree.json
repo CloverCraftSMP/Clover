@@ -1,13 +1,13 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 4210,
-    "separation": 6,
-    "spacing": 24
+    "salt": 420110,
+    "separation": 20,
+    "spacing": 160
   },
   "structures": [
     {
-      "structure": "clover:lightning_tree",
+      "structure": "clover:lightningtree",
       "weight": 1
     }
   ]
