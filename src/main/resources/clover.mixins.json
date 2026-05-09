@@ -3,7 +3,9 @@
   "package": "com.clovercraftsmp.clover.mixin",
   "compatibilityLevel": "${java}",
   "mixins": [
-    "ExampleMixin"
+    "feature.PhantomMixin",
+    "feature.MerchantOfferMixin",
+    "feature.AbstractVillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

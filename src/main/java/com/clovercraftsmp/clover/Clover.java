@@ -1,6 +1,8 @@
 package com.clovercraftsmp.clover;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,19 +10,12 @@ import org.slf4j.LoggerFactory;
 public class Clover implements ModInitializer {
     public static final String MOD_ID = "clover";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    public static final String VERSION = /*$ mod_version*/ "0.1.0";
+    public static final String VERSION = /*$ mod_version*/ "0.3.0";
     public static final String MINECRAFT = /*$ minecraft*/ "1.21.1";
 
     @Override
     public void onInitialize() {
-
-        LOGGER.info("Hello Fabric world!");
-
-        //? if !release
-        //LOGGER.warn("I'm still a template!");
-
-        //? if fapi: <0.100
-        /*LOGGER.info("Fabric API is old on this version");*/
+        LootTableEvents.MODIFY.register(ItemStackUtil::mendingRegistry);
     }
 
     /**
