@@ -46,6 +46,8 @@ dependencies {
     modRuntimeOnly(fletchingTable.modrinth("world-preview", "1.21")) // TODO: make this dynamic by moving it to versions config
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
+    modCompileOnly("maven.modrinth:clutterbestiary:KENBDlzE")
+
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3")
 }
 
