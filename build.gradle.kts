@@ -48,7 +48,7 @@ dependencies {
 
     modCompileOnly("maven.modrinth:clutterbestiary:KENBDlzE")
 
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3")
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3", "fabric-game-rule-api-v1")
 }
 
 loom {

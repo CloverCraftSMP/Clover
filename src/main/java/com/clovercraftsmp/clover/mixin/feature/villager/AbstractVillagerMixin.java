@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.mixin.feature;
+package com.clovercraftsmp.clover.mixin.feature.villager;
 
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

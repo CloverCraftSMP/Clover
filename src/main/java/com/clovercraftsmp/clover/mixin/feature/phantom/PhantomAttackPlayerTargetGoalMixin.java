@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.mixin.feature;
+package com.clovercraftsmp.clover.mixin.feature.phantom;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -13,7 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(targets = "net.minecraft.world.entity.monster.Phantom$PhantomAttackPlayerTargetGoal")
-public class PhantomMixin {
+public class PhantomAttackPlayerTargetGoalMixin {
+    @SuppressWarnings("resource")
     @WrapOperation(method = "canUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Phantom;canAttack(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/targeting/TargetingConditions;)Z"))
     private boolean addInsomniaCheck(Phantom instance, LivingEntity livingEntity, TargetingConditions targetPredicate, Operation<Boolean> original) {
         boolean canStart = original.call(instance, livingEntity, targetPredicate);
