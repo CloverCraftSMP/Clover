@@ -4,13 +4,19 @@
   "plugin": "com.clovercraftsmp.clover.conditional.MixinConfig",
   "compatibilityLevel": "${java}",
   "mixins": [
-    "feature.phantom.LivingEntityMixin",
     "feature.phantom.PhantomAttackPlayerTargetGoalMixin",
     "feature.phantom.PhantomMixin",
     "feature.phantom.PhantomSweepAttackGoalMixin",
+    "feature.status.GameRulesMixin",
+    "feature.status.LivingEntityMixin",
+    "feature.status.PlayerStateManagerMixin",
+    "feature.status.ServerPlayerMixin",
     "feature.villager.AbstractVillagerMixin",
     "feature.villager.MerchantOfferMixin",
     "fix.MossbloomEntityMixin"
+  ],
+  "client": [
+    "feature.status.ClientPlayerStateManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

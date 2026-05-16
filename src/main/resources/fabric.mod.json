@@ -3,9 +3,10 @@
   "id": "${id}",
   "version": "${version}",
   "name": "${name}",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "CloverCraft Companion Mod",
   "authors": [
-    "Syfe"
+    "Syfe",
+    "Colonel"
   ],
   "contact": {
     "homepage": "https://stonecutter.kikugie.dev/",
@@ -18,8 +19,14 @@
     "main": [
       "com.clovercraftsmp.clover.Clover"
     ],
+    "client": [
+      "com.clovercraftsmp.clover.client.CloverClient"
+    ],
     "fabric-datagen": [
       "com.clovercraftsmp.clover.datagen.CloverDataGenerator"
+    ],
+    "mixinsquared": [
+      "com.clovercraftsmp.clover.conditional.MixinCanceller"
     ]
   },
   "mixins": [

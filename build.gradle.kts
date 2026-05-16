@@ -27,6 +27,9 @@ repositories {
     }
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+
+    maven("https://maven.bawnorton.com/releases")
+    maven("https://maven.enjarai.dev/mirrors")
 }
 
 dependencies {
@@ -47,8 +50,11 @@ dependencies {
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
     modCompileOnly("maven.modrinth:clutterbestiary:KENBDlzE")
+    modCompileOnly("maven.modrinth:status:fabric-1.21.1-1.0.8")
 
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3", "fabric-game-rule-api-v1")
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")!!)!!)
+
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3", "fabric-game-rule-api-v1", "fabric-command-api-v2")
 }
 
 loom {

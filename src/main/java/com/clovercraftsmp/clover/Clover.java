@@ -1,10 +1,13 @@
 package com.clovercraftsmp.clover;
 
+import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
+import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
@@ -26,6 +29,9 @@ public class Clover implements ModInitializer {
     @Override
     public void onInitialize() {
         LootTableEvents.MODIFY.register(ItemStackUtil::mendingRegistry);
+
+        PayloadTypeRegistry.playS2C().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
     }
 
     /**

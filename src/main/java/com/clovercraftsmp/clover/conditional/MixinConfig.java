@@ -15,8 +15,13 @@ public class MixinConfig implements IMixinConfigPlugin {
     private static final Supplier<Boolean> TRUE = () -> true;
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-            "com.clovercraftsmp.clover.mixin.fix.MossbloomEntityMixin", () -> FabricLoader.getInstance().isModLoaded("clutterbestiary")
-    );
+            "com.clovercraftsmp.clover.mixin.fix.MossbloomEntityMixin", () -> FabricLoader.getInstance().isModLoaded("clutterbestiary"),
+            "com.clovercraftsmp.clover.mixin.feature.status.ClientPlayerStateManagerMixin", () -> FabricLoader.getInstance().isModLoaded("status"),
+            "com.clovercraftsmp.clover.mixin.feature.status.GameRulesMixin", () -> FabricLoader.getInstance().isModLoaded("status"),
+            "com.clovercraftsmp.clover.mixin.feature.status.LivingEntityMixin", () -> FabricLoader.getInstance().isModLoaded("status"),
+            "com.clovercraftsmp.clover.mixin.feature.status.PlayerStateManagerMixin", () -> FabricLoader.getInstance().isModLoaded("status"),
+            "com.clovercraftsmp.clover.mixin.feature.status.ServerPlayerMixin", () -> FabricLoader.getInstance().isModLoaded("status")
+            );
 
     @Override
     public void onLoad(String s) {
