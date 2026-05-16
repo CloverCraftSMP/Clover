@@ -13,6 +13,7 @@
     "feature.status.ServerPlayerMixin",
     "feature.villager.AbstractVillagerMixin",
     "feature.villager.MerchantOfferMixin",
+    "feature.player.FarmlandBlockMixin",
     "fix.MossbloomEntityMixin"
   ],
   "client": [
