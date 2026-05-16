@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+
+## [0.3.1] - 2026-05-16
+### Added
 - Anti crop trampling
   - Prevent mobs from trampling crops
   - Player requires feather falling to not trample
