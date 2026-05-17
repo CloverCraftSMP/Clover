@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
 import com.clovercraftsmp.clover.duck.StatusDuck;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.net.PlayerStatePacket;
 import de.maxhenkel.status.playerstate.PlayerStateManager;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@IfModLoaded("status")
 @Mixin(PlayerStateManager.class)
 public class PlayerStateManagerMixin {
     @Inject(method = "lambda$new$0", at = @At("TAIL"))

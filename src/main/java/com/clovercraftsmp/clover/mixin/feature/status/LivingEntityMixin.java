@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.events.PlayerEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@IfModLoaded("status")
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
     @Inject(method = "startSleeping", at = @At("TAIL"))

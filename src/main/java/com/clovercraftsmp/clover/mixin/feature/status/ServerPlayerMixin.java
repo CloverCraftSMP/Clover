@@ -3,6 +3,7 @@ package com.clovercraftsmp.clover.mixin.feature.status;
 import com.clovercraftsmp.clover.duck.StatusDuck;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.playerstate.Availability;
 import de.maxhenkel.status.playerstate.PlayerState;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -14,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@IfModLoaded("status")
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin implements StatusDuck {
     @Unique private static final int AFK_TICKS = 20 * 60 * 2;
