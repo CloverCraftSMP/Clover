@@ -46,11 +46,10 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
-    modRuntimeOnly(fletchingTable.modrinth("world-preview", "1.21")) // TODO: make this dynamic by moving it to versions config
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    modCompileOnly("maven.modrinth:clutterbestiary:KENBDlzE")
-    modCompileOnly("maven.modrinth:status:fabric-1.21.1-1.0.8")
+    modCompileOnly(fletchingTable.modrinth("clutterbestiary", sc.current.version))
+    modCompileOnly(fletchingTable.modrinth("status", sc.current.version))
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:1.0.9")!!)
