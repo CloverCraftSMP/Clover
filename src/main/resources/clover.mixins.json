@@ -14,7 +14,8 @@
     "feature.villager.AbstractVillagerMixin",
     "feature.villager.MerchantOfferMixin",
     "feature.player.FarmlandBlockMixin",
-    "fix.MossbloomEntityMixin"
+    "fix.MossbloomEntityMixin",
+    "fix.ChunkGeneratorMixin"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"
