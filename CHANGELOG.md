@@ -3,6 +3,11 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+### Changed
+
+## [0.3.2] - 2026-05-18
+### Added
+### Fixed
 - Larion lava in end bug through mixin (project seems unmaintained)
 ### Changed
 - Using mixin constraints for more clear code
