@@ -51,6 +51,7 @@ dependencies {
     modCompileOnly(fletchingTable.modrinth("clutterbestiary", sc.current.version))
     modCompileOnly(fletchingTable.modrinth("status", sc.current.version))
     modCompileOnly(fletchingTable.modrinth("larion-worldgen", sc.current.version))
+    modCompileOnly(fletchingTable.modrinth("tide", sc.current.version))
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:1.0.9")!!)
