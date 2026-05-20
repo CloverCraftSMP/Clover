@@ -16,7 +16,8 @@
     "feature.villager.MerchantOfferMixin",
     "fix.ChunkGeneratorMixin",
     "fix.InventoryMixin",
-    "fix.MossbloomEntityMixin"
+    "fix.MossbloomEntityMixin",
+    "fix.ModpackCheckerMixin"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"
