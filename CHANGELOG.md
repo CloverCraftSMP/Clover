@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+- Tide satchel item deletion glitch through replacement mixin
 ### Changed
 
 ## [0.3.2] - 2026-05-18
