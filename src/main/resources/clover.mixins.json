@@ -16,6 +16,7 @@
     "feature.villager.MerchantOfferMixin",
     "fix.ChunkGeneratorMixin",
     "fix.FishSatchelItemMixin",
+    "fix.HorsemanSummoningMixin",
     "fix.InventoryMixin",
     "fix.ModpackCheckerMixin",
     "fix.MossbloomEntityMixin"
