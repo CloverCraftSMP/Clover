@@ -41,6 +41,10 @@ dependencies {
         for (it in modules) modImplementation(fabricApi.module(it, property("deps.fabric_api") as String))
     }
 
+    fun resolveMod(vararg mods: String) {
+        for (it in mods) modCompileOnly(fletchingTable.modrinth(it, sc.current.version))
+    }
+
     minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
@@ -48,11 +52,7 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    modCompileOnly(fletchingTable.modrinth("clutterbestiary", sc.current.version))
-    modCompileOnly(fletchingTable.modrinth("status", sc.current.version))
-    modCompileOnly(fletchingTable.modrinth("larion-worldgen", sc.current.version))
-    modCompileOnly(fletchingTable.modrinth("tide", sc.current.version))
-    modCompileOnly(fletchingTable.modrinth("modpack-checker", sc.current.version))
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman") // TODO: move to gradle property
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
