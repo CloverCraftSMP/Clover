@@ -1,5 +1,14 @@
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
+import org.jetbrains.java.decompiler.api.Decompiler
+import org.jetbrains.java.decompiler.main.decompiler.SingleFileSaver
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.vineflower:vineflower:${property("deps.vineflower_source_decomp")}")
+    }
+}
 
 plugins {
     id("net.fabricmc.fabric-loom-remap")
@@ -35,8 +44,6 @@ repositories {
     maven("https://maven.enjarai.dev/mirrors")
 }
 
-val vineflower by configurations.creating
-
 dependencies {
     /**
      * Fetches only the required Fabric API modules to not waste time downloading all of them for each version.
@@ -53,7 +60,6 @@ dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    vineflower("org.vineflower:vineflower:${property("deps.vineflower_source_decomp")}")
 
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
@@ -124,7 +130,6 @@ tasks {
     register("genModCompileOnlySources") {
         group = "fabric"
 
-        val vineflowerPath = vineflower.asPath
         val remappedJars = project.configurations["compileClasspath"]
             .resolvedConfiguration
             .resolvedArtifacts
@@ -135,8 +140,6 @@ tasks {
             }
 
         doLast {
-            val javaExe = "${System.getProperty("java.home")}/bin/java"
-
             remappedJars.forEach { jar ->
                 val sourcesJar = File(jar.parentFile, jar.name.replace(".jar", "-sources.jar"))
 
@@ -147,28 +150,11 @@ tasks {
 
                 println("Decompiling ${jar.name}...")
 
-                val tempDir = File(temporaryDir, jar.nameWithoutExtension)
-                tempDir.mkdirs()
-
-                ProcessBuilder(
-                    javaExe,
-                    "-cp", vineflowerPath,
-                    "org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler",
-                    jar.absolutePath,
-                    tempDir.absolutePath
-                )
-                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
-                    .redirectError(ProcessBuilder.Redirect.DISCARD)
-                    .start()
-                    .waitFor()
-
-                ZipOutputStream(sourcesJar.outputStream()).use { zos ->
-                    tempDir.walkTopDown().filter { it.isFile }.forEach { file ->
-                        zos.putNextEntry(ZipEntry(file.relativeTo(tempDir).path))
-                        file.inputStream().use { it.copyTo(zos) }
-                        zos.closeEntry()
-                    }
-                }
+                Decompiler.Builder()
+                    .inputs(jar)
+                    .output(SingleFileSaver(sourcesJar))
+                    .build()
+                    .decompile()
 
                 println("  -> ${sourcesJar.name}")
             }
