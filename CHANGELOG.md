@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+- Tide satchel deletion / desync due to fish stack sizes
 ### Changed
 
 ## [0.3.3] - 2026-05-20
