@@ -1,3 +1,6 @@
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+
 plugins {
     id("net.fabricmc.fabric-loom-remap")
     id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
@@ -32,6 +35,8 @@ repositories {
     maven("https://maven.enjarai.dev/mirrors")
 }
 
+val vineflower by configurations.creating
+
 dependencies {
     /**
      * Fetches only the required Fabric API modules to not waste time downloading all of them for each version.
@@ -48,6 +53,7 @@ dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    vineflower("org.vineflower:vineflower:${property("deps.vineflower_source_decomp")}")
 
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
@@ -113,6 +119,60 @@ tasks {
         from(remapJar.map { it.archiveFile }, remapSourcesJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
+    }
+
+    register("genModCompileOnlySources") {
+        group = "fabric"
+
+        val vineflowerPath = vineflower.asPath
+        val remappedJars = project.configurations["compileClasspath"]
+            .resolvedConfiguration
+            .resolvedArtifacts
+            .map { it.file }
+            .filter { file ->
+                file.path.contains("loom-cache/remapped_mods") &&
+                !file.name.endsWith("-sources.jar")
+            }
+
+        doLast {
+            val javaExe = "${System.getProperty("java.home")}/bin/java"
+
+            remappedJars.forEach { jar ->
+                val sourcesJar = File(jar.parentFile, jar.name.replace(".jar", "-sources.jar"))
+
+                if (sourcesJar.exists()) {
+                    println("Skipping ${jar.name}, sources already exist")
+                    return@forEach
+                }
+
+                println("Decompiling ${jar.name}...")
+
+                val tempDir = File(temporaryDir, jar.nameWithoutExtension)
+                tempDir.mkdirs()
+
+                ProcessBuilder(
+                    javaExe,
+                    "-cp", vineflowerPath,
+                    "org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler",
+                    jar.absolutePath,
+                    tempDir.absolutePath
+                )
+                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                    .redirectError(ProcessBuilder.Redirect.DISCARD)
+                    .start()
+                    .waitFor()
+
+                ZipOutputStream(sourcesJar.outputStream()).use { zos ->
+                    tempDir.walkTopDown().filter { it.isFile }.forEach { file ->
+                        zos.putNextEntry(ZipEntry(file.relativeTo(tempDir).path))
+                        file.inputStream().use { it.copyTo(zos) }
+                        zos.closeEntry()
+                    }
+                }
+
+                println("  -> ${sourcesJar.name}")
+            }
+        }
     }
 }
 
