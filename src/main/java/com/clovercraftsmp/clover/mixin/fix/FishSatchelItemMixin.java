@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class FishSatchelItemMixin {
     @WrapMethod(method = "overrideOtherStackedOnMe(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/SlotAccess;)Z")
     private boolean preventSatchelOverflowBug(ItemStack stack, ItemStack other, Player player, SlotAccess access, Operation<Boolean> original) {
+        if (other.isEmpty()) return original.call(stack, other, player, access);
         int countBefore = other.getCount();
         boolean result = original.call(stack, other, player, access);
         return other.getCount() != countBefore && result;
