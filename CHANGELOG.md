@@ -4,6 +4,7 @@
 ### Added
 ### Fixed
 - Tide satchel deletion / desync due to fish stack sizes
+- Tide crates occasionally create / delete fluid blocks
 ### Changed
 
 ## [0.3.3] - 2026-05-20

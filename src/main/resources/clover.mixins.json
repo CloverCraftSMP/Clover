@@ -18,8 +18,10 @@
     "fix.FishSatchelItemMixin",
     "fix.HorsemanSummoningMixin",
     "fix.InventoryMixin",
+    "fix.LootCrateEntityMixin",
     "fix.ModpackCheckerMixin",
-    "fix.MossbloomEntityMixin"
+    "fix.MossbloomEntityMixin",
+    "fix.TideFishingHookMixin"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"
