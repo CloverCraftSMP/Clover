@@ -18,6 +18,8 @@
     "fix.horseman.HorsemanSummoningMixin",
     "fix.larion.ChunkGeneratorMixin",
     "fix.modpack_checker.ModpackCheckerMixin",
+    "fix.supplementaries.SafeOwnerAccessor",
+    "fix.supplementaries.SafeOwnerMixin",
     "fix.tide.FishSatchelItemMixin",
     "fix.tide.InventoryMixin",
     "fix.tide.LootCrateEntityMixin",

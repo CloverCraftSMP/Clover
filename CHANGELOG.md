@@ -6,6 +6,7 @@
 - Tide satchel deletion / desync due to fish stack sizes
 - Tide crates occasionally create / delete fluid blocks
 - Vanilla Backport prevents mobs from being leashable
+- Supplementaries safe block password set to player name
 ### Changed
 
 ## [0.3.3] - 2026-05-20

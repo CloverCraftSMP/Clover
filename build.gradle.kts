@@ -64,7 +64,7 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport") // TODO: move to gradle property
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "moonlight") // TODO: move to gradle property
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
