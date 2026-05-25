@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.mixin.fix;
+package com.clovercraftsmp.clover.mixin.fix.modpack_checker;
 
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import modpackChecker.ModpackChecker;

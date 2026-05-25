@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.mixin.fix;
+package com.clovercraftsmp.clover.mixin.fix.horseman;
 
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import io.github.mortuusars.horseman.world.summoning.Summoning;

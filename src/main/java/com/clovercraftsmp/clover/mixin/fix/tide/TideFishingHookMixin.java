@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.mixin.fix;
+package com.clovercraftsmp.clover.mixin.fix.tide;
 
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

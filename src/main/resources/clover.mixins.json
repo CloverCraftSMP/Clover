@@ -14,14 +14,16 @@
     "feature.status.ServerPlayerMixin",
     "feature.villager.AbstractVillagerMixin",
     "feature.villager.MerchantOfferMixin",
-    "fix.ChunkGeneratorMixin",
-    "fix.FishSatchelItemMixin",
-    "fix.HorsemanSummoningMixin",
-    "fix.InventoryMixin",
-    "fix.LootCrateEntityMixin",
-    "fix.ModpackCheckerMixin",
-    "fix.MossbloomEntityMixin",
-    "fix.TideFishingHookMixin"
+    "fix.clutterbestiary.MossbloomEntityMixin",
+    "fix.horseman.HorsemanSummoningMixin",
+    "fix.larion.ChunkGeneratorMixin",
+    "fix.modpack_checker.ModpackCheckerMixin",
+    "fix.tide.FishSatchelItemMixin",
+    "fix.tide.InventoryMixin",
+    "fix.tide.LootCrateEntityMixin",
+    "fix.tide.TideFishingHookMixin",
+    "fix.vanillabackport.EntityMixin",
+    "fix.vanillabackport.LeashIntegrationMixin"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"
