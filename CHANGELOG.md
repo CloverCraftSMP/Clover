@@ -7,6 +7,7 @@
 - Tide crates occasionally create / delete fluid blocks
 - Vanilla Backport prevents mobs from being leashable
 - Supplementaries safe block password set to player name
+- Nether build limit is too low
 ### Changed
 
 ## [0.3.3] - 2026-05-20
