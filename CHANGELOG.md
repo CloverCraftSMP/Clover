@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- Version compatibility checks to ensure mod compatibility at runtime
 ### Fixed
 - Tide satchel deletion / desync due to fish stack sizes
 - Tide crates occasionally create / delete fluid blocks
@@ -9,6 +10,7 @@
 - Supplementaries safe block password set to player name
 - Nether build limit is too low
 ### Changed
+- Edited enderscapes end vault loot table to have mending
 
 ## [0.3.3] - 2026-05-20
 ### Added

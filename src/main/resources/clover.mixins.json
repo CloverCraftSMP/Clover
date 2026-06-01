@@ -25,7 +25,11 @@
     "fix.tide.LootCrateEntityMixin",
     "fix.tide.TideFishingHookMixin",
     "fix.vanillabackport.EntityMixin",
-    "fix.vanillabackport.LeashIntegrationMixin"
+    "fix.vanillabackport.LeashIntegrationMixin",
+    "loot.EnchantRandomlyFunctionAccessor",
+    "loot.LootPoolAccessor",
+    "loot.LootPoolSingletonContainerAccessor",
+    "loot.LootTableBuilderAccessor"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"

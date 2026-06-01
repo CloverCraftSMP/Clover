@@ -36,5 +36,16 @@
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"
+  },
+  "breaks": {
+    "clutterbestiary": ["<${clutterbestiary}", ">${clutterbestiary}"],
+    "status": ["<${status}", ">${status}"],
+    "larion": ["<${larion}", ">${larion}"],
+    "tide": ["<${tide}", ">${tide}"],
+    "modpack-checker": ["<${modpack_checker}", ">${modpack_checker}"],
+    "horseman": ["<${horseman}", ">${horseman}"],
+    "vanillabackport": ["<${vanillabackport}", ">${vanillabackport}"],
+    "supplementaries": ["<${supplementaries}", ">${supplementaries}"],
+    "enderscape": ["<${enderscape}", ">${enderscape}"]
   }
 }

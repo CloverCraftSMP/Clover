@@ -64,7 +64,7 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "moonlight") // TODO: move to gradle property
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
@@ -106,11 +106,31 @@ tasks {
         inputs.property("version", project.property("mod.version"))
         inputs.property("minecraft", project.property("mod.mc_dep"))
 
+        inputs.property("clutterbestiary", project.property("clutterbestiary"))
+        inputs.property("status", project.property("status"))
+        inputs.property("larion", project.property("larion"))
+        inputs.property("tide", project.property("tide"))
+        inputs.property("modpack_checker", project.property("modpack_checker"))
+        inputs.property("horseman", project.property("horseman"))
+        inputs.property("vanillabackport", project.property("vanillabackport"))
+        inputs.property("supplementaries", project.property("supplementaries"))
+        inputs.property("enderscape", project.property("enderscape"))
+
         val props = mapOf(
             "id" to project.property("mod.id"),
             "name" to project.property("mod.name"),
             "version" to project.property("mod.version"),
-            "minecraft" to project.property("mod.mc_dep")
+            "minecraft" to project.property("mod.mc_dep"),
+
+            "clutterbestiary" to project.property("clutterbestiary"),
+            "status" to project.property("status"),
+            "larion" to project.property("larion"),
+            "tide" to project.property("tide"),
+            "modpack_checker" to project.property("modpack_checker"),
+            "horseman" to project.property("horseman"),
+            "vanillabackport" to project.property("vanillabackport"),
+            "supplementaries" to project.property("supplementaries"),
+            "enderscape" to project.property("enderscape")
         )
 
         filesMatching("fabric.mod.json") { expand(props) }
