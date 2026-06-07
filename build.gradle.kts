@@ -42,6 +42,7 @@ repositories {
 
     maven("https://maven.bawnorton.com/releases")
     maven("https://maven.enjarai.dev/mirrors")
+    maven("https://maven.blamejared.com")
 }
 
 dependencies {
@@ -65,6 +66,7 @@ dependencies {
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
     resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
+    modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("crafttweaker")}")
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
