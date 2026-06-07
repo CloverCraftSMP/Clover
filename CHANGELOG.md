@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Version compatibility checks to ensure mod compatibility at runtime
+- Cauldron recipes, throw in an item and have it convert to another (with CraftTweaker integration)
 ### Fixed
 - Tide satchel deletion / desync due to fish stack sizes
 - Tide crates occasionally create / delete fluid blocks
