@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MinigameManager {
-    private static final Map<String, Minigame> REGISTRY = new HashMap<>();
+    private static final Map<MinigameTypes, Minigame> REGISTRY = new HashMap<>();
     private static Minigame activeMinigame = null;
 
     static {
@@ -18,7 +18,7 @@ public class MinigameManager {
         REGISTRY.put(minigame.getId(), minigame);
     }
 
-    public static void initializeActiveMinigame(String configMode) {
+    public static void initializeActiveMinigame(MinigameTypes configMode) {
         if (REGISTRY.containsKey(configMode)) {
             activeMinigame = REGISTRY.get(configMode);
             Clover.LOGGER.info("Starting Minigame Server Mode: " + activeMinigame.getId());

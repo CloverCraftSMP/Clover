@@ -1,7 +1,7 @@
 package com.clovercraftsmp.clover.minigame;
 
 public interface Minigame {
-    String getId();
+    MinigameTypes getId();
 
     void registerWorldGen();
 

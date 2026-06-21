@@ -46,7 +46,7 @@ public class Clover implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
 
-        MinigameManager.initializeActiveMinigame("");
+        MinigameManager.initializeActiveMinigame(CloverConfig.getInstance().minigameType);
     }
 
     /**

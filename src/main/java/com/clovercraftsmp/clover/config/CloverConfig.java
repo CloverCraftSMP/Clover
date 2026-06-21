@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.config;
 
 import com.clovercraftsmp.clover.Clover;
+import com.clovercraftsmp.clover.minigame.MinigameTypes;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -15,6 +16,10 @@ public class CloverConfig {
                     .build())
             .build();
 
-    @SerialEntry
-    public String minigameType = "none";
+    public static CloverConfig getInstance() {
+        return HANDLER.instance();
+    }
+
+    @SerialEntry(comment = "Type of minigame that the server should be running.")
+    public MinigameTypes minigameType = MinigameTypes.NONE;
 }

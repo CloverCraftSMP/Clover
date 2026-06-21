@@ -2,6 +2,7 @@ package com.clovercraftsmp.clover.minigame.backrooms;
 
 import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.minigame.Minigame;
+import com.clovercraftsmp.clover.minigame.MinigameTypes;
 import com.clovercraftsmp.clover.minigame.backrooms.entity.BackroomsEndermanEntity;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -12,7 +13,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -26,8 +26,8 @@ public class BackroomsMinigame implements Minigame {
     public static EntityType<BackroomsEndermanEntity> BACKROOMS_ENDERMAN;
 
     @Override
-    public String getId() {
-        return "backrooms";
+    public MinigameTypes getId() {
+        return MinigameTypes.BACKROOMS;
     }
 
     @Override
