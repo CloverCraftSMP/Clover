@@ -2,6 +2,7 @@ package com.clovercraftsmp.clover;
 
 import com.clovercraftsmp.clover.config.CloverConfig;
 import com.clovercraftsmp.clover.event.feature.CauldronRecipeTickHandler;
+import com.clovercraftsmp.clover.minigame.MinigameManager;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
@@ -44,6 +45,8 @@ public class Clover implements ModInitializer {
 
         PayloadTypeRegistry.playS2C().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
+
+        MinigameManager.initializeActiveMinigame("");
     }
 
     /**

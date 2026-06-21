@@ -1,0 +1,10 @@
+{
+  "type": "clover:backrooms_type",
+  "generator": {
+    "type": "clover:backrooms_generator",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:the_void"
+    }
+  }
+}
