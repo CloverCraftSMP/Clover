@@ -46,6 +46,7 @@
     "horseman": ["<${horseman}", ">${horseman}"],
     "vanillabackport": ["<${vanillabackport}", ">${vanillabackport}"],
     "supplementaries": ["<${supplementaries}", ">${supplementaries}"],
-    "enderscape": ["<${enderscape}", ">${enderscape}"]
+    "enderscape": ["<${enderscape}", ">${enderscape}"],
+    "yet_another_config_lib_v3": ["<${yacl}", "<${yacl}"]
   }
 }

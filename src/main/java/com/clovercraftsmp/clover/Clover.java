@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover;
 
+import com.clovercraftsmp.clover.config.CloverConfig;
 import com.clovercraftsmp.clover.event.feature.CauldronRecipeTickHandler;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
@@ -30,6 +31,10 @@ public class Clover implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        if (!CloverConfig.HANDLER.load()) {
+            Clover.LOGGER.error("Config failed to load!");
+        }
+
         LootTableEvents.MODIFY.register((resourceKey, builder, lootTableSource, provider) -> {
             ItemStackUtil.mendingRegistry(provider);
             LootTableUtil.fixLootTables(resourceKey, builder);

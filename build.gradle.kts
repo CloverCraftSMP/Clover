@@ -43,6 +43,7 @@ repositories {
     maven("https://maven.bawnorton.com/releases")
     maven("https://maven.enjarai.dev/mirrors")
     maven("https://maven.blamejared.com")
+    maven("https://maven.isxander.dev/releases")
 }
 
 dependencies {
@@ -67,6 +68,7 @@ dependencies {
 
     resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
     modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("crafttweaker")}")
+    modImplementation("dev.isxander:yet-another-config-lib:${property("yacl")}")
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
@@ -117,6 +119,7 @@ tasks {
         inputs.property("vanillabackport", project.property("vanillabackport"))
         inputs.property("supplementaries", project.property("supplementaries"))
         inputs.property("enderscape", project.property("enderscape"))
+        inputs.property("yacl", project.property("yacl"))
 
         val props = mapOf(
             "id" to project.property("mod.id"),
@@ -132,7 +135,8 @@ tasks {
             "horseman" to project.property("horseman"),
             "vanillabackport" to project.property("vanillabackport"),
             "supplementaries" to project.property("supplementaries"),
-            "enderscape" to project.property("enderscape")
+            "enderscape" to project.property("enderscape"),
+            "yacl" to project.property("yacl")
         )
 
         filesMatching("fabric.mod.json") { expand(props) }
