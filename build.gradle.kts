@@ -63,6 +63,14 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
+    // Source: https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+    include(implementation("io.jsonwebtoken:jjwt-api:0.13.0")!!)
+    include(runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")!!)
+    include(runtimeOnly("io.jsonwebtoken:jjwt-gson:0.13.0")!!)
+
+    // Source: https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    include(implementation("org.xerial:sqlite-jdbc:3.53.2.0")!!)
+
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 

@@ -29,7 +29,10 @@
     "loot.EnchantRandomlyFunctionAccessor",
     "loot.LootPoolAccessor",
     "loot.LootPoolSingletonContainerAccessor",
-    "loot.LootTableBuilderAccessor"
+    "loot.LootTableBuilderAccessor",
+    "transfer.ServerCommonPacketListenerImplMixin",
+    "transfer.ServerConfigurationPacketListenerImplMixin",
+    "transfer.TransferAccessor"
   ],
   "client": [
     "feature.status.ClientPlayerStateManagerMixin"
