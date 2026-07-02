@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class CheckTransferCookieTask implements ConfigurationTask {
-    public static final ResourceLocation TRANSFER_COOKIE = ResourceLocation.parse("clover:transfer_cookie");
+    public static final ResourceLocation TRANSFER_COOKIE_ROOT = ResourceLocation.parse("clover:transfer_cookie_root");
     public static final Type TYPE = new Type("clover:get_transfer_cookie");
 
     @Override
     public void start(Consumer<Packet<?>> consumer) {
-        consumer.accept(new ClientboundCookieRequestPacket(TRANSFER_COOKIE));
+        consumer.accept(new ClientboundCookieRequestPacket(TRANSFER_COOKIE_ROOT));
     }
 
     @Override @NotNull
