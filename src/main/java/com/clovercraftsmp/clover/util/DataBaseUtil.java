@@ -11,10 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class DataBaseUtil {
     public record BaseState(UUID uuid, UUID session, String hostname, int port, boolean complete, String transferID, int sectionCount) {
@@ -168,6 +165,9 @@ public class DataBaseUtil {
     private static volatile SecretKey key;
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final ConcurrentHashMap<UUID, PlayerState> CACHE = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<UUID, Optional<PlayerState>> PENDING_WRITES = new ConcurrentHashMap<>();
+
     public static final boolean isMainServer = Boolean.parseBoolean(System.getProperty("isMainServer", "true"));
     public static final String serverAddress = System.getProperty("serverAddress", "localhost");
     public static final int serverPort = Integer.parseInt(System.getProperty("serverPort", "25565"));
@@ -180,23 +180,13 @@ public class DataBaseUtil {
             }
     );
 
-    public static CompletableFuture<Void> deleteUserAsync(UUID playerUuid) {
-        return CompletableFuture.runAsync(() -> deleteUser(playerUuid), DB_EXEC)
-                .exceptionally(t -> {
-                    LOGGER.error("deleteUserAsync failed for {}: {}", playerUuid, t.getMessage(), t);
-                    return null;
-                });
-    }
-
-    public static CompletableFuture<Void> updateUserAsync(PlayerState state) {
-        return CompletableFuture.runAsync(() -> updateUser(state), DB_EXEC)
-                .exceptionally(t -> {
-                    LOGGER.error("updateUserAsync failed for {}: {}", state.uuid(), t.getMessage(), t);
-                    return null;
-                });
-    }
-
     public static CompletableFuture<Optional<PlayerState>> getUserAsync(UUID user) {
+        PlayerState cached = CACHE.get(user);
+        if (cached != null) return CompletableFuture.completedFuture(Optional.of(cached));
+
+        Optional<PlayerState> pending = PENDING_WRITES.get(user);
+        if (pending != null) return CompletableFuture.completedFuture(pending);
+
         return CompletableFuture.supplyAsync(() -> getUser(user), DB_EXEC).exceptionally(t -> {
             LOGGER.error("getUserAsync failed for {}: {}", user, t.getMessage(), t);
             return Optional.empty();
@@ -232,6 +222,55 @@ public class DataBaseUtil {
                 });
     }
 
+    public static void flushAsync() {
+        CompletableFuture.runAsync(DataBaseUtil::flush, DB_EXEC)
+                .exceptionally(t -> {
+                    LOGGER.error("flushAsync failed: {}", t.getMessage(), t);
+                    return null;
+                });
+    }
+
+    public static void deleteUser(UUID playerUuid) {
+        requireConnection("deleteUser", playerUuid.toString());
+        CACHE.remove(playerUuid);
+        PENDING_WRITES.put(playerUuid, Optional.empty());
+    }
+
+    public static void updateUser(PlayerState state) {
+        requireConnection("updateUser", state.uuid().toString());
+        CACHE.put(state.uuid(), state);
+        PENDING_WRITES.put(state.uuid(), Optional.of(state));
+    }
+
+    private static Optional<PlayerState> getUser(UUID user) {
+        requireConnection("getUser", user.toString());
+
+        String sql = "SELECT uuid, session, hostname, port, complete, transferID, extra FROM player_states WHERE uuid = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, user.toString());
+
+            try (ResultSet set = stmt.executeQuery()) {
+                if (!set.next()) return Optional.empty();
+
+                PlayerState state = new PlayerState(
+                        UUID.fromString(set.getString("uuid")),
+                        UUID.fromString(set.getString("session")),
+                        set.getString("hostname"),
+                        set.getInt("port"),
+                        set.getBoolean("complete"),
+                        set.getString("transferID"),
+                        set.getBytes("extra")
+                );
+
+                CACHE.putIfAbsent(state.uuid(), state);
+                return Optional.of(state);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to fetch player state for " + user, e);
+        }
+    }
+
     private static void open() {
         if (connection != null) {
             LOGGER.warn("Warning: open() called multiple times!");
@@ -244,6 +283,8 @@ public class DataBaseUtil {
             connection = DriverManager.getConnection(URL);
             try (Statement stmt = connection.createStatement()) {
                 stmt.execute("PRAGMA journal_mode=WAL");
+                stmt.execute("PRAGMA busy_timeout=5000");
+                stmt.execute("PRAGMA synchronous=NORMAL");
                 stmt.execute("CREATE TABLE IF NOT EXISTS player_states (uuid TEXT PRIMARY KEY NOT NULL, session TEXT NOT NULL, hostname TEXT NOT NULL, port INTEGER NOT NULL, complete BOOL NOT NULL, transferID TEXT NOT NULL, extra BLOB NOT NULL)");
             }
         } catch (SQLException e) {
@@ -265,21 +306,47 @@ public class DataBaseUtil {
         }
     }
 
-    private static void deleteUser(UUID playerUuid) {
-        requireConnection("deleteUser", playerUuid.toString());
+    private static void flush() {
+        requireConnection("flush", "N/A");
 
-        String sql = "DELETE FROM player_states WHERE uuid = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, playerUuid.toString());
-            stmt.executeUpdate();
+        if (PENDING_WRITES.isEmpty()) return;
+
+        Map<UUID, Optional<PlayerState>> batch = new HashMap<>();
+        for (UUID uuid : PENDING_WRITES.keySet()) {
+            Optional<PlayerState> value = PENDING_WRITES.remove(uuid);
+            //noinspection OptionalAssignedToNull
+            if (value != null) batch.put(uuid, value);
+        }
+
+        if (batch.isEmpty()) return;
+
+        try {
+            connection.setAutoCommit(false);
+            try {
+                for (Map.Entry<UUID, Optional<PlayerState>> entry : batch.entrySet()) {
+                    if (entry.getValue().isPresent()) {
+                        writeUserToDb(entry.getValue().get());
+                    } else {
+                        deleteUserFromDb(entry.getKey());
+                    }
+                }
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                for (Map.Entry<UUID, Optional<PlayerState>> entry : batch.entrySet()) {
+                    PENDING_WRITES.putIfAbsent(entry.getKey(), entry.getValue());
+                }
+                throw new RuntimeException("Failed to flush batch to database", e);
+            } finally {
+                connection.setAutoCommit(true);
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to delete player state for " + playerUuid, e);
+            throw new RuntimeException("Failed to set autocommit during flush", e);
         }
     }
 
-    private static void updateUser(PlayerState state) {
-        requireConnection("updateUser", state.uuid().toString());
 
+    private static void writeUserToDb(PlayerState state) {
         String sql = "INSERT INTO player_states (uuid, session, hostname, port, complete, transferID, extra) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) " +
                 "ON CONFLICT(uuid) DO UPDATE SET " +
@@ -300,44 +367,23 @@ public class DataBaseUtil {
             stmt.setBytes(7, state.extra());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to update player state for " + state.uuid(), e);
+            throw new RuntimeException("Failed to write player state for " + state.uuid(), e);
         }
     }
 
-    private static Optional<PlayerState> getUser(UUID user) {
-        requireConnection("getUser", user.toString());
-
-        String sql = "SELECT uuid, session, hostname, port, complete, transferID, extra FROM player_states WHERE uuid = ?";
-
+    private static void deleteUserFromDb(UUID playerUuid) {
+        String sql = "DELETE FROM player_states WHERE uuid = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.toString());
-
-            try (ResultSet set = stmt.executeQuery()) {
-                if (!set.next()) return Optional.empty();
-
-                return Optional.of(
-                        new PlayerState(
-                                UUID.fromString(set.getString("uuid")),
-                                UUID.fromString(set.getString("session")),
-                                set.getString("hostname"),
-                                set.getInt("port"),
-                                set.getBoolean("complete"),
-                                set.getString("transferID"),
-                                set.getBytes("extra")
-                        )
-                );
-            }
+            stmt.setString(1, playerUuid.toString());
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to fetch player state for " + user, e);
+            throw new RuntimeException("Failed to delete player state for " + playerUuid, e);
         }
     }
 
     private static void requireConnection(String method, String context) {
-        if (connection == null) {
-            throw new IllegalStateException(
-                    "Database connection not initialized before " + method + " called (context: " + context + ")"
-            );
-        }
+        if (connection == null)
+            throw new IllegalStateException("Database connection not initialized before " + method + " called (context: " + context + ")");
     }
 
     private static SecretKey buildKey() {

@@ -9,6 +9,7 @@ import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.clovercraftsmp.clover.util.LootTableUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
@@ -33,13 +34,9 @@ public class Clover implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-            DataBaseUtil.openAsync().join();
-        });
-
-        ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
-            DataBaseUtil.closeAsync().join();
-        });
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> DataBaseUtil.openAsync().join());
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> DataBaseUtil.closeAsync().join());
+        ServerTickEvents.END_SERVER_TICK.register(server -> DataBaseUtil.flushAsync());
 
         if (!CloverConfig.HANDLER.load()) {
             Clover.LOGGER.error("Config failed to load!");
