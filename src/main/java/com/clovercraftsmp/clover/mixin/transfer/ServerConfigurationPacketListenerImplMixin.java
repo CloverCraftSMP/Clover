@@ -134,7 +134,7 @@ public abstract class ServerConfigurationPacketListenerImplMixin extends ServerC
         boolean isSameSession = cookieState.isSameSessionAs(localState);
 
         if (DataBaseUtil.isMainServer) {
-            DataBaseUtil.deleteUserAsync(this.gameProfile.getId()).join();
+            DataBaseUtil.deleteUser(this.gameProfile.getId());
             TransferEvents.RECEIVED_CONFIGURATION.invoker().onReceived((ServerConfigurationPacketListener) this, cookieState, localState);
             this.finishCurrentTask(CheckTransferCookieTask.TYPE);
         } else if (isSameSession && localState.complete()) {
@@ -154,7 +154,7 @@ public abstract class ServerConfigurationPacketListenerImplMixin extends ServerC
 
             connection.send(new ClientboundTransferPacket(cookieState.hostname(), cookieState.port()));
         } else {
-            DataBaseUtil.updateUserAsync(cookieState).join();
+            DataBaseUtil.updateUser(cookieState);
             TransferEvents.RECEIVED_CONFIGURATION.invoker().onReceived((ServerConfigurationPacketListener) this, cookieState, localState);
             this.finishCurrentTask(CheckTransferCookieTask.TYPE);
         }
