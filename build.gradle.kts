@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
     id("net.fabricmc.fabric-loom-remap")
-    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.23"
 
      `maven-publish`
      id("me.modmuss50.mod-publish-plugin")
@@ -59,6 +59,16 @@ dependencies {
         for (it in mods) modCompileOnly(fletchingTable.modrinth(it, sc.current.version))
     }
 
+    fun resolvePinnedMod(vararg mods: String) {
+        for (mod in mods) {
+            modCompileOnly(fletchingTable.modrinth(mod, sc.current.version) {
+                limit = 50
+
+                constraint { it.version == property(mod) }
+            })
+        }
+    }
+
     minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
@@ -66,7 +76,8 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    resolveMod("clutterbestiary", "status", "larion-worldgen", "tide", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
+    resolvePinnedMod("tide")
     modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("crafttweaker")}")
     modImplementation("dev.isxander:yet-another-config-lib:${property("yacl")}")
 
@@ -85,9 +96,9 @@ loom {
     }
 
     runConfigs.all {
-        ideConfigGenerated(true)
+        generateRunConfig.set(true)
         // vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
-        runDir = "../../run" // Shares the run directory between versions
+        runDirectory.set(file("../../run"))
     }
 }
 
