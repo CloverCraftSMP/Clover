@@ -4,6 +4,7 @@
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "compatibilityLevel": "${java}",
   "mixins": [
+    "feature.copper_pipe.CopperPipeEntityMixin",
     "feature.phantom.PhantomAttackPlayerTargetGoalMixin",
     "feature.phantom.PhantomMixin",
     "feature.phantom.PhantomSweepAttackGoalMixin",
