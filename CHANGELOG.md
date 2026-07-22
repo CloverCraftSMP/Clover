@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+
+## [0.4.0] - 2026-07-22
+### Added
 - Version compatibility checks to ensure mod compatibility at runtime
 ### Fixed
 - ~~Tide satchel deletion / desync due to fish stack sizes~~
