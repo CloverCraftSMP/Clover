@@ -1,25 +1,29 @@
 package com.clovercraftsmp.clover.mixin.fix.tide;
 
-import com.li64.tide.data.item.TideItemData;
-import com.li64.tide.registries.items.FishSatchelItem;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
+import org.spongepowered.asm.mixin.Mixin;
+
+//? if tide: <2.1 {
+/*import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import com.li64.tide.data.item.TideItemData;
+import com.li64.tide.registries.items.FishSatchelItem;
+import net.minecraft.world.entity.SlotAccess;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+*///? }
 
-@IfModLoaded("tide")
+@IfModLoaded(value = "tide", maxVersion = "2.1", maxInclusive = false)
 @Mixin(value = Inventory.class)
 public class InventoryMixin {
-    @Shadow @Final public Player player;
+    //? if tide: <2.1 {
+    /*@Shadow @Final public Player player;
     @Shadow @Final public NonNullList<ItemStack> items;
 
     @Inject(method = "add(ILnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
@@ -44,4 +48,5 @@ public class InventoryMixin {
             }
         }
     }
+    *///? }
 }

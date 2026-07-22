@@ -17,6 +17,8 @@ stonecutter parameters {
     swaps["minecraft"] = "\"${node.metadata.version}\";"
     constants["release"] = property("mod.id") != "template"
     dependencies["fapi"] = node.project.property("deps.fabric_api") as String
+    dependencies["vanillabackport"] = property("vanillabackport") as String
+    dependencies["tide"] = property("tide") as String
 
     replacements {
         string(current.parsed >= "1.21.11") {

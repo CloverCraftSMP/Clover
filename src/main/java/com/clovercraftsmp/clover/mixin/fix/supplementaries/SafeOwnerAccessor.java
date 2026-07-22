@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 @IfModLoaded("supplementaries")
 @Mixin(SafeOwner.class)
 public interface SafeOwnerAccessor {

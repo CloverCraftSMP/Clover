@@ -22,6 +22,7 @@
     "fix.supplementaries.SafeOwnerMixin",
     "fix.tide.FishSatchelItemMixin",
     "fix.tide.InventoryMixin",
+    "fix.tide.ItemMixin",
     "fix.tide.LootCrateEntityMixin",
     "fix.tide.TideFishingHookMixin",
     "fix.vanillabackport.EntityMixin",

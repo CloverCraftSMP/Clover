@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@IfModLoaded("vanillabackport")
+@IfModLoaded(value = "vanillabackport", maxVersion = "1.1.7.10", maxInclusive = false)
 @Mixin(LeashIntegration.class)
 public class LeashIntegrationMixin {
     @WrapOperation(method = "onInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Leashable;setLeashedTo(Lnet/minecraft/world/entity/Entity;Z)V"))

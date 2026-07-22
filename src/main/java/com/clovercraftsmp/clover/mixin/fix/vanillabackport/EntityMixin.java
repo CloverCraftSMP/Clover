@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@IfModLoaded("vanillabackport")
+@IfModLoaded(value = "vanillabackport", maxVersion = "1.1.7.10", maxInclusive = false)
 @Mixin(Entity.class)
 public class EntityMixin implements LeashDuck {
     @Unique private int leashedCounter = 0;

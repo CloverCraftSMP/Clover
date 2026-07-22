@@ -25,7 +25,7 @@ public class SafeOwnerMixin {
         return RecordCodecBuilder.create(
                 instance -> instance.group(
                                 UUIDUtil.CODEC.optionalFieldOf("owner").forGetter(s -> Optional.ofNullable(s.owner())),
-                                Codec.STRING.optionalFieldOf("owner_name").forGetter(s -> Optional.ofNullable(s.ownerName())),
+                                Codec.STRING.optionalFieldOf("ownerName").forGetter(s -> Optional.ofNullable(s.ownerName())),
                                 Codec.STRING.optionalFieldOf("password").forGetter(s -> Optional.ofNullable(s.password()))
                         )
                         .apply(instance, SafeOwnerAccessor::invokeNew)

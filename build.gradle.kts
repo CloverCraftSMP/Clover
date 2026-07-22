@@ -76,10 +76,9 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    resolveMod("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries") // TODO: move to gradle property
-    resolvePinnedMod("tide")
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "tide")
     modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("crafttweaker")}")
-    modImplementation("dev.isxander:yet-another-config-lib:${property("yacl")}")
+    include(modImplementation("dev.isxander:yet-another-config-lib:${property("yacl")}")!!)
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(implementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
