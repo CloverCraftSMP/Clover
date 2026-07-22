@@ -3,15 +3,17 @@
 ## [Unreleased]
 ### Added
 - Version compatibility checks to ensure mod compatibility at runtime
-- Cauldron recipes, throw in an item and have it convert to another (with CraftTweaker integration)
 ### Fixed
-- Tide satchel deletion / desync due to fish stack sizes
-- Tide crates occasionally create / delete fluid blocks
-- Vanilla Backport prevents mobs from being leashable
-- Supplementaries safe block password set to player name
+- ~~Tide satchel deletion / desync due to fish stack sizes~~
+- ~~Tide crates occasionally create / delete fluid blocks~~
+- ~~Vanilla Backport prevents mobs from being leashable~~
+  - Above have been subsequently mostly fixed by offending mods, Tide has required a mixin to convert old satchels to new system (otherwise they're wiped...).
+- Supplementaries safe block password set to player name (*still* broken even with an [attempted fix](https://github.com/MehVahdJukaar/Supplementaries/commit/5e27621641111107e6ca68792e1081ac7ca0e7c4))
 - Nether build limit is too low
+- Modpack checker overriding reload command
 ### Changed
 - Edited enderscapes end vault loot table to have mending
+- Updated to support new mod versions
 
 ## [0.3.3] - 2026-05-20
 ### Added
