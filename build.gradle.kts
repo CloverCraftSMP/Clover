@@ -76,7 +76,7 @@ dependencies {
     modRuntimeOnly(fabricApi.module("fabric-rendering-v1", property("deps.fabric_api") as String))
     modRuntimeOnly(fletchingTable.modrinth("fabric-api", sc.current.version))
 
-    resolveMod("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "tide")
+    resolveMod("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "tide", "simple-copper-pipes")
     modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("crafttweaker")}")
     include(modImplementation("dev.isxander:yet-another-config-lib:${property("yacl")}")!!)
 
