@@ -97,7 +97,7 @@ public class NameFilter extends Filter {
         }
 
         if (entry.toLowerCase().startsWith("sensitive=")) {
-            String attempt = entry.substring(10);
+            String attempt = entry.substring(10).toLowerCase();
             if (!(attempt.equals("true") || attempt.equals("false"))) return true;
             caseSensitive = Boolean.parseBoolean(attempt);
             return false;
