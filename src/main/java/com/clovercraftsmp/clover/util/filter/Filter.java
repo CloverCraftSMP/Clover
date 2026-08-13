@@ -46,7 +46,10 @@ public abstract class Filter {
 
     public Filter(String type, CompoundTag tag) {
         this.type = type;
-        this.mode = Mode.valueOf(tag.getString("mode"));
+        Mode retrievedMode = Mode.valueOf(tag.getString("mode"));
+        List<Mode> allowed = this.allowedModes();
+        if (!this.allowedModes().contains(retrievedMode)) retrievedMode = allowed.getFirst();
+        this.mode = retrievedMode;
     }
 
     public abstract boolean test(ItemStack stack);
