@@ -67,6 +67,7 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
 
     @Override
     public boolean canPlaceItem(int i, ItemStack itemStack) {
-        return !this.clover$isPowered() && (filter == null || filter.test(itemStack));
+        return !this.getBlockState().getValue(BlockStateProperties.POWERED)
+                && (filter == null || filter.test(itemStack));
     }
 }
