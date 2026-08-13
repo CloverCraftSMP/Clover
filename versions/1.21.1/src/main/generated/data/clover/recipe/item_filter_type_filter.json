@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:blue_dye"
+  },
+  "base": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "components": {
+      "!minecraft:writable_book_content": {},
+      "minecraft:custom_data": {
+        "clover:filter_data": {
+          "type": "type",
+          "entries": [],
+          "mode": "ANY"
+        }
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": "{\"color\":\"#3F3FFF\",\"italic\":false,\"text\":\"Type Filter\"}",
+      "minecraft:lore": [
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Current Mode: Any\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Passes if the item matches any type listed.\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Allowed modes: \"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Any\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• None\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"extra\":[\"None specified.\"],\"italic\":false,\"text\":\"Item types: \"}"
+      ]
+    },
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "template": {
+    "item": "minecraft:hopper"
+  }
+}

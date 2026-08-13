@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:lime_dye"
+  },
+  "base": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "components": {
+      "!minecraft:writable_book_content": {},
+      "minecraft:custom_data": {
+        "clover:filter_data": {
+          "type": "enchantment",
+          "mode": "AT_LEAST",
+          "threshold": 1
+        }
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": "{\"color\":\"#3FFF3F\",\"italic\":false,\"text\":\"Enchantment Filter\"}",
+      "minecraft:lore": [
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Current Mode: At least\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Passes if the target enchantment is ≥ the specified level.\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Allowed modes: \"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• At least\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• At most\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Exact\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"extra\":[\"Unset\",\" ≥ 1\"],\"italic\":false,\"text\":\"Enchantment threshold: \"}"
+      ]
+    },
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "template": {
+    "item": "minecraft:hopper"
+  }
+}
