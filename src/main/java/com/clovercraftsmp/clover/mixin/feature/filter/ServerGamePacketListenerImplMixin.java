@@ -22,7 +22,7 @@ import java.util.Objects;
 public class ServerGamePacketListenerImplMixin {
     @WrapOperation(method = "handleUseItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayerGameMode;useItem(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"))
     private InteractionResult onUseItem(ServerPlayerGameMode instance, ServerPlayer serverPlayer, Level level, ItemStack itemStack, InteractionHand interactionHand, Operation<InteractionResult> original) {
-        if (serverPlayer.isSpectator() || !itemStack.is(Items.WRITABLE_BOOK) || !Filter.isFilter(itemStack) || !serverPlayer.isCrouching()) {
+        if (serverPlayer.gameMode.getGameModeForPlayer().isBlockPlacingRestricted() || !itemStack.is(Items.WRITABLE_BOOK) || !Filter.isFilter(itemStack) || !serverPlayer.isCrouching()) {
             return original.call(instance, serverPlayer, level, itemStack, interactionHand);
         }
 
