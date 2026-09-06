@@ -6,6 +6,7 @@ import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.clovercraftsmp.clover.util.LootTableUtil;
+import com.clovercraftsmp.clover.util.filter.Filter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
@@ -36,7 +37,7 @@ public class Clover implements ModInitializer {
         }
 
         LootTableEvents.MODIFY.register((resourceKey, builder, lootTableSource, provider) -> {
-            ItemStackUtil.mendingRegistry(provider);
+            ItemStackUtil.onEnchantmentRegistryReady(provider);
             LootTableUtil.fixLootTables(resourceKey, builder);
         });
 
@@ -44,6 +45,8 @@ public class Clover implements ModInitializer {
 
         PayloadTypeRegistry.playS2C().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
+
+        Filter.registerFilters();
     }
 
     /**

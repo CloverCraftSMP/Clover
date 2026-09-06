@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:pink_dye"
+  },
+  "base": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "components": {
+      "!minecraft:writable_book_content": {},
+      "minecraft:custom_data": {
+        "clover:filter_data": {
+          "type": "content",
+          "mode": "EMPTY",
+          "slot": 0
+        }
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": "{\"color\":\"#FF7FFF\",\"italic\":false,\"text\":\"Content Filter\"}",
+      "minecraft:lore": [
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Current Mode: Empty\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Passes if the target container is empty.\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Allowed modes: \"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Any\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• All\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• None\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Specific\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Empty\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Slot: 1\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Sub-filter: Unspecified.\"}"
+      ]
+    },
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "template": {
+    "item": "minecraft:hopper"
+  }
+}

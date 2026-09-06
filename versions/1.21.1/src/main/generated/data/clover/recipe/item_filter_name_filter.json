@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:cyan_dye"
+  },
+  "base": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "components": {
+      "!minecraft:writable_book_content": {},
+      "minecraft:custom_data": {
+        "clover:filter_data": {
+          "type": "name",
+          "mode": "CONTAINS",
+          "sensitive": 0,
+          "value": ""
+        }
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": "{\"color\":\"#007F7F\",\"italic\":false,\"text\":\"Name Filter\"}",
+      "minecraft:lore": [
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Current Mode: Contains\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Passes if the item name contains the target value.\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Allowed modes: \"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Contains\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Starts with\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Ends with\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• Exact\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Value: Unspecified.\"}",
+        "{\"color\":\"white\",\"extra\":[{\"color\":\"red\",\"italic\":false,\"text\":\"✘\"}],\"italic\":false,\"text\":\"Case sensitive: \"}"
+      ]
+    },
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "template": {
+    "item": "minecraft:hopper"
+  }
+}

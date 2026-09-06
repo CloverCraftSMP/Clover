@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:green_dye"
+  },
+  "base": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "components": {
+      "!minecraft:writable_book_content": {},
+      "minecraft:custom_data": {
+        "clover:filter_data": {
+          "type": "durability",
+          "mode": "AT_LEAST",
+          "threshold": 0.0
+        }
+      },
+      "minecraft:enchantment_glint_override": true,
+      "minecraft:item_name": "{\"color\":\"#007F00\",\"italic\":false,\"text\":\"Durability Filter\"}",
+      "minecraft:lore": [
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Current Mode: At least\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Passes if the durability is ≥ the percentage specified.\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Allowed modes: \"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• At least\"}",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"• At most\"}",
+        "\"\"",
+        "{\"color\":\"white\",\"italic\":false,\"text\":\"Durability threshold: ≥0.00%\"}"
+      ]
+    },
+    "count": 1,
+    "id": "minecraft:writable_book"
+  },
+  "template": {
+    "item": "minecraft:hopper"
+  }
+}
