@@ -27,8 +27,6 @@ public class Clover implements ModInitializer {
 
     public static final String MOD_ID = "clover";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    public static final String VERSION = /*$ mod_version*/ "0.3.4";
-    public static final String MINECRAFT = /*$ minecraft*/ "1.21.1";
 
     @Override
     public void onInitialize() {
