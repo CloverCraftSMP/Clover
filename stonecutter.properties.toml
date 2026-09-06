@@ -1,0 +1,33 @@
+mod.id = "clover"
+mod.name = "Clover"
+mod.group = "com.clovercraftsmp"
+mod.version = "0.4.0"
+
+publish.modrinth = "SnT761HH"
+publish.github_repo = "CloverCraftSMP/Clover"
+
+deps.fabric_loader = "0.19.3"
+loomx.loom_version = "1.17-SNAPSHOT"
+deps.mixin_squared = "0.3.7-beta.3"
+deps.mixinconstraints = "1.1.0"
+deps.vineflower_source_decomp = "1.12.0"
+
+["1.21.1"]
+# used for fabric.mod.json
+mod.mc_compat = ">=1.21 <=1.21.1"
+
+# used for modrinth/curseforge
+mod.mc_releases = ["1.21", "1.21.1"]
+
+deps.fabric_api = "0.116.8+1.21.1"
+deps.clutterbestiary = "1.1.2-Fabric-1.21.1"
+deps.status = "1.21.1-1.0.8"
+deps.larion = "4.3.0"
+deps.tide = "2.1"
+deps.modpack_checker = "0.1.2+1.21.x"
+deps.horseman = "1.5.11"
+deps.vanillabackport = "1.1.7.10"
+deps.supplementaries = "1.21.1-3.8.2"
+deps.enderscape = "2.1.0"
+deps.crafttweaker = "21.0.38"
+deps.yacl = "3.8.2+1.21.1-fabric"
