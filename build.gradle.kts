@@ -85,18 +85,18 @@ dependencies {
     if (sc.current.version <= "1.21.1") {
         resolveModsModrinth(
             "clutterbestiary",
-            "status",
             "larion-worldgen",
             "modpack-checker",
             "horseman",
             "vanillabackport",
             "supplementaries",
-            "tide",
-            "simple-copper-pipes"
+            "tide"
         )
         modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("deps.crafttweaker")}")
         include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
     }
+
+    resolveModsModrinth("status", "simple-copper-pipes")
 
     include(modImplementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)

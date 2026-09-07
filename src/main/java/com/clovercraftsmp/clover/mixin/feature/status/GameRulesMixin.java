@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
+// TODO: gamerules changed, need to redo some of this
 //? if <=1.21.1 {
 /*import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

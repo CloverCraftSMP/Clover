@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
-//? if <=1.21.1 {
-/*import com.clovercraftsmp.clover.duck.StatusDuck;
+
+import com.clovercraftsmp.clover.duck.StatusDuck;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.net.PlayerStatePacket;
 import de.maxhenkel.status.playerstate.PlayerStateManager;
@@ -18,4 +18,3 @@ public class PlayerStateManagerMixin {
         ((StatusDuck) context.player()).clover$receivedPlayerState(packet.getPlayerState());
     }
 }
-*///?}

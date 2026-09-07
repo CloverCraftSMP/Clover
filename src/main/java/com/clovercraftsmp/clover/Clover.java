@@ -6,12 +6,12 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
 
-import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
-import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.clovercraftsmp.clover.util.LootTableUtil;
 import com.clovercraftsmp.clover.util.filter.Filter;
 *///?}
+import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
+import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -46,11 +46,11 @@ public class Clover implements ModInitializer {
         });
         *///?}
 
-        //? if <=1.21.1 {
-        /*PayloadTypeRegistry.playS2C().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundSetAfkPacket.TYPE, ClientboundSetAfkPacket.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
 
-        Filter.registerFilters();
+        //? if <=1.21.1 {
+        /*Filter.registerFilters();
         *///?}
     }
 

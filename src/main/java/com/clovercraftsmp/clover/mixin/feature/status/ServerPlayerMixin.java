@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
-//? if <=1.21.1 {
-/*import com.clovercraftsmp.clover.duck.StatusDuck;
+
+import com.clovercraftsmp.clover.duck.StatusDuck;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
@@ -88,4 +88,3 @@ public class ServerPlayerMixin implements StatusDuck {
         tickNoSleep(player);
     }
 }
-*///?}
