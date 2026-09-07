@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-
-import net.fabricmc.loader.api.FabricLoader;
+//? if <=1.21.1 {
+/*import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -131,3 +131,4 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         return stack.is(entry);
     }
 }
+*///?}

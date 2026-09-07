@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util;
-
-import net.minecraft.core.Holder;
+//? if <=1.21.1 {
+/*import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -43,3 +43,4 @@ public class ItemStackUtil {
         return ENCHANTMENT_LOOKUP.get(loc);
     }
 }
+*///?}

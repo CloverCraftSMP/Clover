@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.client;
-
-import com.clovercraftsmp.clover.compat.StatusCompatImpl;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.compat.StatusCompatImpl;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import net.fabricmc.api.ClientModInitializer;
@@ -21,3 +21,4 @@ public class CloverClient implements ClientModInitializer {
         });
     }
 }
+*///?}

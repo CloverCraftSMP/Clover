@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.modpack_checker;
-
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import modpackChecker.ModpackChecker;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -35,3 +35,4 @@ public class ModpackCheckerMixin {
         ci.cancel();
     }
 }
+*///?}

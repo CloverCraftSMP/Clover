@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.copper_pipe;
-
-import com.clovercraftsmp.clover.duck.FilterDuck;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.duck.FilterDuck;
 import com.clovercraftsmp.clover.duck.PoweredDuck;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -71,3 +71,4 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
                 && (filter == null || filter.test(itemStack));
     }
 }
+*///?}

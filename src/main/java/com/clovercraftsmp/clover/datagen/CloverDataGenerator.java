@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.datagen;
-
-import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
 import com.clovercraftsmp.clover.datagen.providers.StructureProvider;
 import com.clovercraftsmp.clover.structure.ModStructures;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
@@ -27,3 +27,4 @@ public class CloverDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.add(Registries.STRUCTURE_SET, ModStructures::bootstrapStructureSets);
     }
 }
+*///?}

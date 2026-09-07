@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.villager;
-
-import com.clovercraftsmp.clover.util.ItemStackUtil;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.item.ItemStack;
@@ -20,3 +20,4 @@ public class MerchantOfferMixin {
         return ItemStackUtil.hasMending(result) || original.call();
     }
 }
+*///?}

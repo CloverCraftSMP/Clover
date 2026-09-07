@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-
-import com.clovercraftsmp.clover.util.ItemStackUtil;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -161,3 +161,4 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         return 0;
     }
 }
+*///?}

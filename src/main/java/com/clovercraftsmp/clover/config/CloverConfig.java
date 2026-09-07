@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.config;
-
-import com.clovercraftsmp.clover.Clover;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.Clover;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -18,3 +18,4 @@ public class CloverConfig {
     @SerialEntry
     public String minigameType = "none";
 }
+*///?}

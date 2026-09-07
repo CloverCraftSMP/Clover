@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.vanillabackport;
-
-import com.blackgear.vanillabackport.common.api.leash.LeashIntegration;
+//? if <=1.21.1 {
+/*import com.blackgear.vanillabackport.common.api.leash.LeashIntegration;
 import com.clovercraftsmp.clover.duck.LeashDuck;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -30,3 +30,4 @@ public class LeashIntegrationMixin {
         if (duck.clover$preventRemoveLeash()) cir.setReturnValue(InteractionResult.FAIL);
     }
 }
+*///?}

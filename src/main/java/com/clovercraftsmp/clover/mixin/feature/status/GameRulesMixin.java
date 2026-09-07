@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+//? if <=1.21.1 {
+/*import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.Status;
@@ -21,3 +22,4 @@ public class GameRulesMixin {
         return original.call(key);
     }
 }
+*///?}

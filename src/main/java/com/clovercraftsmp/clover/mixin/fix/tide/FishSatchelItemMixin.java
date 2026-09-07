@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.tide;
-
-import com.li64.tide.registries.items.FishSatchelItem;
+//? if <=1.21.1 {
+/*import com.li64.tide.registries.items.FishSatchelItem;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -25,3 +25,4 @@ public abstract class FishSatchelItemMixin {
     }
     //? }
 }
+*///?}

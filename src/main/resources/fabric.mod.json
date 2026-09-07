@@ -22,17 +22,5 @@
   "depends": {
     "fabricloader": ">=0.19",
     "minecraft": "${minecraft}"
-  },
-  "breaks": {
-    "clutterbestiary": ["<${clutterbestiary}", ">${clutterbestiary}"],
-    "status": ["<${status}", ">${status}"],
-    "larion": ["<${larion}", ">${larion}"],
-    "tide": ["<${tide}", ">${tide}"],
-    "modpack-checker": ["<${modpack_checker}", ">${modpack_checker}"],
-    "horseman": ["<${horseman}", ">${horseman}"],
-    "vanillabackport": ["<${vanillabackport}", ">${vanillabackport}"],
-    "supplementaries": ["<${supplementaries}", ">${supplementaries}"],
-    "enderscape": ["<${enderscape}", ">${enderscape}"],
-    "yet_another_config_lib_v3": ["<${yacl}", "<${yacl}"]
   }
 }

@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.tide;
-
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.world.entity.player.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -50,3 +50,4 @@ public class InventoryMixin {
     }
     //? }
 }
+*///?}

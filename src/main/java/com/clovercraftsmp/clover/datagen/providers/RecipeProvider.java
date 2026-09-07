@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.datagen.providers;
-
-import com.clovercraftsmp.clover.Clover;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -109,3 +109,4 @@ public class RecipeProvider extends FabricRecipeProvider {
         );
     }
 }
+*///?}

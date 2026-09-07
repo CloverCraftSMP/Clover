@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
-
-import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -113,3 +113,4 @@ public class CraftingMenuMixin {
         return ItemStack.EMPTY;
     }
 }
+*///?}

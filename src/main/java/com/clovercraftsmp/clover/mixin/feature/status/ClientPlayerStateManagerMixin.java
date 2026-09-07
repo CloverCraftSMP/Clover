@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
-
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import dev.kikugie.fletching_table.mixin.MixinEnvironment;
 import dev.kikugie.fletching_table.mixin.MixinEnvironment.Env;
 import de.maxhenkel.status.playerstate.Availability;
@@ -27,3 +27,4 @@ public abstract class ClientPlayerStateManagerMixin {
         this.setNoSleep(false);
     }
 }
+*///?}

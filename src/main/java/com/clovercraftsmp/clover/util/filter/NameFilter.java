@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-
-import net.minecraft.ChatFormatting;
+//? if <=1.21.1 {
+/*import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -121,3 +121,4 @@ public class NameFilter extends Filter {
         stack.set(DataComponents.LORE, new ItemLore(loreList));
     }
 }
+*///?}

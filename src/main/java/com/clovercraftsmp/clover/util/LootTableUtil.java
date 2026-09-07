@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util;
-
-import com.clovercraftsmp.clover.Clover;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.mixin.loot.EnchantRandomlyFunctionAccessor;
 import com.clovercraftsmp.clover.mixin.loot.LootPoolAccessor;
 import com.clovercraftsmp.clover.mixin.loot.LootPoolSingletonContainerAccessor;
@@ -80,3 +80,4 @@ public class LootTableUtil {
         return (T) list.get(index);
     }
 }
+*///?}

@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-
-import net.minecraft.core.component.DataComponents;
+//? if <=1.21.1 {
+/*import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -186,3 +186,4 @@ public class ContentFilter extends Filter {
         stack.set(DataComponents.LORE, new ItemLore(loreList));
     }
 }
+*///?}

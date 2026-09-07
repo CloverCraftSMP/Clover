@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.compat;
-
-import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import de.maxhenkel.status.StatusClient;
 import de.maxhenkel.status.playerstate.Availability;
 import de.maxhenkel.status.playerstate.ClientPlayerStateManager;
@@ -16,3 +16,4 @@ public class StatusCompatImpl {
         StatusClient.STATE_MANAGER.setNoSleep(false);
     }
 }
+*///?}

@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import de.maxhenkel.status.events.PlayerEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,3 +21,4 @@ public class LivingEntityMixin {
         }
     }
 }
+*///?}

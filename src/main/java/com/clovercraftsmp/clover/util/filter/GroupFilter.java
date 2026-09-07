@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-
-import net.minecraft.core.component.DataComponents;
+//? if <=1.21.1 {
+/*import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -131,3 +131,4 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
         return entry.test(item);
     }
 }
+*///?}
