@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.core.component.DataComponents;
+
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,8 +33,12 @@ public class ContentFilter extends Filter {
 
     public ContentFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.slot = tag.getInt("slot");
-        this.subFilter = tag.contains("filter", 10) ? Filter.fromCompound(tag.getCompound("filter")) : null;
+        this.slot = tag.getInt("slot")/*? if >1.21.1 {*/.orElse(0)/*?}*/;
+        //? if <=1.21.1 {
+        /*this.subFilter = tag.contains("filter", 10) ? Filter.fromCompound(tag.getCompound("filter")) : null;
+        *///?} else {
+        this.subFilter = tag.getCompound("filter").map(Filter::fromCompound).orElse(null);
+        //? }
     }
 
     @Override
@@ -68,9 +72,15 @@ public class ContentFilter extends Filter {
 
     private ItemStack get(ItemContainerContents container, BundleContents bundle, int slot) {
         if (container != null) {
-            return container.stream().skip(slot).findFirst().orElse(null);
+            return container
+                    /*? if <=1.21.1 {*//*.stream()*//*?} else {*/.allItemsCopyStream()/*?}*/
+                    .skip(slot)
+                    .findFirst()
+                    .orElse(null);
         } else {
-            Iterator<ItemStack> iter = bundle.items().iterator();
+            Iterator<ItemStack> iter = bundle
+                    /*? if <=1.21.1 {*//*.items()*//*?} else {*/.itemCopyStream()/*?}*/
+                    .iterator();
             return skip(iter, slot) && iter.hasNext() ? iter.next() : null;
         }
     }
@@ -83,9 +93,15 @@ public class ContentFilter extends Filter {
         return true;
     }
 
-    private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
+    //? if <=1.21.1 {
+    /*private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
         return container != null ? container.nonEmptyItems().iterator() : bundle.items().iterator();
     }
+    *///?} else {
+    private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
+        return container != null ? container.nonEmptyItemCopyStream().iterator() : bundle.itemCopyStream().iterator();
+    }
+    //?}
 
     private boolean match(Iterator<ItemStack> stacks, boolean all) {
         while (stacks.hasNext()) if (all ^ (subFilter == null || subFilter.test(stacks.next()))) return !all;
@@ -186,4 +202,3 @@ public class ContentFilter extends Filter {
         stack.set(DataComponents.LORE, new ItemLore(loreList));
     }
 }
-*///?}

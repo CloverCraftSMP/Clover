@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.ChatFormatting;
+
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,8 +28,8 @@ public class NameFilter extends Filter {
 
     public NameFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.value = tag.getString("value");
-        this.caseSensitive = tag.getBoolean("sensitive");
+        this.value = tag.getString("value")/*? if >1.21.1 {*/.orElse("")/*?}*/;
+        this.caseSensitive = tag.getBoolean("sensitive")/*? if >1.21.1 {*/.orElse(false)/*?}*/;
     }
 
     @Override
@@ -121,4 +121,3 @@ public class NameFilter extends Filter {
         stack.set(DataComponents.LORE, new ItemLore(loreList));
     }
 }
-*///?}

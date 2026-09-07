@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.ChatFormatting;
+
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -46,7 +46,7 @@ public abstract class Filter {
 
     public Filter(String type, CompoundTag tag) {
         this.type = type;
-        Mode retrievedMode = Mode.valueOf(tag.getString("mode"));
+        Mode retrievedMode = Mode.valueOf(tag.getString("mode")/*? if >1.21.1 {*/.orElse("")/*?}*/);
         List<Mode> allowed = this.allowedModes();
         if (!this.allowedModes().contains(retrievedMode)) retrievedMode = allowed.getFirst();
         this.mode = retrievedMode;
@@ -96,11 +96,15 @@ public abstract class Filter {
 
     public static @Nullable Filter fromItem(ItemStack stack) {
         if (!isFilter(stack)) return null;
-        return Filter.fromCompound(Objects.requireNonNull(stack.get(DataComponents.CUSTOM_DATA)).copyTag().getCompound(FILTER_PATH));
+        return Filter
+                .fromCompound(Objects.requireNonNull(stack.get(DataComponents.CUSTOM_DATA)).copyTag()
+                        .getCompound(FILTER_PATH)
+                        /*? if >1.21.1 {*/.orElse(new CompoundTag())/*?}*/
+                );
     }
 
     public static Filter fromCompound(CompoundTag tag) {
-        String type = tag.getString("type");
+        String type = tag.getString("type")/*? if >1.21.1 {*/.orElse("")/*?}*/;
         Function<CompoundTag, Filter> factory = REGISTRY.get(type);
         if (factory == null) throw new RuntimeException("Unexpected type found when parsing filter: " + type);
         return factory.apply(tag);
@@ -161,4 +165,3 @@ public abstract class Filter {
         stack.remove(DataComponents.WRITABLE_BOOK_CONTENT);
     }
 }
-*///?}

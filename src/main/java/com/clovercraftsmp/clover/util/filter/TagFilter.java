@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.fabricmc.loader.api.FabricLoader;
+
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -33,12 +33,23 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
     }
 
     private void resolveIds(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 8);
+        ListTag tagEntries =
+                //? if <=1.21.1 {
+                /*tag.getList("entries", 8);
+                 *///? } else {
+                tag.getList("entries")
+                        .filter(e -> e.stream().allMatch(t -> t instanceof StringTag))
+                        .orElse(new ListTag());
+                //? }
         for (int i = 0; i < tagEntries.size(); i++) {
-            String path = tagEntries.getString(i);
+            String path = tagEntries.getString(i)/*? if >1.21.1 {*/.orElse("")/*?}*/;
             Identifier loc = Identifier.parse(path);
             TagKey<Item> tagKey = TagKey.create(Registries.ITEM, loc);
-            if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) continue;
+            //? if <=1.21.1 {
+            /*if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) continue;
+            *///? } else {
+            if (BuiltInRegistries.ITEM.get(tagKey).isEmpty()) continue;
+            //? }
             entries.add(tagKey);
         }
     }
@@ -84,7 +95,11 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         if (tagLocation == null) return true;
 
         TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagLocation);
-        if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) return true;
+        //? if <=1.21.1 {
+        /*if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) return true;
+         *///? } else {
+        if (BuiltInRegistries.ITEM.get(tagKey).isEmpty()) return true;
+        //? }
 
         if (!(entries.removeIf(tag -> tag.location().equals(tagLocation)))) {
             entries.add(tagKey);
@@ -131,4 +146,3 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         return stack.is(entry);
     }
 }
-*///?}

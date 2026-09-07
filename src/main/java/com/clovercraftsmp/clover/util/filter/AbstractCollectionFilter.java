@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.nbt.CompoundTag;
+
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -36,4 +36,3 @@ public abstract class AbstractCollectionFilter<T> extends Filter {
     }
 
 }
-*///?}

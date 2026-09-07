@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.fabricmc.loader.api.FabricLoader;
+
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -31,11 +31,18 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
     }
 
     private void resolveIds(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 8);
+        ListTag tagEntries =
+                //? if <=1.21.1 {
+                /*tag.getList("entries", 8);
+                 *///? } else {
+                tag.getList("entries")
+                        .filter(e -> e.stream().allMatch(t -> t instanceof StringTag))
+                        .orElse(new ListTag());
+        //? }
         for (int i = 0; i < tagEntries.size(); i++) {
-            String path = tagEntries.getString(i);
+            String path = tagEntries.getString(i)/*? if >1.21.1 {*/.orElse("")/*?}*/;
             Identifier loc = Identifier.parse(path);
-            Item item = BuiltInRegistries.ITEM.get(loc);
+            Item item = BuiltInRegistries.ITEM/*? if <=1.21.1 {*//*.get(loc)*//*? } else {*/.getValue(loc)/*? }*/;
             if (item == Items.AIR) continue;
             entries.add(item);
         }
@@ -76,10 +83,10 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         if (!entry.toLowerCase().startsWith("item=")) return true;
 
         String itemAttempt = entry.substring(5);
-        Identifier itemLocation = Identifier.tryParse(itemAttempt);
-        if (itemLocation == null) return true;
+        Identifier loc = Identifier.tryParse(itemAttempt);
+        if (loc == null) return true;
 
-        Item item = BuiltInRegistries.ITEM.get(itemLocation);
+        Item item = BuiltInRegistries.ITEM/*? if <=1.21.1 {*//*.get(loc)*//*? } else {*/.getValue(loc)/*? }*/;
         if (item == Items.AIR) return true;
 
         if (!(entries.removeIf(element -> element == item))) {
@@ -127,4 +134,3 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         return item.is(entry);
     }
 }
-*///?}

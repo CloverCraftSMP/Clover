@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import com.clovercraftsmp.clover.util.ItemStackUtil;
+
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -32,8 +32,8 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     public EnchantmentFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getInt("threshold"));
-        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment"));
+        super(TYPE, tag, tag.getInt("threshold")/*? if >1.21.1 {*/.orElse(0)/*?}*/);
+        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment")/*? if >1.21.1 {*/.orElse("")/*?}*/);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
 
         if (enchantmentId != null) {
-            Identifier loc = enchantmentId.key().location();
+            Identifier loc = ItemStackUtil.identifierOf(enchantmentId.key());
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());
@@ -134,7 +134,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         if (enchantmentId != null) {
             tag.putString("enchantment", enchantmentId
                     .unwrapKey()
-                    .map(ResourceKey::location)
+                    .map(ItemStackUtil::identifierOf)
                     .orElseThrow()
                     .toString());
         }
@@ -161,4 +161,3 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         return 0;
     }
 }
-*///?}

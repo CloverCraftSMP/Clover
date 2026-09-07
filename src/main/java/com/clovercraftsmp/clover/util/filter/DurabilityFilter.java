@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.core.component.DataComponents;
+
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -21,7 +21,7 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     public DurabilityFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getDouble("threshold"));
+        super(TYPE, tag, tag.getDouble("threshold")/*? if >1.21.1 {*/.orElse(0.0)/*?}*/);
     }
 
     @Override
@@ -97,4 +97,3 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
         return Math.clamp(((double) (maxDamage - damageTaken) / (double) maxDamage) * 100.0, 0, 100);
     }
 }
-*///?}

@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
-//? if <=1.21.1 {
-/*import net.minecraft.core.component.DataComponents;
+
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -33,7 +33,14 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
     }
 
     private void resolveFilters(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 10);
+        ListTag tagEntries =
+        //? if <=1.21.1 {
+        /*tag.getList("entries", 10);
+        *///? } else {
+        tag.getList("entries")
+                .filter(e -> e.stream().allMatch(t -> t instanceof CompoundTag))
+                .orElse(new ListTag());
+        //? }
         for (Tag tagEntry : tagEntries) {
             entries.add(Filter.fromCompound((CompoundTag) tagEntry));
         }
@@ -131,4 +138,3 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
         return entry.test(item);
     }
 }
-*///?}
