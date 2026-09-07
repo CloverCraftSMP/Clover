@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,7 +34,7 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         ListTag tagEntries = tag.getList("entries", 8);
         for (int i = 0; i < tagEntries.size(); i++) {
             String path = tagEntries.getString(i);
-            ResourceLocation loc = ResourceLocation.parse(path);
+            Identifier loc = Identifier.parse(path);
             Item item = BuiltInRegistries.ITEM.get(loc);
             if (item == Items.AIR) continue;
             entries.add(item);
@@ -76,7 +76,7 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         if (!entry.toLowerCase().startsWith("item=")) return true;
 
         String itemAttempt = entry.substring(5);
-        ResourceLocation itemLocation = ResourceLocation.tryParse(itemAttempt);
+        Identifier itemLocation = Identifier.tryParse(itemAttempt);
         if (itemLocation == null) return true;
 
         Item item = BuiltInRegistries.ITEM.get(itemLocation);
@@ -97,7 +97,7 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         loreList.add(Component.literal("Item types: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
 
         for (Item item : entries) {
-            ResourceLocation loc = BuiltInRegistries.ITEM.getKey(item);
+            Identifier loc = BuiltInRegistries.ITEM.getKey(item);
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());

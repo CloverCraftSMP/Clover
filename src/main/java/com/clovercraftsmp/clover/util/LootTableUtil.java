@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import java.util.*;
 
 public class LootTableUtil {
-    private static final ResourceLocation END_VAULT = ResourceLocation.fromNamespaceAndPath("enderscape", "end_city/vault");
+    private static final Identifier END_VAULT = Identifier.fromNamespaceAndPath("enderscape", "end_city/vault");
 
     public static void fixLootTables(ResourceKey<LootTable> resourceKey, LootTable.Builder builder) {
         LootTableBuilderAccessor builderAccessor = (LootTableBuilderAccessor) builder;

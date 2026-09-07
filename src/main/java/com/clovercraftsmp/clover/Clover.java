@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,16 +48,16 @@ public class Clover implements ModInitializer {
     }
 
     /**
-     * Adapts to the {@link ResourceLocation} changes introduced in 1.21.
+     * Adapts to the {@link Identifier} changes introduced in 1.21.
      */
-    public static ResourceLocation id(String namespace, String path) {
+    public static Identifier id(String namespace, String path) {
         //? if <1.21 {
-        /*return new ResourceLocation(namespace, path);
+        /*return new Identifier(namespace, path);
         *///?} else
-        return ResourceLocation.fromNamespaceAndPath(namespace, path);
+        return Identifier.fromNamespaceAndPath(namespace, path);
     }
 
-    public static ResourceLocation id(String path) {
+    public static Identifier id(String path) {
         return id(MOD_ID, path);
     }
 }

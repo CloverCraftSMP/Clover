@@ -32,9 +32,9 @@ plugins {
 includeBuild("build-logic")
 stonecutter {
     create(rootProject) {
-        // See https://stonecutter.kikugie.dev/wiki/start/#choosing-minecraft-versions
+        version("26.1.x", "26.1")
         versions("1.21.1")
-        vcsVersion = "1.21.1"
+        vcsVersion = "26.1.x"
     }
 }
 

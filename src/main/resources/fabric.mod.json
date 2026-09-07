@@ -18,7 +18,7 @@
   "mixins": [
     "clover.mixins.json"
   ],
-  "accessWidener": "clover.accesswidener",
+  "accessWidener": "clover.ct",
   "depends": {
     "fabricloader": ">=0.19",
     "minecraft": "${minecraft}"

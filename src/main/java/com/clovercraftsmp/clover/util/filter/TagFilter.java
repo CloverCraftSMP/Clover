@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         ListTag tagEntries = tag.getList("entries", 8);
         for (int i = 0; i < tagEntries.size(); i++) {
             String path = tagEntries.getString(i);
-            ResourceLocation loc = ResourceLocation.parse(path);
+            Identifier loc = Identifier.parse(path);
             TagKey<Item> tagKey = TagKey.create(Registries.ITEM, loc);
             if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) continue;
             entries.add(tagKey);
@@ -80,7 +80,7 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
 
         String tagAttempt = entry.substring(4);
         if (tagAttempt.startsWith("#")) tagAttempt = tagAttempt.substring(1);
-        ResourceLocation tagLocation = ResourceLocation.tryParse(tagAttempt);
+        Identifier tagLocation = Identifier.tryParse(tagAttempt);
         if (tagLocation == null) return true;
 
         TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagLocation);
@@ -101,7 +101,7 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         loreList.add(Component.literal("Tags: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
 
         for (TagKey<Item> tag : entries) {
-            ResourceLocation loc = tag.location();
+            Identifier loc = tag.location();
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());

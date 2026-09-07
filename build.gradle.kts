@@ -82,9 +82,21 @@ dependencies {
         modRuntimeOnly(dep)
     }
 
-    resolveModsModrinth("clutterbestiary", "status", "larion-worldgen", "modpack-checker", "horseman", "vanillabackport", "supplementaries", "tide", "simple-copper-pipes")
-    modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("deps.crafttweaker")}")
-    include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
+    if (sc.current.version <= "1.21.1") {
+        resolveModsModrinth(
+            "clutterbestiary",
+            "status",
+            "larion-worldgen",
+            "modpack-checker",
+            "horseman",
+            "vanillabackport",
+            "supplementaries",
+            "tide",
+            "simple-copper-pipes"
+        )
+        modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("deps.crafttweaker")}")
+        include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
+    }
 
     include(modImplementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
@@ -94,7 +106,10 @@ dependencies {
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    accessWidenerPath = rootProject.file("src/main/resources/clover.accesswidener")
+    accessWidenerPath = sc.process(
+        rootProject.file("src/main/resources/clover.ct"),
+        "build/processed.ct"
+    )
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins

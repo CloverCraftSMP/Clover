@@ -4,7 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ItemStackUtil {
-    private static final Map<ResourceLocation, Holder.Reference<Enchantment>> ENCHANTMENT_LOOKUP = new HashMap<>();
+    private static final Map<Identifier, Holder.Reference<Enchantment>> ENCHANTMENT_LOOKUP = new HashMap<>();
     public static Holder.Reference<Enchantment> MENDING;
     private static HolderLookup.Provider lastSeenProvider;
 
@@ -38,7 +38,7 @@ public class ItemStackUtil {
     }
 
     public static @Nullable Holder.Reference<Enchantment> resolveEnchantment(String id) {
-        ResourceLocation loc = ResourceLocation.tryParse(id);
+        Identifier loc = Identifier.tryParse(id);
         if (loc == null) return null;
         return ENCHANTMENT_LOOKUP.get(loc);
     }

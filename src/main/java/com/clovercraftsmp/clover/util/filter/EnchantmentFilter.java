@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -109,7 +109,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
 
         if (enchantmentId != null) {
-            ResourceLocation loc = enchantmentId.key().location();
+            Identifier loc = enchantmentId.key().location();
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());
