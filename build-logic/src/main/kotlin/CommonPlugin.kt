@@ -37,6 +37,8 @@ private fun Project.configure() {
         options.compilerArgs.add("-Xdoclint:none")
     }
 
+    val currentVersion = findProperty("stonecutter.current") as? String ?: name
+
     val processResources = tasks.named<ProcessResources>("processResources") {
         fun prop(name: String) = project.property(name).toString().also {
             inputs.property(name, it)
@@ -48,16 +50,18 @@ private fun Project.configure() {
             this["version"] = prop("mod.version")
             this["minecraft"] = prop("mod.mc_compat")
 
-            this["clutterbestiary"] = prop("deps.clutterbestiary")
-            this["status"] = prop("deps.status")
-            this["larion"] = prop("deps.larion")
-            this["tide"] = prop("deps.tide")
-            this["modpack_checker"] = prop("deps.modpack_checker")
-            this["horseman"] = prop("deps.horseman")
-            this["vanillabackport"] = prop("deps.vanillabackport")
-            this["supplementaries"] = prop("deps.supplementaries")
-            this["enderscape"] = prop("deps.enderscape")
-            this["yacl"] = prop("deps.yacl")
+            if (currentVersion <= "1.21") {
+                this["clutterbestiary"] = prop("deps.clutterbestiary")
+                this["status"] = prop("deps.status")
+                this["larion"] = prop("deps.larion")
+                this["tide"] = prop("deps.tide")
+                this["modpack_checker"] = prop("deps.modpack_checker")
+                this["horseman"] = prop("deps.horseman")
+                this["vanillabackport"] = prop("deps.vanillabackport")
+                this["supplementaries"] = prop("deps.supplementaries")
+                this["enderscape"] = prop("deps.enderscape")
+                this["yacl"] = prop("deps.yacl")
+            }
         }
 
         filesMatching(listOf("fabric.mod.json")) {

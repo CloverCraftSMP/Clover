@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     "implementation"(gradleKotlinDsl())
-    implementation(common.kotlin.serialization.json)
+    implementation(common.kotlin.serialization)
 }
 
 samWithReceiver {
