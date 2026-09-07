@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
-
-import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -10,7 +10,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -46,7 +46,7 @@ public class CraftingMenuMixin {
             @Nullable RecipeHolder<CraftingRecipe> recipeHolder,
             CallbackInfo ci,
             @Local(ordinal = 1) RecipeHolder<CraftingRecipe> recipeHolder2,
-            @Share("recipe") LocalRef<ResourceLocation> recipeId,
+            @Share("recipe") LocalRef<Identifier> recipeId,
             @Share("player") LocalRef<Player> playerShare
     ) {
         recipeId.set(recipeHolder2.id());
@@ -59,7 +59,7 @@ public class CraftingMenuMixin {
             RecipeInput recipeInput,
             HolderLookup.Provider provider,
             Operation<ItemStack> original,
-            @Share("recipe") LocalRef<ResourceLocation> share,
+            @Share("recipe") LocalRef<Identifier> share,
             @Share("player") LocalRef<Player> playerShare
     ) {
         Player player = playerShare.get();
@@ -113,3 +113,4 @@ public class CraftingMenuMixin {
         return ItemStack.EMPTY;
     }
 }
+*///?}

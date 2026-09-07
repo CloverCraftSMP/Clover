@@ -21,7 +21,7 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     public DurabilityFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getDouble("threshold"));
+        super(TYPE, tag, tag.getDouble("threshold")/*? if >1.21.1 {*/.orElse(0.0)/*?}*/);
     }
 
     @Override

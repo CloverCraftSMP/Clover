@@ -33,7 +33,14 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
     }
 
     private void resolveFilters(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 10);
+        ListTag tagEntries =
+        //? if <=1.21.1 {
+        /*tag.getList("entries", 10);
+        *///? } else {
+        tag.getList("entries")
+                .filter(e -> e.stream().allMatch(t -> t instanceof CompoundTag))
+                .orElse(new ListTag());
+        //? }
         for (Tag tagEntry : tagEntries) {
             entries.add(Filter.fromCompound((CompoundTag) tagEntry));
         }

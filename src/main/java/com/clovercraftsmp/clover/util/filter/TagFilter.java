@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,12 +33,23 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
     }
 
     private void resolveIds(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 8);
+        ListTag tagEntries =
+                //? if <=1.21.1 {
+                /*tag.getList("entries", 8);
+                 *///? } else {
+                tag.getList("entries")
+                        .filter(e -> e.stream().allMatch(t -> t instanceof StringTag))
+                        .orElse(new ListTag());
+                //? }
         for (int i = 0; i < tagEntries.size(); i++) {
-            String path = tagEntries.getString(i);
-            ResourceLocation loc = ResourceLocation.parse(path);
+            String path = tagEntries.getString(i)/*? if >1.21.1 {*/.orElse("")/*?}*/;
+            Identifier loc = Identifier.parse(path);
             TagKey<Item> tagKey = TagKey.create(Registries.ITEM, loc);
-            if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) continue;
+            //? if <=1.21.1 {
+            /*if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) continue;
+            *///? } else {
+            if (BuiltInRegistries.ITEM.get(tagKey).isEmpty()) continue;
+            //? }
             entries.add(tagKey);
         }
     }
@@ -80,11 +91,15 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
 
         String tagAttempt = entry.substring(4);
         if (tagAttempt.startsWith("#")) tagAttempt = tagAttempt.substring(1);
-        ResourceLocation tagLocation = ResourceLocation.tryParse(tagAttempt);
+        Identifier tagLocation = Identifier.tryParse(tagAttempt);
         if (tagLocation == null) return true;
 
         TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagLocation);
-        if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) return true;
+        //? if <=1.21.1 {
+        /*if (BuiltInRegistries.ITEM.getTag(tagKey).isEmpty()) return true;
+         *///? } else {
+        if (BuiltInRegistries.ITEM.get(tagKey).isEmpty()) return true;
+        //? }
 
         if (!(entries.removeIf(tag -> tag.location().equals(tagLocation)))) {
             entries.add(tagKey);
@@ -101,7 +116,7 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         loreList.add(Component.literal("Tags: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
 
         for (TagKey<Item> tag : entries) {
-            ResourceLocation loc = tag.location();
+            Identifier loc = tag.location();
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());

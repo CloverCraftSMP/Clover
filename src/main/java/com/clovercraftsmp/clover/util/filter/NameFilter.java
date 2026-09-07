@@ -28,8 +28,8 @@ public class NameFilter extends Filter {
 
     public NameFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.value = tag.getString("value");
-        this.caseSensitive = tag.getBoolean("sensitive");
+        this.value = tag.getString("value")/*? if >1.21.1 {*/.orElse("")/*?}*/;
+        this.caseSensitive = tag.getBoolean("sensitive")/*? if >1.21.1 {*/.orElse(false)/*?}*/;
     }
 
     @Override

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "CloverCraft Companion Mod",
+  "authors": [
+    "Syfe",
+    "Colonel"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/clover-core",
+    "sources": "https://github.com/CloverCraftSMP/Clover"
+  },
+  "license": "ARR",
+  "icon": "assets/clover/icon.png",
+  "environment": "*",
+  "mixins": [
+    "clover.mixins.json"
+  ],
+  "accessWidener": "clover.ct",
+  "depends": {
+    "fabricloader": ">=0.19",
+    "minecraft": "${minecraft}"
+  },
+  "breaks": {
+    "clutterbestiary": ["<${clutterbestiary}", ">${clutterbestiary}"],
+    "status": ["<${status}", ">${status}"],
+    "larion": ["<${larion}", ">${larion}"],
+    "tide": ["<${tide}", ">${tide}"],
+    "modpack-checker": ["<${modpack_checker}", ">${modpack_checker}"],
+    "horseman": ["<${horseman}", ">${horseman}"],
+    "vanillabackport": ["<${vanillabackport}", ">${vanillabackport}"],
+    "supplementaries": ["<${supplementaries}", ">${supplementaries}"],
+    "enderscape": ["<${enderscape}", ">${enderscape}"],
+    "yet_another_config_lib_v3": ["<${yacl}", "<${yacl}"]
+  }
+}

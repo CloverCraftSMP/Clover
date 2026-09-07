@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.datagen.providers;
-
-import com.clovercraftsmp.clover.Clover;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -17,7 +17,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,8 +35,8 @@ public class RecipeProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
-    public static final ResourceLocation FILTER_VERIFICATION = Clover.id("filter_verification");
-    public static final ResourceLocation FILTER_COMBINATION = Clover.id("filter_combination");
+    public static final Identifier FILTER_VERIFICATION = Clover.id("filter_verification");
+    public static final Identifier FILTER_COMBINATION = Clover.id("filter_combination");
 
     @Override
     public void buildRecipes(RecipeOutput recipeOutput) {
@@ -61,7 +61,7 @@ public class RecipeProvider extends FabricRecipeProvider {
     private void addFilterTutorialBook(RecipeOutput recipeOutput) {
         ItemStack result = loadItemStack(Clover.id("item_filter_tutorial_item"));
 
-        ResourceLocation id = Clover.id("item_filter_tutorial");
+        Identifier id = Clover.id("item_filter_tutorial");
         SmithingTransformRecipe recipe = new SmithingTransformRecipe(Ingredient.of(Items.HOPPER), Ingredient.of(Items.PAPER), Ingredient.of(Items.WHITE_DYE), result);
 
         Advancement.Builder advancement = recipeOutput.advancement()
@@ -72,7 +72,7 @@ public class RecipeProvider extends FabricRecipeProvider {
         recipeOutput.accept(id, recipe, advancement.build(id.withPrefix("recipes/misc/")));
     }
 
-    private static ItemStack loadItemStack(ResourceLocation id) {
+    private static ItemStack loadItemStack(Identifier id) {
         try (InputStream stream = RecipeProvider.class.getResourceAsStream(String.format("/data/%s/item/%s.nbt", id.getNamespace(), id.getPath()))) {
             if (stream == null) throw new RuntimeException("Missing item resource: " + id);
             CompoundTag tag = NbtIo.read(new DataInputStream(stream));
@@ -93,7 +93,7 @@ public class RecipeProvider extends FabricRecipeProvider {
         filter.formatItem(result);
 
         Item dyeItem = filter.getSmithingItem();
-        ResourceLocation id = Clover.id("item_filter_" + filter.getFilterName().toLowerCase().replace(' ', '_'));
+        Identifier id = Clover.id("item_filter_" + filter.getFilterName().toLowerCase().replace(' ', '_'));
 
         SmithingTransformRecipe recipe = new SmithingTransformRecipe(Ingredient.of(Items.HOPPER), Ingredient.of(Items.PAPER), Ingredient.of(dyeItem), result);
 
@@ -109,3 +109,4 @@ public class RecipeProvider extends FabricRecipeProvider {
         );
     }
 }
+*///?}

@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.mixin.feature.player;
 
-import net.minecraft.core.BlockPos;
+//? if <=1.21.1 {
+/*import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
@@ -39,3 +40,4 @@ public class FarmlandBlockMixin {
         }
     }
 }
+*///?}

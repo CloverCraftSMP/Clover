@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,8 +32,8 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     public EnchantmentFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getInt("threshold"));
-        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment"));
+        super(TYPE, tag, tag.getInt("threshold")/*? if >1.21.1 {*/.orElse(0)/*?}*/);
+        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment")/*? if >1.21.1 {*/.orElse("")/*?}*/);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
 
         if (enchantmentId != null) {
-            ResourceLocation loc = enchantmentId.key().location();
+            Identifier loc = ItemStackUtil.identifierOf(enchantmentId.key());
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());
@@ -134,7 +134,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         if (enchantmentId != null) {
             tag.putString("enchantment", enchantmentId
                     .unwrapKey()
-                    .map(ResourceKey::location)
+                    .map(ItemStackUtil::identifierOf)
                     .orElseThrow()
                     .toString());
         }

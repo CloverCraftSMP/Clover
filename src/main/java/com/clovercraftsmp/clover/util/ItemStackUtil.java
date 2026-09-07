@@ -4,7 +4,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ItemStackUtil {
-    private static final Map<ResourceLocation, Holder.Reference<Enchantment>> ENCHANTMENT_LOOKUP = new HashMap<>();
+    private static final Map<Identifier, Holder.Reference<Enchantment>> ENCHANTMENT_LOOKUP = new HashMap<>();
     public static Holder.Reference<Enchantment> MENDING;
     private static HolderLookup.Provider lastSeenProvider;
 
@@ -25,9 +26,9 @@ public class ItemStackUtil {
 
         ENCHANTMENT_LOOKUP.clear();
         wrapper.lookupOrThrow(Registries.ENCHANTMENT).listElements()
-                .forEach(holder -> ENCHANTMENT_LOOKUP.put(holder.key().location(), holder));
+                .forEach(holder -> ENCHANTMENT_LOOKUP.put(identifierOf(holder.key()), holder));
 
-        MENDING = ENCHANTMENT_LOOKUP.get(Enchantments.MENDING.location());
+        MENDING = ENCHANTMENT_LOOKUP.get(identifierOf(Enchantments.MENDING));
     }
 
     public static boolean hasMending(ItemStack stack) {
@@ -38,8 +39,16 @@ public class ItemStackUtil {
     }
 
     public static @Nullable Holder.Reference<Enchantment> resolveEnchantment(String id) {
-        ResourceLocation loc = ResourceLocation.tryParse(id);
+        Identifier loc = Identifier.tryParse(id);
         if (loc == null) return null;
         return ENCHANTMENT_LOOKUP.get(loc);
+    }
+
+    public static Identifier identifierOf(ResourceKey<?> key) {
+    //? if <=1.21.1 {
+        /*return key.location();
+    *///?} else {
+        return key.identifier();
+    //?}
     }
 }

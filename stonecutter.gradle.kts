@@ -1,15 +1,8 @@
 plugins {
-    id("dev.kikugie.stonecutter")
-    id("net.fabricmc.fabric-loom-remap") version "1.17.12" apply false
-    id("me.modmuss50.mod-publish-plugin") version "1.0.+" apply false
+    alias(libs.plugins.stonecutter)
 }
 
-stonecutter active "1.21.1"
-
-// Make newer versions be published last
-stonecutter tasks {
-    order("publishModrinth")
-}
+stonecutter active "26.1.x"
 
 // See https://stonecutter.kikugie.dev/wiki/config/params
 stonecutter parameters {
@@ -17,12 +10,24 @@ stonecutter parameters {
     swaps["minecraft"] = "\"${node.metadata.version}\";"
     constants["release"] = property("mod.id") != "template"
     dependencies["fapi"] = node.project.property("deps.fabric_api") as String
-    dependencies["vanillabackport"] = property("vanillabackport") as String
-    dependencies["tide"] = property("tide") as String
+
+    var isS3 = current.parsed <= "1.21.1"
+    dependencies["vanillabackport"] = if (isS3) node.project.property("deps.vanillabackport") as String else "0.0.0"
+    dependencies["tide"] = if (isS3) node.project.property("deps.tide") as String else "0.0.0"
 
     replacements {
         string(current.parsed >= "1.21.11") {
             replace("ResourceLocation", "Identifier")
         }
+
+        string(current.parsed >= "26.1") {
+            replace("classTweaker v2 named", "classTweaker v2 official")
+            replace("playS2C", "clientboundPlay")
+        }
     }
+}
+
+// Make newer versions be published last
+stonecutter tasks {
+    order("publishModrinth")
 }

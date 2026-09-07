@@ -9,44 +9,18 @@
     "Colonel"
   ],
   "contact": {
-    "homepage": "https://stonecutter.kikugie.dev/",
-    "sources": "https://codeberg.org/stonecutter/template-fabric"
+    "homepage": "https://modrinth.com/mod/clover-core",
+    "sources": "https://github.com/CloverCraftSMP/Clover"
   },
-  "license": "CC0-1.0",
+  "license": "ARR",
   "icon": "assets/clover/icon.png",
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "com.clovercraftsmp.clover.Clover"
-    ],
-    "client": [
-      "com.clovercraftsmp.clover.client.CloverClient"
-    ],
-    "fabric-datagen": [
-      "com.clovercraftsmp.clover.datagen.CloverDataGenerator"
-    ],
-    "mixinsquared": [
-      "com.clovercraftsmp.clover.conditional.MixinCanceller"
-    ]
-  },
   "mixins": [
     "clover.mixins.json"
   ],
-  "accessWidener": "clover.accesswidener",
+  "accessWidener": "clover.ct",
   "depends": {
-    "fabricloader": ">=0.17",
+    "fabricloader": ">=0.19",
     "minecraft": "${minecraft}"
-  },
-  "breaks": {
-    "clutterbestiary": ["<${clutterbestiary}", ">${clutterbestiary}"],
-    "status": ["<${status}", ">${status}"],
-    "larion": ["<${larion}", ">${larion}"],
-    "tide": ["<${tide}", ">${tide}"],
-    "modpack-checker": ["<${modpack_checker}", ">${modpack_checker}"],
-    "horseman": ["<${horseman}", ">${horseman}"],
-    "vanillabackport": ["<${vanillabackport}", ">${vanillabackport}"],
-    "supplementaries": ["<${supplementaries}", ">${supplementaries}"],
-    "enderscape": ["<${enderscape}", ">${enderscape}"],
-    "yet_another_config_lib_v3": ["<${yacl}", "<${yacl}"]
   }
 }
