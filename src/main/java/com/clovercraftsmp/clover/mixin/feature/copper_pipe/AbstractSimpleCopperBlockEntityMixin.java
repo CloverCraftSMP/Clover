@@ -40,7 +40,16 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
 
         BlockState otherState = level.getBlockState(pos);
         boolean otherPowered =
-                (otherState.getBlock() instanceof CopperFittingBlock || otherState.getBlock() instanceof CopperPipeBlock)
+                (otherState.getBlock() instanceof
+                        //? if <=1.21.1
+                        //CopperFitting
+                        //? if >= 26.1
+                        CopperFittingBlock
+                        || otherState.getBlock() instanceof
+                        //? if <=1.21.1
+                        //CopperPipe
+                        //? if >= 26.1
+                        CopperPipeBlock)
                 && otherState.getValue(BlockStateProperties.POWERED);
 
         return !thisPowered && !otherPowered;
@@ -63,7 +72,7 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
             //? if >=26.1
             "Lnet/lunade/copper/block/block/entity/AbstractSimpleCopperBlockEntity;trySaveLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
             //? if <= 1.21.1
-            //"Lnet/lunade/copper/block/block_entity/AbstractSimpleCopperBlockEntity;trySaveLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
+            //"Lnet/lunade/copper/blocks/block_entity/AbstractSimpleCopperBlockEntity;trySaveLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
     ))
     private boolean addFilterToSave(AbstractSimpleCopperBlockEntity instance, CompoundTag tag, Operation<Boolean> original) {
         if (filter != null) tag.put(Filter.FILTER_PATH, filter.toCompound());
@@ -72,7 +81,7 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
 
     @WrapOperation(method = "loadAdditional", at = @At(value = "INVOKE", target =
             //? if >=26.1
-            "Lnet/lunade/copper/blocks/block/entity/AbstractSimpleCopperBlockEntity;tryLoadLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
+            "Lnet/lunade/copper/block/block/entity/AbstractSimpleCopperBlockEntity;tryLoadLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
             //? if <= 1.21.1
             //"Lnet/lunade/copper/blocks/block_entity/AbstractSimpleCopperBlockEntity;tryLoadLootTable(Lnet/minecraft/nbt/CompoundTag;)Z"
     ))
