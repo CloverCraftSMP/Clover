@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.phantom;
-
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+//? if <=1.21.1 {
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -27,3 +27,4 @@ public class PhantomAttackPlayerTargetGoalMixin {
         return canStart;
     }
 }
+*///?}

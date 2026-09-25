@@ -32,9 +32,9 @@ plugins {
 includeBuild("build-logic")
 stonecutter {
     create(rootProject) {
-        version("26.1.x", "26.1")
+        version("26.1.2")
         versions("1.21.1")
-        vcsVersion = "26.1.x"
+        vcsVersion = "26.1.2"
     }
 }
 

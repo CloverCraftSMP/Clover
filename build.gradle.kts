@@ -54,10 +54,18 @@ dependencies {
         for (it in modules) modImplementation(fabricApi.module(it, sc.properties["deps.fabric_api"]))
     }
 
+    logger.lifecycle("Building for Stonecutter Version: '${sc.current.version}' (Parsed: '${sc.current.parsed.value}')")
+
     fun resolveModsModrinth(vararg mods: String) {
         for (it in mods) {
-            fletchingTable.modrinth(it, sc.current.version)?.let { dep ->
-                modCompileOnly(dep)
+            val dep = fletchingTable.modrinth(it, sc.current.version)
+            if (dep != null) {
+                logger.lifecycle("Resolved $it for ${sc.current.version}")
+                val remappedDep = dependencies.create(dep)
+                modCompileOnly(remappedDep)
+                modLocalRuntime(remappedDep)
+            } else {
+                logger.error("FAILED to resolve Modrinth mod '$it' for version '${sc.current.version}'")
             }
         }
     }
@@ -119,7 +127,7 @@ loom {
         preferGradleTask = true
         generateRunConfig = true
         runDirectory = rootProject.file("run")
-        // vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging)
+        jvmArguments.add("-Dmixin.debug.export=true") // Exports transformed classes for debugging)
     }
 }
 

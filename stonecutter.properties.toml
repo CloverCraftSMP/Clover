@@ -32,7 +32,7 @@ deps.enderscape = "2.1.0"
 deps.crafttweaker = "21.0.38"
 deps.yacl = "3.8.2+1.21.1-fabric"
 
-["26.1.x"]
+["26.1.2"]
 mod.mc_compat = "~26.1"
 mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 

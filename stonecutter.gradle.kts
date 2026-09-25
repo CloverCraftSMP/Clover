@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.stonecutter)
 }
 
-stonecutter active "26.1.x"
+stonecutter active "26.1.2"
 
 // See https://stonecutter.kikugie.dev/wiki/config/params
 stonecutter parameters {
