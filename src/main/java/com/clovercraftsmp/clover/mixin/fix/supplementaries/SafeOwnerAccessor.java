@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.supplementaries;
-
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.mehvahdjukaar.supplementaries.common.items.components.SafeOwner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -21,3 +21,4 @@ public interface SafeOwnerAccessor {
         throw new AssertionError();
     }
 }
+*///?}

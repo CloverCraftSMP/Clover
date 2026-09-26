@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.horseman;
-
-import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if <=1.21.1 {
+/*import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import io.github.mortuusars.horseman.world.summoning.Summoning;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -21,3 +21,4 @@ public class HorsemanSummoningMixin {
         if (horse.isRemoved()) ci.cancel();
     }
 }
+*///?}

@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
-
-import com.clovercraftsmp.clover.util.filter.Filter;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.component.DataComponents;
@@ -38,3 +38,4 @@ public class ServerGamePacketListenerImplMixin {
         original.call(instance, i, itemStack);
     }
 }
+*///?}

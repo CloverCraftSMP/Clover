@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
-
-import com.clovercraftsmp.clover.duck.FilterDuck;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.duck.FilterDuck;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -58,3 +58,4 @@ public class ServerPlayerGameModeMixin {
         return original.call(instance, stack, level, player, interactionHand, blockHitResult);
     }
 }
+*///?}

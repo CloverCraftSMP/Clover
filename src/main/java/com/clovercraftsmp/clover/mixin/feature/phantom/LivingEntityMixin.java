@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.phantom;
-
-import com.clovercraftsmp.clover.duck.PhantomDuck;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.duck.PhantomDuck;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,3 +23,4 @@ public class LivingEntityMixin {
         if (!damageSource.is(DamageTypes.ON_FIRE) && this instanceof PhantomDuck duck) duck.clover$setNonFireHurtTime();
     }
 }
+*///?}

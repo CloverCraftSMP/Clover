@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.datagen.providers;
-
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+//? if <=1.21.1 {
+/*import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -23,3 +23,4 @@ public class StructureProvider extends FabricDynamicRegistryProvider {
     @Override
     public String getName() { return "Clover Structures"; }
 }
+*///?}

@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -28,8 +29,8 @@ public class NameFilter extends Filter {
 
     public NameFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.value = tag.getString("value");
-        this.caseSensitive = tag.getBoolean("sensitive");
+        this.value = ItemStackUtil.getStringOrDefault(tag, "value");
+        this.caseSensitive = ItemStackUtil.getBooleanOrDefault(tag, "sensitive");
     }
 
     @Override

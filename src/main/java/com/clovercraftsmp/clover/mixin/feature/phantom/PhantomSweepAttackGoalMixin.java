@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.phantom;
-
-import com.clovercraftsmp.clover.Clover;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.duck.PhantomDuck;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -34,3 +34,4 @@ public class PhantomSweepAttackGoalMixin {
         return success;
     }
 }
+*///?}
