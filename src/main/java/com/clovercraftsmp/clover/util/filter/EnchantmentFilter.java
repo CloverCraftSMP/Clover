@@ -7,7 +7,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +31,8 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     public EnchantmentFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getInt("threshold")/*? if >1.21.1 {*/.orElse(0)/*?}*/);
-        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment")/*? if >1.21.1 {*/.orElse("")/*?}*/);
+        super(TYPE, tag, ItemStackUtil.getIntOrDefault(tag, "threshold"));
+        this.enchantmentId = ItemStackUtil.resolveEnchantment(ItemStackUtil.getStringOrDefault(tag, "enchantment"));
     }
 
     @Override

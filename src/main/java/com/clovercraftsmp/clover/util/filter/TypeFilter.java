@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,18 +32,11 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
     }
 
     private void resolveIds(CompoundTag tag) {
-        ListTag tagEntries =
-                //? if <=1.21.1 {
-                /*tag.getList("entries", 8);
-                 *///? } else {
-                tag.getList("entries")
-                        .filter(e -> e.stream().allMatch(t -> t instanceof StringTag))
-                        .orElse(new ListTag());
-        //? }
+        ListTag tagEntries = ItemStackUtil.getStringListOrEmpty(tag, "entries");
         for (int i = 0; i < tagEntries.size(); i++) {
-            String path = tagEntries.getString(i)/*? if >1.21.1 {*/.orElse("")/*?}*/;
+            String path = ItemStackUtil.getStringOrDefault(tagEntries, i);
             Identifier loc = Identifier.parse(path);
-            Item item = BuiltInRegistries.ITEM/*? if <=1.21.1 {*//*.get(loc)*//*? } else {*/.getValue(loc)/*? }*/;
+            Item item = ItemStackUtil.getFromBuiltin(loc);
             if (item == Items.AIR) continue;
             entries.add(item);
         }
@@ -86,7 +80,7 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         Identifier loc = Identifier.tryParse(itemAttempt);
         if (loc == null) return true;
 
-        Item item = BuiltInRegistries.ITEM/*? if <=1.21.1 {*//*.get(loc)*//*? } else {*/.getValue(loc)/*? }*/;
+        Item item = ItemStackUtil.getFromBuiltin(loc);
         if (item == Items.AIR) return true;
 
         if (!(entries.removeIf(element -> element == item))) {

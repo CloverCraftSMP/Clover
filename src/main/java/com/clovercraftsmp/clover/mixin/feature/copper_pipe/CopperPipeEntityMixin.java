@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.copper_pipe;
-//? if <=1.21.1 {
-/*import com.clovercraftsmp.clover.duck.FilterDuck;
+
+import com.clovercraftsmp.clover.duck.FilterDuck;
 import com.clovercraftsmp.clover.duck.PoweredDuck;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -9,8 +9,6 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.lunade.copper.blocks.CopperPipe;
-import net.lunade.copper.blocks.block_entity.CopperPipeEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,36 +22,93 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(CopperPipeEntity.class)
+//? if <=1.21.1 {
+/*import net.lunade.copper.blocks.CopperPipe;
+import net.lunade.copper.blocks.block_entity.CopperPipeEntity;
+*///? }
+
+//? if >=26.1 {
+import net.lunade.copper.block.CopperPipeBlock;
+import net.lunade.copper.block.entity.CopperPipeBlockEntity;
+//? }
+
+//? if <=1.21.1 {
+/*@Mixin(net.lunade.copper.blocks.block_entity.CopperPipeEntity.class)
+ *///? }
+//? if >=26.1 {
+@Mixin(net.lunade.copper.block.entity.CopperPipeBlockEntity.class)
+//? }
+
 public class CopperPipeEntityMixin extends BlockEntity {
     public CopperPipeEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
 
-    @WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/blocks/block_entity/CopperPipeEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/blocks/block_entity/CopperPipeEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
     private boolean wrapCanMoveIn(Level level, BlockPos pos, boolean _to, @NotNull CopperPipeEntity copperPipe, @Nullable Storage<ItemVariant> inventory, @Nullable Storage<ItemVariant> pipeInventory, Operation<Boolean> original) {
         return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)
                 && original.call(level, pos, _to, copperPipe, inventory, pipeInventory);
     }
+    *///? }
 
-    @WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/blocks/block_entity/CopperPipeEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
+    //? if >=26.1 {
+    @WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/block/entity/CopperPipeBlockEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/block/entity/CopperPipeBlockEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
+    private boolean wrapCanMoveIn(Level level, BlockPos pos, boolean _to, @NotNull CopperPipeBlockEntity copperPipe, @Nullable Storage<ItemVariant> inventory, @Nullable Storage<ItemVariant> pipeInventory, Operation<Boolean> original) {
+        return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)
+                && original.call(level, pos, _to, copperPipe, inventory, pipeInventory);
+    }
+    //? }
+
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/blocks/block_entity/CopperPipeEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
     private boolean wrapCanMoveOut(Level level, BlockPos pos, boolean _to, @NotNull CopperPipeEntity copperPipe, @Nullable Storage<ItemVariant> inventory, @Nullable Storage<ItemVariant> pipeInventory, Operation<Boolean> original, @Share("otherPos") LocalRef<BlockPos> otherPos) {
         otherPos.set(pos);
         return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)
                 && original.call(level, pos, _to, copperPipe, inventory, pipeInventory);
     }
+    *///? }
 
-    @WrapOperation(method = "dispense", at = @At(value = "FIELD", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
+    //? if >=26.1 {
+    @WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/block/entity/CopperPipeBlockEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;ZLnet/lunade/copper/block/entity/CopperPipeBlockEntity;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;Lnet/fabricmc/fabric/api/transfer/v1/storage/Storage;)Z"))
+    private boolean wrapCanMoveOut(Level level, BlockPos pos, boolean _to, @NotNull CopperPipeBlockEntity copperPipe, @Nullable Storage<ItemVariant> inventory, @Nullable Storage<ItemVariant> pipeInventory, Operation<Boolean> original, @Share("otherPos") LocalRef<BlockPos> otherPos) {
+        otherPos.set(pos);
+        return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)
+                && original.call(level, pos, _to, copperPipe, inventory, pipeInventory);
+    }
+    //? }
+
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "dispense", at = @At(value = "FIELD", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
     private boolean wrapDispense(CopperPipeEntity instance, Operation<Boolean> original) {
         boolean powered = instance.getBlockState().getValue(CopperPipe.POWERED);
         return !powered && original.call(instance);
     }
+    *///? }
 
-    @WrapOperation(method = "dispenseMoveableNbt", at = @At(value = "FIELD", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
+    //? if >=26.1 {
+    @WrapOperation(method = "dispense", at = @At(value = "FIELD", target = "Lnet/lunade/copper/block/entity/CopperPipeBlockEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
+    private boolean wrapDispense(CopperPipeBlockEntity instance, Operation<Boolean> original) {
+        boolean powered = instance.getBlockState().getValue(CopperPipeBlock.POWERED);
+        return !powered && original.call(instance);
+    }
+    //? }
+
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "dispenseMoveableNbt", at = @At(value = "FIELD", target = "Lnet/lunade/copper/blocks/block_entity/CopperPipeEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
     private boolean wrapDispenseMovableNbt(CopperPipeEntity instance, Operation<Boolean> original) {
         boolean powered = instance.getBlockState().getValue(CopperPipe.POWERED);
         return !powered && original.call(instance);
     }
+    *///? }
+
+    //? if >=26.1 {
+    @WrapOperation(method = "dispenseTransferableData", at = @At(value = "FIELD", target = "Lnet/lunade/copper/block/entity/CopperPipeBlockEntity;canDispense:Z", opcode = Opcodes.GETFIELD))
+    private boolean wrapDispenseTransferableData(CopperPipeBlockEntity instance, Operation<Boolean> original) {
+        boolean powered = instance.getBlockState().getValue(CopperPipeBlock.POWERED);
+        return !powered && original.call(instance);
+    }
+    //? }
 
     @WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/api/transfer/v1/storage/StorageView;isResourceBlank()Z"))
     private boolean addMoveInFilter(StorageView<ItemVariant> instance, Operation<Boolean> original) {
@@ -70,4 +125,3 @@ public class CopperPipeEntityMixin extends BlockEntity {
                 && !Objects.requireNonNull(filterDuck.clover$getFilter()).test(instance.getResource().toStack()));
     }
 }
-*///?}

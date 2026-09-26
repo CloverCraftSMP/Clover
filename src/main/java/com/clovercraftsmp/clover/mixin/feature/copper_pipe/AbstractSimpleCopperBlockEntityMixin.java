@@ -42,11 +42,15 @@ public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity i
 
         BlockState otherState = level.getBlockState(pos);
         Block otherBlock = otherState.getBlock();
+
         //? if <=1.21.1 {
         /*boolean otherIsCopperPipe = otherBlock instanceof CopperFitting || otherBlock instanceof CopperPipe;
-        *///? } else {
+        *///? }
+
+        //? if >=26.1 {
         boolean otherIsCopperPipe = otherBlock instanceof CopperFittingBlock || otherBlock instanceof CopperPipeBlock;
         //? }
+
         boolean otherPowered = otherIsCopperPipe && otherState.getValue(BlockStateProperties.POWERED);
 
         return !thisPowered && !otherPowered;

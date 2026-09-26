@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,12 +34,8 @@ public class ContentFilter extends Filter {
 
     public ContentFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.slot = tag.getInt("slot")/*? if >1.21.1 {*/.orElse(0)/*?}*/;
-        //? if <=1.21.1 {
-        /*this.subFilter = tag.contains("filter", 10) ? Filter.fromCompound(tag.getCompound("filter")) : null;
-        *///?} else {
-        this.subFilter = tag.getCompound("filter").map(Filter::fromCompound).orElse(null);
-        //? }
+        this.slot = ItemStackUtil.getIntOrDefault(tag, "slot");
+        this.subFilter = ItemStackUtil.getCompound(tag, "filter").map(Filter::fromCompound).orElse(null);
     }
 
     @Override
@@ -65,21 +62,20 @@ public class ContentFilter extends Filter {
     }
 
     private boolean isEmpty(ItemContainerContents container, BundleContents bundle) {
-        boolean containerEmpty = container == null || !container.nonEmptyItems().iterator().hasNext();
+        boolean containerEmpty = container == null || ItemStackUtil.nonEmptyItems(container).findAny().isEmpty();
         boolean bundleEmpty = bundle == null || bundle.isEmpty();
         return containerEmpty && bundleEmpty;
     }
 
     private ItemStack get(ItemContainerContents container, BundleContents bundle, int slot) {
         if (container != null) {
-            return container
-                    /*? if <=1.21.1 {*//*.stream()*//*?} else {*/.allItemsCopyStream()/*?}*/
+            return ItemStackUtil.allItems(container)
                     .skip(slot)
                     .findFirst()
                     .orElse(null);
         } else {
             Iterator<ItemStack> iter = bundle
-                    /*? if <=1.21.1 {*//*.items()*//*?} else {*/.itemCopyStream()/*?}*/
+                    .itemCopyStream()
                     .iterator();
             return skip(iter, slot) && iter.hasNext() ? iter.next() : null;
         }
@@ -93,15 +89,9 @@ public class ContentFilter extends Filter {
         return true;
     }
 
-    //? if <=1.21.1 {
-    /*private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
-        return container != null ? container.nonEmptyItems().iterator() : bundle.items().iterator();
-    }
-    *///?} else {
     private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
-        return container != null ? container.nonEmptyItemCopyStream().iterator() : bundle.itemCopyStream().iterator();
+        return container != null ? ItemStackUtil.nonEmptyItems(container).iterator() : bundle.itemCopyStream().iterator();
     }
-    //?}
 
     private boolean match(Iterator<ItemStack> stacks, boolean all) {
         while (stacks.hasNext()) if (all ^ (subFilter == null || subFilter.test(stacks.next()))) return !all;
