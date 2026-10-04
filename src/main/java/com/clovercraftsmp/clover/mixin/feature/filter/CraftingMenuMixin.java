@@ -1,17 +1,15 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
 
-import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
+import com.clovercraftsmp.clover.datagen.providers.CloverRecipeProvider;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -19,11 +17,10 @@ import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.WritableBookContent;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,12 +28,43 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
+//? if >= 26.1 {
+import net.minecraft.server.level.ServerLevel;
+//? }
+
+//? if <= 1.21.1 {
+/*import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.server.level.ServerPlayer;
+*///? }
+
+@SuppressWarnings("CommentedOutCode")
 @Mixin(CraftingMenu.class)
 public class CraftingMenuMixin {
+    //? if >= 26.1 {
     @Inject(method = "slotChangedCraftingGrid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/RecipeHolder;value()Lnet/minecraft/world/item/crafting/Recipe;"))
+    private static void shareRecipeID(
+            AbstractContainerMenu menu,
+            ServerLevel level,
+            Player player,
+            CraftingContainer container,
+            ResultContainer resultSlots,
+            RecipeHolder<CraftingRecipe> recipeHint,
+            CallbackInfo ci,
+            @Share("recipe") LocalRef<Identifier> recipeId,
+            @Share("player") LocalRef<Player> playerShare,
+            @Local(name = "recipeHolder") RecipeHolder<CraftingRecipe> recipeHolder
+    ) {
+        recipeId.set(recipeHolder.id().identifier());
+        playerShare.set(player);
+    }
+    //? }
+
+    //? if <= 1.21.1 {
+    /*@Inject(method = "slotChangedCraftingGrid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/RecipeHolder;value()Lnet/minecraft/world/item/crafting/Recipe;"))
     private static void shareRecipeID(
             AbstractContainerMenu abstractContainerMenu,
             Level level,
@@ -46,49 +74,62 @@ public class CraftingMenuMixin {
             @Nullable RecipeHolder<CraftingRecipe> recipeHolder,
             CallbackInfo ci,
             @Local(ordinal = 1) RecipeHolder<CraftingRecipe> recipeHolder2,
-            @Share("recipe") LocalRef<ResourceLocation> recipeId,
+            @Share("recipe") LocalRef<Identifier> recipeId,
             @Share("player") LocalRef<Player> playerShare
     ) {
         recipeId.set(recipeHolder2.id());
         playerShare.set(player);
     }
+    *///? }
 
-    @WrapOperation(method = "slotChangedCraftingGrid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/CraftingRecipe;assemble(Lnet/minecraft/world/item/crafting/RecipeInput;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;"))
+    //? if >= 26.1 {
+    @WrapOperation(method = "slotChangedCraftingGrid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/CraftingRecipe;assemble(Lnet/minecraft/world/item/crafting/RecipeInput;)Lnet/minecraft/world/item/ItemStack;"))
+    private static ItemStack wrapOutput(
+            CraftingRecipe instance,
+            RecipeInput recipeInput,
+            Operation<ItemStack> original,
+            @Share("recipe") LocalRef<Identifier> share
+    ) {
+        if (share.get().equals(CloverRecipeProvider.FILTER_VERIFICATION)) return filterVerification(recipeInput);
+        if (share.get().equals(CloverRecipeProvider.FILTER_COMBINATION)) return filterCombination(recipeInput);
+        return original.call(instance, recipeInput);
+    }
+    //? }
+
+    //? if <= 1.21.1 {
+    /*@WrapOperation(method = "slotChangedCraftingGrid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/CraftingRecipe;assemble(Lnet/minecraft/world/item/crafting/RecipeInput;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;"))
     private static ItemStack wrapOutput(
             CraftingRecipe instance,
             RecipeInput recipeInput,
             HolderLookup.Provider provider,
             Operation<ItemStack> original,
-            @Share("recipe") LocalRef<ResourceLocation> share,
+            @Share("recipe") LocalRef<Identifier> share,
             @Share("player") LocalRef<Player> playerShare
     ) {
         Player player = playerShare.get();
         if (!(player instanceof ServerPlayer)) return original.call(instance, recipeInput, provider);
-        if (share.get().equals(RecipeProvider.FILTER_VERIFICATION)) return filterVerification(recipeInput);
-        if (share.get().equals(RecipeProvider.FILTER_COMBINATION)) return filterCombination(recipeInput);
+        if (share.get().equals(CloverRecipeProvider.FILTER_VERIFICATION)) return filterVerification(recipeInput);
+        if (share.get().equals(CloverRecipeProvider.FILTER_COMBINATION)) return filterCombination(recipeInput);
         return original.call(instance, recipeInput, provider);
     }
+    *///? }
 
     @Unique
     private static ItemStack filterVerification(RecipeInput recipeInput) {
         ItemStack out = recipeInput.getItem(0).copy();
-        if (!(Filter.isFilter(out) && out.has(DataComponents.WRITABLE_BOOK_CONTENT))) return ItemStack.EMPTY;
+        WritableBookContent book = out.get(DataComponents.WRITABLE_BOOK_CONTENT);
+        Filter filter = Filter.isFilter(out) ? Filter.fromItem(out) : null;
+        if (filter == null || book == null) return ItemStack.EMPTY;
 
-        CompoundTag customData = Objects.requireNonNull(out.get(DataComponents.CUSTOM_DATA)).copyTag();
-        Filter filter = Filter.fromCompound(customData.getCompound(Filter.FILTER_PATH));
-        List<String> entries = new java.util.ArrayList<>(Objects.requireNonNull(out.get(DataComponents.WRITABLE_BOOK_CONTENT))
-                .getPages(false)
-                .flatMap(e -> Arrays.stream(e.replaceAll("§.", "").split("\n")).map(String::trim))
-                .toList());
+        boolean failed = book.getPages(false)
+                .flatMap(page -> Arrays.stream(page.replaceAll("§.", "").split("\n")))
+                .map(String::trim)
+                .filter(line -> !line.isEmpty())
+                .anyMatch(filter::changeFailed);
 
-        entries.removeIf(String::isEmpty);
+        if (failed) return ItemStack.EMPTY;
 
-        if (entries.stream().anyMatch(filter::changeFailed)) {
-            return ItemStack.EMPTY;
-        }
-
-        customData.put(Filter.FILTER_PATH, filter.toCompound());
-        out.set(DataComponents.CUSTOM_DATA, CustomData.of(customData));
+        CustomData.update(DataComponents.CUSTOM_DATA, out, tag -> tag.put(Filter.FILTER_PATH, filter.toCompound()));
         filter.formatItem(out);
         return out;
     }

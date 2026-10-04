@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,8 +34,8 @@ public class ContentFilter extends Filter {
 
     public ContentFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.slot = tag.getInt("slot");
-        this.subFilter = tag.contains("filter", 10) ? Filter.fromCompound(tag.getCompound("filter")) : null;
+        this.slot = ItemStackUtil.getIntOrDefault(tag, "slot");
+        this.subFilter = ItemStackUtil.getCompound(tag, "filter").map(Filter::fromCompound).orElse(null);
     }
 
     @Override
@@ -61,16 +62,21 @@ public class ContentFilter extends Filter {
     }
 
     private boolean isEmpty(ItemContainerContents container, BundleContents bundle) {
-        boolean containerEmpty = container == null || !container.nonEmptyItems().iterator().hasNext();
+        boolean containerEmpty = container == null || ItemStackUtil.nonEmptyItems(container).findAny().isEmpty();
         boolean bundleEmpty = bundle == null || bundle.isEmpty();
         return containerEmpty && bundleEmpty;
     }
 
     private ItemStack get(ItemContainerContents container, BundleContents bundle, int slot) {
         if (container != null) {
-            return container.stream().skip(slot).findFirst().orElse(null);
+            return ItemStackUtil.allItems(container)
+                    .skip(slot)
+                    .findFirst()
+                    .orElse(null);
         } else {
-            Iterator<ItemStack> iter = bundle.items().iterator();
+            Iterator<ItemStack> iter = bundle
+                    .itemCopyStream()
+                    .iterator();
             return skip(iter, slot) && iter.hasNext() ? iter.next() : null;
         }
     }
@@ -84,7 +90,7 @@ public class ContentFilter extends Filter {
     }
 
     private Iterator<ItemStack> iterator(ItemContainerContents container, BundleContents bundle) {
-        return container != null ? container.nonEmptyItems().iterator() : bundle.items().iterator();
+        return container != null ? ItemStackUtil.nonEmptyItems(container).iterator() : bundle.itemCopyStream().iterator();
     }
 
     private boolean match(Iterator<ItemStack> stacks, boolean all) {

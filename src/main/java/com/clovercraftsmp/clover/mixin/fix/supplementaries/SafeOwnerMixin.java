@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.supplementaries;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+//? if <=1.21.1 {
+/*import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
@@ -32,3 +32,4 @@ public class SafeOwnerMixin {
         );
     }
 }
+*///?}

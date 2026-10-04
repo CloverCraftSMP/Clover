@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.phantom;
-
-import com.clovercraftsmp.clover.duck.PhantomDuck;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.duck.PhantomDuck;
 import net.minecraft.world.entity.monster.Phantom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,3 +28,4 @@ public class PhantomMixin implements PhantomDuck {
         if (nonFireHurtTime > 0) nonFireHurtTime--;
     }
 }
+*///?}

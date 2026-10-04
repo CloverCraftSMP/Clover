@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,7 +22,7 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     public DurabilityFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getDouble("threshold"));
+        super(TYPE, tag, ItemStackUtil.getDoubleOrDefault(tag, "threshold"));
     }
 
     @Override

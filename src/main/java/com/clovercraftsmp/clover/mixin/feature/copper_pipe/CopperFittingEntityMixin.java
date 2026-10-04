@@ -8,7 +8,6 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.lunade.copper.blocks.block_entity.CopperFittingEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -20,19 +19,35 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(CopperFittingEntity.class)
+//? if <=1.21.1 {
+/*@Mixin(net.lunade.copper.blocks.block_entity.CopperFittingEntity.class)
+*///? }
+//? if >=26.1 {
+@Mixin(net.lunade.copper.block.entity.CopperFittingBlockEntity.class)
+//? }
+
 public class CopperFittingEntityMixin extends BlockEntity {
     public CopperFittingEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
 
-    @WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperFittingEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperFittingEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    *///? }
+    //? if >=26.1 {
+    @WrapOperation(method = "moveIn", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/block/entity/CopperFittingBlockEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    //? }
     private boolean wrapCanMoveIn(Level level, BlockPos pos, Direction direction, boolean _to, Operation<Boolean> original) {
         return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)
                 && original.call(level, pos, direction, _to);
     }
 
-    @WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperFittingEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    //? if <=1.21.1 {
+    /*@WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/blocks/block_entity/CopperFittingEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    *///? }
+    //? if >=26.1 {
+    @WrapOperation(method = "moveOut", at = @At(value = "INVOKE", target = "Lnet/lunade/copper/block/entity/CopperFittingBlockEntity;canTransfer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z"))
+    //? }
     private boolean wrapCanMoveOut(Level level, BlockPos pos, Direction direction, boolean _to, Operation<Boolean> original, @Share("otherPos") LocalRef<BlockPos> otherPos) {
         otherPos.set(pos);
         return ((PoweredDuck) this).clover$canTransferPoweredCheck(level, pos)

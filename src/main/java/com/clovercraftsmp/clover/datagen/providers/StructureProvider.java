@@ -1,6 +1,13 @@
 package com.clovercraftsmp.clover.datagen.providers;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+//? if <= 1.21.1 {
+/*import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+*///? }
+
+//? if >= 26.1 {
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+//? }
+
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -9,9 +16,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class StructureProvider extends FabricDynamicRegistryProvider {
 
-    public StructureProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    //? if <= 1.21.1 {
+    /*public StructureProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
+    *///? }
+
+    //? if >= 26.1 {
+    public StructureProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
+    }
+    //? }
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {

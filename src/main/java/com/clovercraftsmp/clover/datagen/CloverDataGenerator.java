@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.datagen;
 
-import com.clovercraftsmp.clover.datagen.providers.RecipeProvider;
+import com.clovercraftsmp.clover.datagen.providers.CloverRecipeProvider;
 import com.clovercraftsmp.clover.datagen.providers.StructureProvider;
 import com.clovercraftsmp.clover.structure.ModStructures;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
@@ -15,7 +15,7 @@ public class CloverDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = generator.createPack();
         pack.addProvider((output, registriesFuture) -> {
             ItemStackUtil.onEnchantmentRegistryReady(registriesFuture.join());
-            return new RecipeProvider(output, registriesFuture);
+            return new CloverRecipeProvider(output, registriesFuture);
         });
         pack.addProvider(StructureProvider::new);
     }
