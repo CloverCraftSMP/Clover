@@ -56,14 +56,14 @@ dependencies {
 
     logger.lifecycle("Building for Stonecutter Version: '${sc.current.version}' (Parsed: '${sc.current.parsed.value}')")
 
-    fun resolveModsModrinth(vararg mods: String) {
+    fun resolveModsModrinth(vararg mods: String, runtime: Boolean = true) {
         for (it in mods) {
             val dep = fletchingTable.modrinth(it, sc.current.version)
             if (dep != null) {
                 logger.lifecycle("Resolved $it for ${sc.current.version}")
                 val remappedDep = dependencies.create(dep)
                 modCompileOnly(remappedDep)
-                modLocalRuntime(remappedDep)
+                if (runtime) modLocalRuntime(remappedDep)
             } else {
                 logger.error("FAILED to resolve Modrinth mod '$it' for version '${sc.current.version}'")
             }
@@ -98,13 +98,14 @@ dependencies {
             "horseman",
             "vanillabackport",
             "supplementaries",
-            "tide"
+            "tide",
+            runtime = false
         )
         modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("deps.crafttweaker")}")
         include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
     }
 
-    resolveModsModrinth("status", "simple-copper-pipes")
+    resolveModsModrinth("status", "simple-copper-pipes", runtime = false)
 
     include(modImplementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)

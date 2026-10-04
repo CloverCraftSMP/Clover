@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.filter;
-//? if <=1.21.1 {
-/*import com.clovercraftsmp.clover.duck.FilterDuck;
+
+import com.clovercraftsmp.clover.duck.FilterDuck;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,22 +21,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//? if <= 1.21.1 {
+/*import net.minecraft.world.ItemInteractionResult;
+*///? }
+
 @Mixin(ServerPlayerGameMode.class)
 public class ServerPlayerGameModeMixin {
     @Inject(method = "useItemOn", at = @At("HEAD"))
     private void onUseItemOn(
-            ServerPlayer serverPlayer,
+            ServerPlayer player,
             Level level,
             ItemStack itemStack,
-            InteractionHand interactionHand,
-            BlockHitResult blockHitResult,
+            InteractionHand hand,
+            BlockHitResult hitResult,
             CallbackInfoReturnable<InteractionResult> cir,
             @Share("result") LocalRef<BlockHitResult> result
     ) {
-        result.set(blockHitResult);
+        result.set(hitResult);
     }
 
-    @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;useItemOn(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/ItemInteractionResult;"))
+    //? if <= 1.21.1 {
+    /*@WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;useItemOn(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/ItemInteractionResult;"))
     private ItemInteractionResult addFilterInteraction(
             BlockState instance,
             ItemStack stack,
@@ -57,5 +61,29 @@ public class ServerPlayerGameModeMixin {
 
         return original.call(instance, stack, level, player, interactionHand, blockHitResult);
     }
+    *///? }
+
+    //? if >= 26.1 {
+    @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;useItemOn(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;"))
+    private InteractionResult addFilterInteraction(
+            BlockState instance,
+            ItemStack stack,
+            Level level,
+            Player player,
+            InteractionHand interactionHand,
+            BlockHitResult blockHitResult,
+            Operation<InteractionResult> original,
+            @Share("result") LocalRef<BlockHitResult> result
+    ) {
+        if (!level.isClientSide() && level.getBlockEntity(result.get().getBlockPos()) instanceof FilterDuck filterDuck && Filter.isFilter(stack)) {
+            filterDuck.clover$setFilter(Filter.fromItem(stack));
+            ((ServerPlayer) player).sendSystemMessage(Component.literal("Applied filter!"), true);
+            ((ServerPlayer) player).closeContainer();
+            return InteractionResult.SUCCESS;
+        }
+
+        return original.call(instance, stack, level, player, interactionHand, blockHitResult);
+    }
+    //? }
 }
-*///?}
+
