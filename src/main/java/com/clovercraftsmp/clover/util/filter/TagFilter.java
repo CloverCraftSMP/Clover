@@ -94,6 +94,27 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal("Tags: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
+
+        for (TagKey<Item> tag : entries) {
+            Identifier loc = tag.location();
+            String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
+                    .map(e -> e.getMetadata().getName())
+                    .orElse(loc.getNamespace());
+
+            String tagTranslate = String.format("tag.item.%s.%s", loc.getNamespace(), loc.getPath().replace('/','.'));
+
+            lore.add(
+                    Component.literal("• ")
+                            .append(Component.translatableWithFallback(tagTranslate, loc.getPath()))
+                            .append(Component.literal(modName.equals("Minecraft") ? "" : String.format(" (%s)", modName)))
+                            .withStyle(LORE_STYLE)
+            );
+        }
+    }
+
+   /* @Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
 
@@ -117,7 +138,7 @@ public class TagFilter extends AbstractCollectionFilter<TagKey<Item>> {
         }
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     public void addEntries(CompoundTag tag) {

@@ -2,6 +2,7 @@ package com.clovercraftsmp.clover.util.filter;
 
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -150,7 +151,7 @@ public abstract class Filter {
         return modeName;
     }
 
-    public void formatItem(ItemStack stack) {
+    public DataComponentPatch formatPatch() {
         List<Component> loreList = new ArrayList<>(List.of(
                 Component.literal(String.format("Current Mode: %s", prettyName(mode))).withStyle(LORE_STYLE),
                 Component.literal(getModeDescription(mode)).withStyle(LORE_STYLE),
@@ -159,12 +160,20 @@ public abstract class Filter {
         ));
 
         allowedModes().forEach(allowedMode -> loreList.add(Component.literal(String.format("• %s", prettyName(allowedMode))).withStyle(LORE_STYLE)));
-
         loreList.add(Component.empty());
+        appendLore(loreList);
 
-        stack.set(DataComponents.ITEM_NAME, Component.literal(getFilterName()).withStyle(Style.EMPTY.withItalic(false).withColor(getColor())));
-        stack.set(DataComponents.LORE, new ItemLore(loreList));
-        stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-        stack.remove(DataComponents.WRITABLE_BOOK_CONTENT);
+        return DataComponentPatch.builder()
+                .set(DataComponents.ITEM_NAME, Component.literal(getFilterName()).withStyle(Style.EMPTY.withItalic(false).withColor(getColor())))
+                .set(DataComponents.LORE, new ItemLore(loreList))
+                .set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .remove(DataComponents.WRITABLE_BOOK_CONTENT)
+                .build();
+    }
+
+    protected void appendLore(List<Component> lore) {}
+
+    public final void formatItem(ItemStack stack) {
+        stack.applyComponents(formatPatch());
     }
 }

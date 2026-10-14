@@ -37,3 +37,4 @@ mod.mc_compat = "~26.1"
 mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 
 deps.fabric_api = "0.155.2+26.1.2"
+deps.yacl = "3.9.7+26.1-fabric"

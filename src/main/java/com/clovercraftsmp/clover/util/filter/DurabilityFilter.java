@@ -74,12 +74,17 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal(String.format("Durability threshold: %s%.2f%%", mode == Mode.AT_LEAST ? "≥" : "≤", threshold)).withStyle(LORE_STYLE));
+    }
+
+/*    @Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
         loreList.add(Component.literal(String.format("Durability threshold: %s%.2f%%", mode == Mode.AT_LEAST ? "≥" : "≤", threshold)).withStyle(LORE_STYLE));
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     protected void addThresholdData(CompoundTag tag) {

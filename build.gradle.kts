@@ -102,13 +102,13 @@ dependencies {
             runtime = false
         )
         modCompileOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-1.21.1:${property("deps.crafttweaker")}")
-        include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
     }
 
     resolveModsModrinth("status", "simple-copper-pipes", runtime = false)
 
     include(modImplementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
+    include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
 
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3", "fabric-game-rule-api-v1", "fabric-command-api-v2", "fabric-transfer-api-v1")
 }
@@ -207,8 +207,6 @@ fletchingTable {
     }
 
     fabric.configure(sourceSets.main) {
-        entrypoint("main", "com.clovercraftsmp.clover.Clover")
-        entrypoint("client", "com.clovercraftsmp.clover.client.CloverClient")
         entrypoint("fabric-datagen", "com.clovercraftsmp.clover.datagen.CloverDataGenerator")
         entrypoint("mixinsquared", "com.clovercraftsmp.clover.conditional.MixinCanceller")
     }

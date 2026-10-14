@@ -103,6 +103,19 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal("Sub-filters: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
+
+        for (Filter subFilter : entries) {
+            lore.add(
+                    Component.literal("• ")
+                            .append(Component.literal(subFilter.getFilterName()))
+                            .withStyle(LORE_STYLE)
+            );
+        }
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
 
@@ -118,7 +131,7 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
         }
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     public void addEntries(CompoundTag tag) {

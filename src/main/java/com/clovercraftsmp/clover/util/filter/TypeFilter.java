@@ -91,6 +91,25 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal("Item types: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
+
+        for (Item item : entries) {
+            Identifier loc = BuiltInRegistries.ITEM.getKey(item);
+            String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
+                    .map(e -> e.getMetadata().getName())
+                    .orElse(loc.getNamespace());
+
+            lore.add(
+                    Component.literal("• ")
+                            .append(Component.translatable(item.getDescriptionId()))
+                            .append(Component.literal(modName.equals("Minecraft") ? "" : String.format(" (%s)", modName)))
+                            .withStyle(LORE_STYLE)
+            );
+        }
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
 
@@ -112,7 +131,7 @@ public class TypeFilter extends AbstractCollectionFilter<Item> {
         }
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     public void addEntries(CompoundTag tag) {

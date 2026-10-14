@@ -108,6 +108,18 @@ public class NameFilter extends Filter {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal(String.format("Value: %s", value.isEmpty() ? "Unspecified." : "'" + value + "'")).withStyle(LORE_STYLE));
+        lore.add(
+                Component.literal("Case sensitive: ")
+                        .withStyle(LORE_STYLE)
+                        .append(Component.literal(caseSensitive ? "✔" : "✘")
+                                .withStyle(LORE_STYLE.withColor(caseSensitive ? ChatFormatting.GREEN : ChatFormatting.RED))
+                        )
+        );
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
@@ -120,5 +132,5 @@ public class NameFilter extends Filter {
                         )
         );
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 }

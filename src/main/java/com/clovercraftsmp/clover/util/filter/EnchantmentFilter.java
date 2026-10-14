@@ -94,6 +94,36 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        String comparison = switch (mode) {
+            case AT_LEAST -> "≥";
+            case AT_MOST -> "≤";
+            case EXACT -> "=";
+            default -> throw new IllegalStateException("Unexpected value: " + mode);
+        };
+
+        MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
+
+        if (enchantmentId != null) {
+            Identifier loc = ItemStackUtil.identifierOf(enchantmentId.key());
+            String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
+                    .map(e -> e.getMetadata().getName())
+                    .orElse(loc.getNamespace());
+
+            String translate = String.format("enchantment.%s.%s", loc.getNamespace(), loc.getPath());
+            enchantmentThreshold = enchantmentThreshold
+                    .append(Component.translatableWithFallback(translate, loc.toString()))
+                    .append(Component.literal(modName.equals("Minecraft") ? "" : String.format(" (%s)", modName)));
+        } else {
+            enchantmentThreshold = enchantmentThreshold.append(Component.literal("Unset"));
+        }
+
+        enchantmentThreshold = enchantmentThreshold.append(String.format(" %s %s", comparison, threshold));
+
+        lore.add(enchantmentThreshold.withStyle(LORE_STYLE));
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
@@ -126,7 +156,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         loreList.add(enchantmentThreshold.withStyle(LORE_STYLE));
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     protected void addThresholdData(CompoundTag tag) {

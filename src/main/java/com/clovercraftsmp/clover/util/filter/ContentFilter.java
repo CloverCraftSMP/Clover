@@ -184,11 +184,17 @@ public class ContentFilter extends Filter {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal(String.format("Slot: %s", (slot + 1))).withStyle(LORE_STYLE));
+        lore.add(Component.literal(String.format("Sub-filter: %s", subFilter == null ? "Unspecified." : subFilter.getFilterName())).withStyle(LORE_STYLE));
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
         loreList.add(Component.literal(String.format("Slot: %s", (slot + 1))).withStyle(LORE_STYLE));
         loreList.add(Component.literal(String.format("Sub-filter: %s", subFilter == null ? "Unspecified." : subFilter.getFilterName())).withStyle(LORE_STYLE));
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 }

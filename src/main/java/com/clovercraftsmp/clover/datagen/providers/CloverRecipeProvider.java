@@ -4,6 +4,8 @@ import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +23,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 //? if >= 26.1 {
@@ -51,7 +54,7 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
     @SuppressWarnings({"AccessStaticViaInstance", "RedundantSuppression"})
     private static void generate(HolderLookup.Provider registries, RecipeOutput output, RecipeProvider provider) {
         for (Filter filter : Filter.craftableFilters()) {
-            smithing(filter.getSmithingItem(), toResult(createFilterStack(filter)), filterRecipeId(filter), output, provider);
+            smithing(filter.getSmithingItem(), toResult(createFilterPatch(filter), filter.formatPatch()), filterRecipeId(filter), output, provider);
         }
 
         smithing(Items.WHITE_DYE, loadResult(registries, FILTER_TUTORIAL_ITEM), FILTER_TUTORIAL, output, provider);
@@ -72,14 +75,22 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
         return Clover.id("item_filter_" + filter.getFilterName().toLowerCase().replace(' ','_'));
     }
 
-    private static ItemStack createFilterStack(Filter filter) {
+    private static DataComponentPatch createFilterPatch(Filter filter) {
+        CompoundTag tag = new CompoundTag();
+        tag.put(Filter.FILTER_PATH, filter.toCompound());
+        return DataComponentPatch.builder()
+                .set(DataComponents.CUSTOM_DATA, CustomData.of(tag))
+                .build();
+    }
+
+    /*private static ItemStack createFilterStack(Filter filter) {
         ItemStack stack = new ItemStack(Items.WRITABLE_BOOK);
         CompoundTag tag = new CompoundTag();
         tag.put(Filter.FILTER_PATH, filter.toCompound());
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         filter.formatItem(stack);
         return stack;
-    }
+    }*/
 
     private static CompoundTag readItemNBT(Identifier id) {
         String path = String.format("/data/%s/item/%s.nbt", id.getNamespace(), id.getPath());
@@ -125,8 +136,11 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
         return provider.shaped(RecipeCategory.MISC, result);
     }
 
-    private static ItemStackTemplate toResult(ItemStack stack) {
-        return ItemStackTemplate.fromNonEmptyStack(stack);
+    private static ItemStackTemplate toResult(DataComponentPatch data, DataComponentPatch format) {
+        DataComponentPatch.Builder b = DataComponentPatch.builder();
+        for (DataComponentPatch p : List.of(data, format))
+            p.entrySet().forEach(e -> e.getValue().ifPresentOrElse(v -> b.set((DataComponentType) e.getKey(), v), () -> b.remove(e.getKey())));
+        return new ItemStackTemplate(Items.WRITABLE_BOOK, b.build());
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -175,7 +189,10 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
         return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result);
     }
 
-    private static ItemStack toResult(ItemStack stack) {
+    private static ItemStack toResult(DataComponentPatch data, DataComponentPatch format) {
+        ItemStack stack = new ItemStack(Items.WRITABLE_BOOK);
+        stack.applyComponents(data);
+        stack.applyComponents(format);
         return stack;
     }
 
@@ -192,6 +209,7 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
 
         Advancement.Builder advancement = output.advancement()
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .addCriterion(RecipeProvider.getHasName(Items.HOPPER), RecipeProvider.has(Items.HOPPER))
                 .rewards(AdvancementRewards.Builder.recipe(id))
                 .requirements(AdvancementRequirements.Strategy.OR);
 

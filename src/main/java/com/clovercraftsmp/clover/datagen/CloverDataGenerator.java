@@ -9,6 +9,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 
+import dev.kikugie.fletching_table.fabric.Entrypoint;
+
+@Entrypoint("fabric-datagen")
 public class CloverDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {

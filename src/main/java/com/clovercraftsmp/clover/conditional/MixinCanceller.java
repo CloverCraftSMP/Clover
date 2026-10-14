@@ -2,6 +2,9 @@ package com.clovercraftsmp.clover.conditional;
 
 import java.util.List;
 
+import dev.kikugie.fletching_table.fabric.Entrypoint;
+
+@Entrypoint("mixinsquared")
 public class MixinCanceller implements com.bawnorton.mixinsquared.api.MixinCanceller {
     private static final List<String> cancelledMixins = List.of(
             //? if tide: <2.1 && tide: >0

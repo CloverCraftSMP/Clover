@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-12T19:04:16.415862641	Clover/Clover Structures
+// 1.21.1	2026-10-13T14:25:21.608398209	Clover/Clover Structures
 5f7d2283640f872863853a741ff1eed1ab539958 data/clover/worldgen/structure/barn.json
 9081cfd69e23ac557306e436423831416d3402b3 data/clover/worldgen/structure_set/lightningtree.json
 734fab6ab5192bcb130ae89d39341164a6fd9d21 data/clover/worldgen/template_pool/wagon.json
@@ -31,8 +31,8 @@ a19b0fabba65f8165218a68f41a4a9cb9055e17b data/clover/worldgen/structure/berrycab
 355ccc497d38e661e78e4a3fb2bf9c1d4e233e3b data/clover/worldgen/structure_set/deserthouse.json
 d23cc8a178e91f68a91784a3f3e738cad3d05ebd data/clover/worldgen/structure_set/campsite.json
 50dc6afd8239bb9fb64cc94fc99698c9bb847a5e data/clover/worldgen/structure/wizardtower.json
-25bc94d1bf79848f28f98ab1017f9b8969899117 data/clover/worldgen/template_pool/berrycabin.json
 155a2572232ca98a4dd4e266fe3a402d888e428d data/clover/worldgen/template_pool/greenhouse.json
+25bc94d1bf79848f28f98ab1017f9b8969899117 data/clover/worldgen/template_pool/berrycabin.json
 ec1d997cb64af5dacbbcd4899406c0dd61ec8ff9 data/clover/worldgen/template_pool/deserthouse.json
 95ac5387169deaaac5a666df1b3bb8490af9d090 data/clover/worldgen/structure/stonehenge.json
 b268319c1c690a6dd0dbb0fa007f3291113d76d7 data/clover/worldgen/template_pool/wizardtower.json
