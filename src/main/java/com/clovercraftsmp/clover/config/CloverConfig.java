@@ -17,4 +17,16 @@ public class CloverConfig {
 
     @SerialEntry
     public String minigameType = "none";
+
+    @SerialEntry(comment = "Require ccbot approval to join. Players are refused while ccbot is unreachable.")
+    public boolean ccbotEnabled = true;
+
+    @SerialEntry
+    public String ccbotAddress = "127.0.0.1";
+
+    @SerialEntry
+    public int ccbotPort = 25566;
+
+    @SerialEntry
+    public String ccbotPassphrase = "";
 }

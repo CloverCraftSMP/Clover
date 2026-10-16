@@ -9,15 +9,19 @@ import net.minecraft.world.level.GameRules;
 
 *///?}
 
+import com.clovercraftsmp.clover.companion.CcbotClient;
 import com.clovercraftsmp.clover.config.CloverConfig;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
 import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.clovercraftsmp.clover.util.filter.Filter;
 import dev.kikugie.fletching_table.fabric.Entrypoint;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +31,17 @@ public class Clover implements ModInitializer {
     public static final String MOD_ID = "clover";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    public static final CcbotClient ccbot = new CcbotClient();
+
     @Override
     public void onInitialize() {
         if (!CloverConfig.HANDLER.load()) {
             Clover.LOGGER.error("Config failed to load!");
+        }
+
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER && CloverConfig.HANDLER.instance().ccbotEnabled) {
+            ccbot.start();
+            ServerLifecycleEvents.SERVER_STOPPING.register((server) -> ccbot.shutdown());
         }
 
         LootTableEvents.MODIFY.register((resourceKey, builder, lootTableSource, provider) -> {
