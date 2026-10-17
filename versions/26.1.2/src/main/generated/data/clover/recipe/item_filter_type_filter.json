@@ -4,7 +4,6 @@
   "base": "minecraft:paper",
   "result": {
     "components": {
-      "!minecraft:writable_book_content": {},
       "minecraft:custom_data": {
         "clover:filter_data": {
           "type": "type",
@@ -54,7 +53,8 @@
           "italic": false,
           "text": "Item types: "
         }
-      ]
+      ],
+      "minecraft:writable_book_content": {}
     },
     "id": "minecraft:writable_book"
   },

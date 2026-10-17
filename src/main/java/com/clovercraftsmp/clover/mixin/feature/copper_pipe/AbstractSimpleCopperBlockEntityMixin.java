@@ -15,6 +15,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.lunade.copper.blocks.CopperPipe;
 import net.lunade.copper.blocks.block_entity.AbstractSimpleCopperBlockEntity;
 *///?}
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -31,6 +32,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractSimpleCopperBlockEntity.class)
+@IfModLoaded("simple_copper_pipes")
 public abstract class AbstractSimpleCopperBlockEntityMixin extends BlockEntity implements FilterDuck, PoweredDuck, Container {
     public AbstractSimpleCopperBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);

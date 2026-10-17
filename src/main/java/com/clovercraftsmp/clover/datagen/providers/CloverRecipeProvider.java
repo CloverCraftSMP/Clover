@@ -13,7 +13,6 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import net.minecraft.world.item.component.CustomData;
@@ -33,6 +32,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.NotNull;
+import com.mojang.serialization.Dynamic;
+import net.minecraft.SharedConstants;
+import net.minecraft.nbt.Tag;
+import net.minecraft.util.datafix.DataFixers;
+import net.minecraft.util.datafix.fixes.References;
 //? }
 
 //? if <= 1.21.1 {
@@ -42,6 +46,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.world.item.crafting.SmithingTransformRecipe;
+import net.minecraft.world.item.ItemStack;
 *///? }
 
 @SuppressWarnings("CommentedOutCode")
@@ -143,10 +148,19 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
         return new ItemStackTemplate(Items.WRITABLE_BOOK, b.build());
     }
 
+    private static final int ITEM_NBT_DATA_VERSION = 3955;
+
     @SuppressWarnings("SameParameterValue")
     private static ItemStackTemplate loadResult(HolderLookup.Provider registries, Identifier id) {
+        Dynamic<Tag> upgraded = DataFixers.getDataFixer().update(
+                References.ITEM_STACK,
+                new Dynamic<>(NbtOps.INSTANCE, readItemNBT(id)),
+                ITEM_NBT_DATA_VERSION,
+                SharedConstants.getCurrentVersion().dataVersion().version()
+        );
+
         return ItemStackTemplate.CODEC
-                .parse(registries.createSerializationContext(NbtOps.INSTANCE), readItemNBT(id))
+                .parse(registries.createSerializationContext(NbtOps.INSTANCE), upgraded.getValue())
                 .getOrThrow(e -> new IllegalStateException("Invalid item compound read from " + id + ": " + e));
     }
 

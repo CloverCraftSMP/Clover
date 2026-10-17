@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.minecraft.core.BlockPos;
@@ -26,6 +27,7 @@ import java.util.Objects;
 @Mixin(net.lunade.copper.block.entity.CopperFittingBlockEntity.class)
 //? }
 
+@IfModLoaded("simple_copper_pipes")
 public class CopperFittingEntityMixin extends BlockEntity {
     public CopperFittingEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);

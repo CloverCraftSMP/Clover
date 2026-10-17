@@ -4,7 +4,6 @@
   "base": "minecraft:paper",
   "result": {
     "components": {
-      "!minecraft:writable_book_content": {},
       "minecraft:custom_data": {
         "clover:filter_data": {
           "type": "durability",
@@ -51,7 +50,8 @@
           "italic": false,
           "text": "Durability threshold: ≥0.00%"
         }
-      ]
+      ],
+      "minecraft:writable_book_content": {}
     },
     "id": "minecraft:writable_book"
   },

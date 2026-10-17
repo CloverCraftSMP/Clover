@@ -90,6 +90,8 @@ dependencies {
         modRuntimeOnly(dep)
     }
 
+//    modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+
     if (sc.current.version <= "1.21.1") {
         resolveModsModrinth(
             "clutterbestiary",
@@ -108,7 +110,13 @@ dependencies {
 
     include(modImplementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${property("deps.mixin_squared")}")!!)!!)
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
-    include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
+
+//    include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
+
+    include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}") {
+        exclude(group = "net.fabricmc.fabric-api")
+        exclude(group = "net.fabricmc", module = "fabric-language-kotlin")
+    })
 
     compileOnly("net.luckperms:api:5.4")
 

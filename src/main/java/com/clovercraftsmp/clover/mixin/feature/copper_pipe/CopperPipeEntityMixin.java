@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
@@ -38,7 +39,7 @@ import net.lunade.copper.block.entity.CopperPipeBlockEntity;
 //? if >=26.1 {
 @Mixin(net.lunade.copper.block.entity.CopperPipeBlockEntity.class)
 //? }
-
+@IfModLoaded("simple_copper_pipes")
 public class CopperPipeEntityMixin extends BlockEntity {
     public CopperPipeEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);

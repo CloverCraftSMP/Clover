@@ -4,7 +4,6 @@
   "base": "minecraft:paper",
   "result": {
     "components": {
-      "!minecraft:writable_book_content": {},
       "minecraft:custom_data": {
         "clover:filter_data": {
           "type": "group",
@@ -59,7 +58,8 @@
           "italic": false,
           "text": "Sub-filters: "
         }
-      ]
+      ],
+      "minecraft:writable_book_content": {}
     },
     "id": "minecraft:writable_book"
   },

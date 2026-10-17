@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.item.component.WritableBookContent;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -167,7 +168,7 @@ public abstract class Filter {
                 .set(DataComponents.ITEM_NAME, Component.literal(getFilterName()).withStyle(Style.EMPTY.withItalic(false).withColor(getColor())))
                 .set(DataComponents.LORE, new ItemLore(loreList))
                 .set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                .remove(DataComponents.WRITABLE_BOOK_CONTENT)
+                .set(DataComponents.WRITABLE_BOOK_CONTENT, WritableBookContent.EMPTY)
                 .build();
     }
 
