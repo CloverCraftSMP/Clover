@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -33,7 +34,7 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
     }
 
     private void resolveFilters(CompoundTag tag) {
-        ListTag tagEntries = tag.getList("entries", 10);
+        ListTag tagEntries = ItemStackUtil.getCompoundListOrEmpty(tag, "entries");
         for (Tag tagEntry : tagEntries) {
             entries.add(Filter.fromCompound((CompoundTag) tagEntry));
         }
@@ -102,6 +103,19 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal("Sub-filters: ").append(entries.isEmpty() ? "None specified." : "").withStyle(LORE_STYLE));
+
+        for (Filter subFilter : entries) {
+            lore.add(
+                    Component.literal("• ")
+                            .append(Component.literal(subFilter.getFilterName()))
+                            .withStyle(LORE_STYLE)
+            );
+        }
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
 
@@ -117,7 +131,7 @@ public class GroupFilter extends AbstractCollectionFilter<Filter>  {
         }
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     public void addEntries(CompoundTag tag) {

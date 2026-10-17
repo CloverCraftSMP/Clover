@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 420107,
+    "separation": 18,
+    "spacing": 80
+  },
+  "structures": [
+    {
+      "structure": "clover:berrycabin",
+      "weight": 1
+    }
+  ]
+}

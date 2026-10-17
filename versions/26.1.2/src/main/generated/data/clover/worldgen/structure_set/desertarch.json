@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 420108,
+    "separation": 6,
+    "spacing": 64
+  },
+  "structures": [
+    {
+      "structure": "clover:desertarch",
+      "weight": 1
+    }
+  ]
+}

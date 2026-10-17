@@ -7,6 +7,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 
+import dev.kikugie.fletching_table.fabric.Entrypoint;
+
+@Entrypoint(Entrypoint.CLIENT)
 public class CloverClient implements ClientModInitializer {
     private static final boolean STATUS_PRESENT = FabricLoader.getInstance().isModLoaded("status");
 

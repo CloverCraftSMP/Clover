@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 420111,
+    "separation": 24,
+    "spacing": 96
+  },
+  "structures": [
+    {
+      "structure": "clover:stonehenge",
+      "weight": 1
+    }
+  ]
+}

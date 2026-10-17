@@ -8,7 +8,6 @@
   },
   "result": {
     "components": {
-      "!minecraft:writable_book_content": {},
       "minecraft:custom_data": {
         "clover:filter_data": {
           "type": "enchantment",

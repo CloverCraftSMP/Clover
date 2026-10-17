@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.clutterbestiary;
-
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+//? if <=1.21.1 {
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.emilsg.clutterbestiary.entity.custom.MossbloomEntity;
@@ -20,3 +20,4 @@ public abstract class MossbloomEntityMixin {
         return original.call(object) && this.getIsSaddled();
     }
 }
+*///?}
