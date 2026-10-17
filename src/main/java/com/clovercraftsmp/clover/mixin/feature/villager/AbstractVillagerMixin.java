@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.feature.villager;
-
-import com.clovercraftsmp.clover.util.ItemStackUtil;
+//? if <=1.21.1 {
+/*import com.clovercraftsmp.clover.util.ItemStackUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.util.RandomSource;
@@ -19,3 +19,4 @@ public class AbstractVillagerMixin {
         return ItemStackUtil.hasMending(offer.getResult()) ? null : offer;
     }
 }
+*///?}

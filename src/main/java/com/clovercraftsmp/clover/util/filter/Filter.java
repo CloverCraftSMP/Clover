@@ -1,6 +1,8 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -46,7 +48,12 @@ public abstract class Filter {
 
     public Filter(String type, CompoundTag tag) {
         this.type = type;
-        Mode retrievedMode = Mode.valueOf(tag.getString("mode"));
+        Mode retrievedMode;
+        try {
+            retrievedMode = Mode.valueOf(ItemStackUtil.getStringOrDefault(tag, "mode"));
+        } catch (IllegalArgumentException e) {
+            retrievedMode = allowedModes().getFirst();
+        }
         List<Mode> allowed = this.allowedModes();
         if (!this.allowedModes().contains(retrievedMode)) retrievedMode = allowed.getFirst();
         this.mode = retrievedMode;
@@ -95,12 +102,13 @@ public abstract class Filter {
     }
 
     public static @Nullable Filter fromItem(ItemStack stack) {
-        if (!isFilter(stack)) return null;
-        return Filter.fromCompound(Objects.requireNonNull(stack.get(DataComponents.CUSTOM_DATA)).copyTag().getCompound(FILTER_PATH));
+        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data == null) return null;
+        return ItemStackUtil.getCompound(data.copyTag(), FILTER_PATH).map(Filter::fromCompound).orElse(null);
     }
 
     public static Filter fromCompound(CompoundTag tag) {
-        String type = tag.getString("type");
+        String type = ItemStackUtil.getStringOrDefault(tag, "type");
         Function<CompoundTag, Filter> factory = REGISTRY.get(type);
         if (factory == null) throw new RuntimeException("Unexpected type found when parsing filter: " + type);
         return factory.apply(tag);
@@ -143,7 +151,7 @@ public abstract class Filter {
         return modeName;
     }
 
-    public void formatItem(ItemStack stack) {
+    public DataComponentPatch formatPatch() {
         List<Component> loreList = new ArrayList<>(List.of(
                 Component.literal(String.format("Current Mode: %s", prettyName(mode))).withStyle(LORE_STYLE),
                 Component.literal(getModeDescription(mode)).withStyle(LORE_STYLE),
@@ -152,12 +160,20 @@ public abstract class Filter {
         ));
 
         allowedModes().forEach(allowedMode -> loreList.add(Component.literal(String.format("• %s", prettyName(allowedMode))).withStyle(LORE_STYLE)));
-
         loreList.add(Component.empty());
+        appendLore(loreList);
 
-        stack.set(DataComponents.ITEM_NAME, Component.literal(getFilterName()).withStyle(Style.EMPTY.withItalic(false).withColor(getColor())));
-        stack.set(DataComponents.LORE, new ItemLore(loreList));
-        stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-        stack.remove(DataComponents.WRITABLE_BOOK_CONTENT);
+        return DataComponentPatch.builder()
+                .set(DataComponents.ITEM_NAME, Component.literal(getFilterName()).withStyle(Style.EMPTY.withItalic(false).withColor(getColor())))
+                .set(DataComponents.LORE, new ItemLore(loreList))
+                .set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                .remove(DataComponents.WRITABLE_BOOK_CONTENT)
+                .build();
+    }
+
+    protected void appendLore(List<Component> lore) {}
+
+    public final void formatItem(ItemStack stack) {
+        stack.applyComponents(formatPatch());
     }
 }

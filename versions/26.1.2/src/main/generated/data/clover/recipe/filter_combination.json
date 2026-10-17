@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:writable_book"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "minecraft:writable_book"
+  }
+}

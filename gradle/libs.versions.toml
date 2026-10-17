@@ -1,0 +1,7 @@
+[versions]
+mod-publish-plugin = "2.0.+"
+
+[plugins]
+stonecutter = { id = "dev.kikugie.stonecutter" }
+loomx = { id = "dev.kikugie.loom-back-compat" }
+mpp = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod-publish-plugin" }

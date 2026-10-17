@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -28,8 +29,8 @@ public class NameFilter extends Filter {
 
     public NameFilter(CompoundTag tag) {
         super(TYPE, tag);
-        this.value = tag.getString("value");
-        this.caseSensitive = tag.getBoolean("sensitive");
+        this.value = ItemStackUtil.getStringOrDefault(tag, "value");
+        this.caseSensitive = ItemStackUtil.getBooleanOrDefault(tag, "sensitive");
     }
 
     @Override
@@ -107,6 +108,18 @@ public class NameFilter extends Filter {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal(String.format("Value: %s", value.isEmpty() ? "Unspecified." : "'" + value + "'")).withStyle(LORE_STYLE));
+        lore.add(
+                Component.literal("Case sensitive: ")
+                        .withStyle(LORE_STYLE)
+                        .append(Component.literal(caseSensitive ? "✔" : "✘")
+                                .withStyle(LORE_STYLE.withColor(caseSensitive ? ChatFormatting.GREEN : ChatFormatting.RED))
+                        )
+        );
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
@@ -119,5 +132,5 @@ public class NameFilter extends Filter {
                         )
         );
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 }

@@ -2,7 +2,7 @@ package com.clovercraftsmp.clover.structure;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -32,7 +32,7 @@ public record StructureEntry(
         return ResourceKey.create(Registries.TEMPLATE_POOL, id(name));
     }
 
-    public ResourceLocation nbtId() {
+    public Identifier nbtId() {
         return id(name);
     }
 }

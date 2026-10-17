@@ -7,8 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,8 +31,8 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     public EnchantmentFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getInt("threshold"));
-        this.enchantmentId = ItemStackUtil.resolveEnchantment(tag.getString("enchantment"));
+        super(TYPE, tag, ItemStackUtil.getIntOrDefault(tag, "threshold"));
+        this.enchantmentId = ItemStackUtil.resolveEnchantment(ItemStackUtil.getStringOrDefault(tag, "enchantment"));
     }
 
     @Override
@@ -95,6 +94,36 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        String comparison = switch (mode) {
+            case AT_LEAST -> "≥";
+            case AT_MOST -> "≤";
+            case EXACT -> "=";
+            default -> throw new IllegalStateException("Unexpected value: " + mode);
+        };
+
+        MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
+
+        if (enchantmentId != null) {
+            Identifier loc = ItemStackUtil.identifierOf(enchantmentId.key());
+            String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
+                    .map(e -> e.getMetadata().getName())
+                    .orElse(loc.getNamespace());
+
+            String translate = String.format("enchantment.%s.%s", loc.getNamespace(), loc.getPath());
+            enchantmentThreshold = enchantmentThreshold
+                    .append(Component.translatableWithFallback(translate, loc.toString()))
+                    .append(Component.literal(modName.equals("Minecraft") ? "" : String.format(" (%s)", modName)));
+        } else {
+            enchantmentThreshold = enchantmentThreshold.append(Component.literal("Unset"));
+        }
+
+        enchantmentThreshold = enchantmentThreshold.append(String.format(" %s %s", comparison, threshold));
+
+        lore.add(enchantmentThreshold.withStyle(LORE_STYLE));
+    }
+
+    /*@Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
@@ -109,7 +138,7 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         MutableComponent enchantmentThreshold = Component.literal("Enchantment threshold: ");
 
         if (enchantmentId != null) {
-            ResourceLocation loc = enchantmentId.key().location();
+            Identifier loc = ItemStackUtil.identifierOf(enchantmentId.key());
             String modName = FabricLoader.getInstance().getModContainer(loc.getNamespace())
                     .map(e -> e.getMetadata().getName())
                     .orElse(loc.getNamespace());
@@ -127,14 +156,14 @@ public class EnchantmentFilter extends AbstractComparisonFilter<Integer> {
         loreList.add(enchantmentThreshold.withStyle(LORE_STYLE));
 
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     protected void addThresholdData(CompoundTag tag) {
         if (enchantmentId != null) {
             tag.putString("enchantment", enchantmentId
                     .unwrapKey()
-                    .map(ResourceKey::location)
+                    .map(ItemStackUtil::identifierOf)
                     .orElseThrow()
                     .toString());
         }

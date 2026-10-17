@@ -1,6 +1,8 @@
 package com.clovercraftsmp.clover.mixin.feature.status;
 
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+import dev.kikugie.fletching_table.mixin.MixinEnvironment;
+import dev.kikugie.fletching_table.mixin.MixinEnvironment.Env;
 import de.maxhenkel.status.playerstate.Availability;
 import de.maxhenkel.status.playerstate.ClientPlayerStateManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @IfModLoaded("status")
+@MixinEnvironment(type = Env.CLIENT)
 @Mixin(ClientPlayerStateManager.class)
 public abstract class ClientPlayerStateManagerMixin {
     @Shadow

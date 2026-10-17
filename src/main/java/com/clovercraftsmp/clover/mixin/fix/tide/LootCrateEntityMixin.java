@@ -1,6 +1,6 @@
 package com.clovercraftsmp.clover.mixin.fix.tide;
-
-import com.li64.tide.registries.entities.misc.LootCrateEntity;
+//? if <=1.21.1 {
+/*import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
@@ -18,3 +18,4 @@ public class LootCrateEntityMixin {
         return false;
     }
 }
+*///?}

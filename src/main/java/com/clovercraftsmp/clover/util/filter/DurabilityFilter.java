@@ -1,5 +1,6 @@
 package com.clovercraftsmp.clover.util.filter;
 
+import com.clovercraftsmp.clover.util.ItemStackUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,7 +22,7 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     public DurabilityFilter(CompoundTag tag) {
-        super(TYPE, tag, tag.getDouble("threshold"));
+        super(TYPE, tag, ItemStackUtil.getDoubleOrDefault(tag, "threshold"));
     }
 
     @Override
@@ -73,12 +74,17 @@ public class DurabilityFilter extends AbstractComparisonFilter<Double> {
     }
 
     @Override
+    protected void appendLore(List<Component> lore) {
+        lore.add(Component.literal(String.format("Durability threshold: %s%.2f%%", mode == Mode.AT_LEAST ? "≥" : "≤", threshold)).withStyle(LORE_STYLE));
+    }
+
+/*    @Override
     public void formatItem(ItemStack stack) {
         super.formatItem(stack);
         ArrayList<Component> loreList = new ArrayList<>(Objects.requireNonNull(stack.get(DataComponents.LORE)).lines());
         loreList.add(Component.literal(String.format("Durability threshold: %s%.2f%%", mode == Mode.AT_LEAST ? "≥" : "≤", threshold)).withStyle(LORE_STYLE));
         stack.set(DataComponents.LORE, new ItemLore(loreList));
-    }
+    }*/
 
     @Override
     protected void addThresholdData(CompoundTag tag) {
