@@ -110,6 +110,8 @@ dependencies {
     include(modImplementation("com.moulberry:mixinconstraints:${property("deps.mixinconstraints")}")!!)
     include(modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")!!)
 
+    compileOnly("net.luckperms:api:5.4")
+
     fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-data-generation-api-v1", "fabric-loot-api-v3", "fabric-game-rule-api-v1", "fabric-command-api-v2", "fabric-transfer-api-v1")
 }
 
