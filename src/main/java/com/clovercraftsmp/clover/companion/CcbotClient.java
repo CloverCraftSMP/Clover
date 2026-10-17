@@ -5,7 +5,6 @@ import com.clovercraftsmp.clover.companion.protocol.CcbotProtocol;
 import com.clovercraftsmp.clover.config.CloverConfig;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.*;
@@ -25,7 +24,6 @@ public final class CcbotClient {
     private volatile boolean stopped;
 
     public static final Set<UUID> APPROVED = ConcurrentHashMap.newKeySet();
-    public static final Map<UUID, long[]> ROLES = new ConcurrentHashMap<>();
 
     public void start() {
         executor.execute(this::connect);

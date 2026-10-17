@@ -1,4 +1,4 @@
-package com.clovercraftsmp.clover.companion;
+package com.clovercraftsmp.clover.compat;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -15,6 +15,11 @@ import java.util.stream.Collectors;
 
 public class LuckPermsSync {
     static final String META_KEY = "discord-role-id";
+
+    public static boolean hasPermission(UUID uuid, String permission) {
+        User user = LuckPermsProvider.get().getUserManager().getUser(uuid);
+        return user != null && user.getCachedData().getPermissionData().checkPermission(permission).asBoolean();
+    }
 
     public static void apply(UUID uuid, long[] roleIds) {
         LuckPerms lp = LuckPermsProvider.get();

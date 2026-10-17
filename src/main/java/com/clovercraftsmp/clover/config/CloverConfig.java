@@ -21,12 +21,15 @@ public class CloverConfig {
     @SerialEntry(comment = "Require ccbot approval to join. Players are refused while ccbot is unreachable.")
     public boolean ccbotEnabled = true;
 
-    @SerialEntry
+    @SerialEntry(comment = "The address that ccbot is running on.")
     public String ccbotAddress = "127.0.0.1";
 
-    @SerialEntry
+    @SerialEntry(comment = "The port that ccbot is running on.")
     public int ccbotPort = 25566;
 
-    @SerialEntry
+    @SerialEntry(comment = "The passphrase set in ccbot config.")
     public String ccbotPassphrase = "";
+
+    @SerialEntry(comment = "If set to true, players must have the 'clover.maintenance' permission to join.")
+    public boolean maintenanceMode = true;
 }

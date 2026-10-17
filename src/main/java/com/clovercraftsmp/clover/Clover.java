@@ -10,7 +10,6 @@ import net.minecraft.world.level.GameRules;
 *///?}
 
 import com.clovercraftsmp.clover.companion.CcbotClient;
-import com.clovercraftsmp.clover.companion.LuckPermsSync;
 import com.clovercraftsmp.clover.config.CloverConfig;
 import com.clovercraftsmp.clover.networking.ClientboundRemoveNoSleepPacket;
 import com.clovercraftsmp.clover.networking.ClientboundSetAfkPacket;
@@ -22,7 +21,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -41,14 +39,9 @@ public class Clover implements ModInitializer {
             Clover.LOGGER.error("Config failed to load!");
         }
 
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER && CloverConfig.HANDLER.instance().ccbotEnabled) {
-            if (FabricLoader.getInstance().isModLoaded("luckperms")) {
-                ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-                    long[] roles = CcbotClient.ROLES.remove(handler.player.getUUID());
-                    if (roles != null) LuckPermsSync.apply(handler.player.getUUID(), roles);
-                });
-            }
+        boolean isServer = FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER;
 
+        if (isServer && CloverConfig.HANDLER.instance().ccbotEnabled) {
             ccbot.start();
             ServerLifecycleEvents.SERVER_STOPPING.register((server) -> ccbot.shutdown());
         }

@@ -2,6 +2,7 @@ package com.clovercraftsmp.clover.mixin.companion;
 
 import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.companion.CcbotClient;
+import com.clovercraftsmp.clover.compat.LuckPermsSync;
 import com.clovercraftsmp.clover.companion.PlayerState;
 import com.clovercraftsmp.clover.companion.protocol.CcbotProtocol;
 import com.clovercraftsmp.clover.config.CloverConfig;
@@ -80,14 +81,13 @@ public class ServerLoginPacketListenerImplMixin {
                 //profile.getId();
 
         CcbotClient.APPROVED.remove(id);
-        CcbotClient.ROLES.remove(id);
-        if (clover$ccbotState == null) return original.call(instance, address, profile);
+        if (clover$ccbotState == null) return clover$finishLogin(instance, address, profile, id, original);
 
         CcbotProtocol.PlayerStateResponse response = clover$ccbotState.getNow(CcbotProtocol.PlayerStateResponse.FAILED);
 
         if (instance.isUsingWhitelist() && instance.isWhiteListed(profile)) {
-            if (response.state() == PlayerState.APPROVED) CcbotClient.ROLES.put(id, response.roleIds());
-            return original.call(instance, address, profile);
+            if (response.state() == PlayerState.APPROVED) clover$applyRoles(id, response.roleIds());
+            return clover$finishLogin(instance, address, profile, id, original);
         }
 
         return switch (response.state()) {
@@ -96,10 +96,42 @@ public class ServerLoginPacketListenerImplMixin {
             case PENDING -> Component.literal("Your account is pending admin approval. Please try again later!");
             case FAILED -> Component.literal("Ccbot was unable to verify your status at this time. Please try again later!");
             case APPROVED -> {
-                CcbotClient.ROLES.put(id, response.roleIds());
+                clover$applyRoles(id, response.roleIds());
                 CcbotClient.APPROVED.add(id);
-                yield original.call(instance, address, profile);
+                yield clover$finishLogin(instance, address, profile, id, original);
             }
         };
+    }
+
+    @Unique
+    private static void clover$applyRoles(UUID id, long[] roleIds) {
+        if (FabricLoader.getInstance().isModLoaded("luckperms")) LuckPermsSync.apply(id, roleIds);
+    }
+
+    @Unique
+    private Component clover$finishLogin(
+            PlayerList instance,
+            SocketAddress address,
+            //? if <=1.21.1
+            //GameProfile profile,
+            //? if >=26.1
+            NameAndId profile,
+            UUID id,
+            Operation<Component> original
+    ) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER
+        && CloverConfig.HANDLER.instance().maintenanceMode
+        && !clover$canBypassMaintenance(id)) {
+            return Component.literal("The server is currently under maintenance. Please try again later!");
+        }
+        return original.call(instance, address, profile);
+    }
+
+    @Unique
+    private static boolean clover$canBypassMaintenance(UUID id) {
+        if (FabricLoader.getInstance().isModLoaded("luckperms")) {
+            return LuckPermsSync.hasPermission(id, "clover.maintenance");
+        }
+        return true;
     }
 }
