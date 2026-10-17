@@ -119,11 +119,13 @@ public final class CcbotProtocol {
         }
     }
 
-    public record PlayerStateResponse(PlayerState state) {
+    public record PlayerStateResponse(PlayerState state, long[] roleIds) {
         public static final int ID = 2;
 
+        public static final PlayerStateResponse FAILED = new PlayerStateResponse(PlayerState.FAILED, new long[0]);
+
         public static PlayerStateResponse read(FriendlyByteBuf buf) {
-            return new PlayerStateResponse(PlayerState.fromWireId(buf.readVarInt()));
+            return new PlayerStateResponse(PlayerState.fromWireId(buf.readVarInt()), buf.readLongArray());
         }
     }
 }

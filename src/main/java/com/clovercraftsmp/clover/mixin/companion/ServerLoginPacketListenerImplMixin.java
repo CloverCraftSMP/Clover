@@ -2,7 +2,7 @@ package com.clovercraftsmp.clover.mixin.companion;
 
 import com.clovercraftsmp.clover.Clover;
 import com.clovercraftsmp.clover.companion.CcbotClient;
-import com.clovercraftsmp.clover.companion.PlayerState;
+import com.clovercraftsmp.clover.companion.protocol.CcbotProtocol;
 import com.clovercraftsmp.clover.config.CloverConfig;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -33,7 +33,7 @@ public class ServerLoginPacketListenerImplMixin {
     @Shadow
     @Final
     private MinecraftServer server;
-    @Unique private CompletableFuture<PlayerState> clover$ccbotState;
+    @Unique private CompletableFuture<CcbotProtocol.PlayerStateResponse> clover$ccbotState;
 
     @Inject(method = "startClientVerification", at = @At("HEAD"))
     private void startCcbotQuery(GameProfile profile, CallbackInfo ci) {
@@ -53,7 +53,7 @@ public class ServerLoginPacketListenerImplMixin {
                 //profile.getId()
                 //? if >=26.1
                 profile.id()
-        ).exceptionally(e -> PlayerState.FAILED);
+        ).exceptionally(e -> CcbotProtocol.PlayerStateResponse.FAILED);
     }
 
     @Inject(method = "verifyLoginAndFinishConnectionSetup", at = @At("HEAD"), cancellable = true)
@@ -89,13 +89,20 @@ public class ServerLoginPacketListenerImplMixin {
         CcbotClient.APPROVED.remove(id);
         if (clover$ccbotState == null) return original.call(instance, address, profile);
 
-        PlayerState state = clover$ccbotState.getNow(PlayerState.FAILED);
-        return switch (state) {
+        CcbotProtocol.PlayerStateResponse response = clover$ccbotState.getNow(CcbotProtocol.PlayerStateResponse.FAILED);
+        return switch (response.state()) {
             case BANNED -> Component.literal("Your account is banned through ccbot! If you believe this is an error, contact the mod team.");
             case NEW -> Component.literal("Please join auth.clovercraftsmp.com to link your account!");
             case PENDING -> Component.literal("Your account is pending admin approval. Please try again later!");
             case FAILED -> Component.literal("Ccbot was unable to verify your status at this time. Please try again later!");
             case APPROVED -> {
+                String msg = "Player was approved through ccbot. Roles: ";
+                for (long role : response.roleIds()) {
+                    msg += role + ", ";
+                }
+                msg = msg.substring(0, msg.length() - 2);
+                Clover.LOGGER.info(msg);
+
                 CcbotClient.APPROVED.add(id);
                 yield original.call(instance, address, profile);
             }

@@ -51,9 +51,9 @@ final class CcbotSession implements Closeable {
         }
     }
 
-    PlayerState queryPlayer(UUID uuid) throws IOException {
+    PlayerStateResponse queryPlayer(UUID uuid) throws IOException {
         stream.send(new PlayerStateRequest(uuid));
-        return stream.receive(PlayerStateResponse.ID, PlayerStateResponse::read).state();
+        return stream.receive(PlayerStateResponse.ID, PlayerStateResponse::read);
     }
 
     @Override

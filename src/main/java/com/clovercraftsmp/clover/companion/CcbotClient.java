@@ -1,6 +1,7 @@
 package com.clovercraftsmp.clover.companion;
 
 import com.clovercraftsmp.clover.Clover;
+import com.clovercraftsmp.clover.companion.protocol.CcbotProtocol;
 import com.clovercraftsmp.clover.config.CloverConfig;
 
 import java.io.IOException;
@@ -28,13 +29,13 @@ public final class CcbotClient {
         executor.execute(this::connect);
     }
 
-    public CompletableFuture<PlayerState> getState(UUID uuid) {
-        if (stopped) return CompletableFuture.completedFuture(PlayerState.FAILED);
+    public CompletableFuture<CcbotProtocol.PlayerStateResponse> getState(UUID uuid) {
+        if (stopped) return CompletableFuture.completedFuture(CcbotProtocol.PlayerStateResponse.FAILED);
         try {
             return CompletableFuture.supplyAsync(() -> query(uuid), executor)
-                    .completeOnTimeout(PlayerState.FAILED, QUERY_TIMEOUT_S, TimeUnit.SECONDS);
+                    .completeOnTimeout(CcbotProtocol.PlayerStateResponse.FAILED, QUERY_TIMEOUT_S, TimeUnit.SECONDS);
         } catch (RejectedExecutionException e) {
-            return CompletableFuture.completedFuture(PlayerState.FAILED);
+            return CompletableFuture.completedFuture(CcbotProtocol.PlayerStateResponse.FAILED);
         }
     }
 
@@ -49,8 +50,8 @@ public final class CcbotClient {
         executor.shutdown();
     }
 
-    private PlayerState query(UUID uuid) {
-        if (session == null) return PlayerState.FAILED;
+    private CcbotProtocol.PlayerStateResponse query(UUID uuid) {
+        if (session == null) return CcbotProtocol.PlayerStateResponse.FAILED;
         try {
             return session.queryPlayer(uuid);
         } catch (IOException | RuntimeException e) {
@@ -62,7 +63,7 @@ public final class CcbotClient {
                     dropSession(e2);
                 }
             }
-            return PlayerState.FAILED;
+            return CcbotProtocol.PlayerStateResponse.FAILED;
         }
     }
 
