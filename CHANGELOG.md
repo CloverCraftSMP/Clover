@@ -2,8 +2,13 @@
 
 ## [Unreleased]
 ### Added
+- Huge extension for Simple Copper Pipes!
+- New build process, using Stonecutter! Heaps of nice automations for us and we can multi-version target now as well.
+- Clover Companion now built into Clover itself.
+- LuckPerms syncing for Discord roles -> Minecraft LP group! (with a maintenance mode to require additional permission to join)
 ### Fixed
 ### Changed
+
 
 ## [0.4.0] - 2026-07-22
 ### Added

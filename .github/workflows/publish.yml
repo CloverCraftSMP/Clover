@@ -21,7 +21,7 @@ jobs:
           - name: Verify version matches tag
             run: |
               TAG_VERSION=${GITHUB_REF_NAME}
-              PROP_VERSION=$(grep "mod.version" gradle.properties | cut -d= -f2 | tr -d '[:space:]')
+              PROP_VERSION=$(grep "mod.version" stonecutter.properties.toml | cut -d= -f2 | tr -d '[:space:]"')
               if [ "$TAG_VERSION" != "$PROP_VERSION" ]; then
                 echo "Tag $TAG_VERSION does not match mod.version $PROP_VERSION"
                 exit 1
