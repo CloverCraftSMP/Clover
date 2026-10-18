@@ -47,7 +47,8 @@ public class ModStructures {
 
             // uncommon structures
             new StructureEntry("barn", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 4),
-            new StructureEntry("cabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
+// uses blocks that don't exist
+//            new StructureEntry("cabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 5),
             new StructureEntry("greenhouse", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_BOX, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 6),
             new StructureEntry("berrycabin", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 7),
             new StructureEntry("wizardtower", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, UNCOMMON_SPACING, UNCOMMON_SEPARATION, SALT_BASE + 13),
