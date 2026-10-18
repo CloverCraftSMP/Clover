@@ -223,29 +223,30 @@ fletchingTable {
 }
 
 // Publishes builds to Modrinth with changelog from the CHANGELOG.md file
-//publishMods {
-//    file = tasks.remapJar.map { it.archiveFile.get() }
-//    additionalFiles.from(tasks.remapSourcesJar.map { it.archiveFile.get() })
-//    displayName = "${property("mod.name")} ${property("mod.version")} for ${property("mod.mc_title")}"
-//    version = property("mod.version") as String
-//    changelog = rootProject.file("CHANGELOG.md").readText()
-//    type = STABLE
-//    modLoaders.add("fabric")
-//
-//    dryRun = providers.environmentVariable("MODRINTH_TOKEN").getOrNull() == null
-//
-//    modrinth {
-//        projectId = property("publish.modrinth") as String
-//        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-//        minecraftVersions.addAll(property("mod.mc_targets").toString().split(' '))
-//        requires {
-//            slug = "fabric-api"
-//        }
-//    }
-//
-//    github {
-//        repository = property("publish.github_repo") as String
-//        accessToken = providers.environmentVariable("GITHUB_TOKEN")
-//        commitish = "main"
-//    }
-//}
+publishMods {
+    file = loomx.modJar.flatMap { it.archiveFile }
+    additionalFiles.from(loomx.modSourcesJar.flatMap { it.archiveFile })
+    displayName = "${property("mod.name")} ${property("mod.version")} for ${sc.current.version}"
+    version = project.version.toString()
+    changelog = providers.fileContents(rootProject.layout.projectDirectory.file("CHANGELOG.md")).asText
+    type = STABLE
+    modLoaders.add("fabric")
+
+    dryRun = providers.environmentVariable("MODRINTH_TOKEN").orNull == null
+            || providers.environmentVariable("GITHUB_TOKEN").orNull == null
+
+    modrinth {
+        projectId = property("publish.modrinth") as String
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.addAll(compatibleVersions)
+        requires {
+            slug = "fabric-api"
+        }
+    }
+
+    github {
+        repository = property("publish.github_repo") as String
+        accessToken = providers.environmentVariable("GITHUB_TOKEN")
+        commitish = "main"
+    }
+}
