@@ -2,11 +2,6 @@
 
 ## [Unreleased]
 ### Added
-### Fixed
-### Changed
-
-## [4.0.0] - 2026-10-18
-### Added
 - Huge extension for Simple Copper Pipes!
 - New build process, using Stonecutter! Heaps of nice automations for us and we can multi-version target now as well.
 - Clover Companion now built into Clover itself.
