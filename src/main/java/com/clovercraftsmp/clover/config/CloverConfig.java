@@ -32,4 +32,19 @@ public class CloverConfig {
 
     @SerialEntry(comment = "If set to true, players must have the 'clover.maintenance' permission to join.")
     public boolean maintenanceMode = true;
+
+    @SerialEntry(comment = "The key used for verifying transfer tokens. If less than 32 characters, the transfer system is disabled.")
+    public String transferTokenKey = "";
+
+    @SerialEntry(comment = "Whether the transfer system is required for entry to the server.")
+    public boolean requireTransfer = false;
+
+    @SerialEntry(comment = "Unique ID of this node in the transfer network. Required. Do not change this once players have been transferred.")
+    public String transferNodeId = "";
+
+    @SerialEntry(comment = "The address other servers send players to when transferring them back here.")
+    public String transferAddress = "localhost";
+
+    @SerialEntry(comment = "The port other servers send players to when transferring them back here.")
+    public int transferPort = 25565;
 }

@@ -86,6 +86,12 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
+    include(implementation("io.jsonwebtoken:jjwt-api:0.13.0")!!)
+    include(runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")!!)
+    include(runtimeOnly("io.jsonwebtoken:jjwt-gson:0.13.0")!!)
+
+    include(implementation("org.xerial:sqlite-jdbc:3.53.2.0")!!)
+
     fletchingTable.modrinth("fabric-api", sc.current.version)?.let { dep ->
         modRuntimeOnly(dep)
     }
