@@ -21,6 +21,7 @@
   "accessWidener": "clover.ct",
   "depends": {
     "fabricloader": ">=0.19",
+    "yet_another_config_lib_v3": "*",
     "minecraft": "${minecraft}"
   },
   "suggests": {

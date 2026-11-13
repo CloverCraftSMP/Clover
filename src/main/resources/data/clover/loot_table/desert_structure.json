@@ -2,7 +2,7 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 3,
+      "rolls": 5,
       "entries": [
         {
           "type": "minecraft:item",

@@ -39,8 +39,8 @@ public class ModStructures {
 
     public static final List<StructureEntry> ALL = List.of(
             // common structures
-            new StructureEntry("wagon", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
-            new StructureEntry("campsite", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.NONE, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
+            new StructureEntry("wagon", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 1),
+            new StructureEntry("campsite", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 2),
             new StructureEntry("haystorage", ConventionalBiomeTags.IS_PLAINS, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 3),
             new StructureEntry("desertarch", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 8),
             new StructureEntry("deserthouse", BiomeTags.HAS_DESERT_PYRAMID, TerrainAdjustment.BEARD_THIN, COMMON_SPACING, COMMON_SEPARATION, SALT_BASE + 9),
