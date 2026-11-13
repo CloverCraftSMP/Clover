@@ -3,6 +3,11 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+### Changed
+
+## [4.1.0] - 2026-11-13
+### Added
+### Fixed
 - Structure generation works properly
 - Loot tables work properly
 ### Changed
