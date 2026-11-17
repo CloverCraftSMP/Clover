@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+
+## [4.1.1] - 2026-11-17
+### Added
 - Dye duplication recipes
 - Player head drops
 - Cobblestone -> Gravel -> Sand stonecutter recipes
