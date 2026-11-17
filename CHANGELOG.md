@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 ### Added
+- Dye duplication recipes
+- Player head drops
+- Cobblestone -> Gravel -> Sand stonecutter recipes
 ### Fixed
 ### Changed
 

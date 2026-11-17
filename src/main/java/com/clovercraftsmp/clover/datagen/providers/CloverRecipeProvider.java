@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
@@ -74,6 +75,32 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
                 .define('#', Items.WRITABLE_BOOK)
                 .unlockedBy(RecipeProvider.getHasName(Items.WRITABLE_BOOK), provider.has(Items.WRITABLE_BOOK))
                 .save(output, key(FILTER_COMBINATION));
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.COBBLESTONE), RecipeCategory.BUILDING_BLOCKS, Items.GRAVEL, 1)
+                .unlockedBy(RecipeProvider.getHasName(Items.COBBLESTONE), provider.has(Items.COBBLESTONE))
+                .save(output, key(Clover.id("gravel_from_cobblestone_stonecutting")));
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.GRAVEL), RecipeCategory.BUILDING_BLOCKS, Items.SAND, 1)
+                .unlockedBy(RecipeProvider.getHasName(Items.GRAVEL), provider.has(Items.GRAVEL))
+                .save(output, key(Clover.id("sand_from_gravel_cobblestone")));
+
+        List<Item> dyes = List.of(
+                Items.ORANGE_DYE, Items.MAGENTA_DYE, Items.LIGHT_BLUE_DYE, Items.YELLOW_DYE,
+                Items.LIME_DYE, Items.PINK_DYE, Items.GRAY_DYE, Items.LIGHT_GRAY_DYE,
+                Items.CYAN_DYE, Items.PURPLE_DYE, Items.BLUE_DYE, Items.BROWN_DYE,
+                Items.GREEN_DYE, Items.RED_DYE, Items.BLACK_DYE
+        );
+
+        for (Item dye : dyes) {
+            shaped(provider, dye, 9)
+                    .pattern("WWW")
+                    .pattern("WDW")
+                    .pattern("WWW")
+                    .define('W', Items.WHITE_DYE)
+                    .define('D', dye)
+                    .unlockedBy(RecipeProvider.getHasName(dye), provider.has(dye))
+                    .save(output, key(Clover.id(BuiltInRegistries.ITEM.getKey(dye).getPath() + "_duplication")));
+        }
     }
 
     private static Identifier filterRecipeId(Filter filter) {
@@ -137,6 +164,11 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
     }
 
     @SuppressWarnings("SameParameterValue")
+    private static ShapedRecipeBuilder shaped(RecipeProvider provider, Item result, int count) {
+        return provider.shaped(RecipeCategory.MISC, result, count);
+    }
+
+    @SuppressWarnings("SameParameterValue")
     private static ShapedRecipeBuilder shaped(RecipeProvider provider, Item result) {
         return provider.shaped(RecipeCategory.MISC, result);
     }
@@ -196,6 +228,11 @@ public class CloverRecipeProvider extends FabricRecipeProvider {
     @SuppressWarnings("SameParameterValue")
     private static ShapelessRecipeBuilder shapeless(@SuppressWarnings("unused") RecipeProvider provider, Item result) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static ShapedRecipeBuilder shaped(@SuppressWarnings("unused") RecipeProvider provider, Item result, int count) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result, count);
     }
 
     @SuppressWarnings("SameParameterValue")

@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "entity": "this",
+              "name": {
+                "translate": "block.minecraft.player_head.named",
+                "with": [
+                  {
+                    "selector": "@s"
+                  }
+                ]
+              }
+            },
+            {
+              "function": "minecraft:fill_player_head",
+              "entity": "this"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
