@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 ### Fixed
+- Saving a schematic containing a copper pipe no longer crashes the game
 ### Changed
 
 ## [4.1.1] - 2026-11-17
