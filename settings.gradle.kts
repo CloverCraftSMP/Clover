@@ -16,10 +16,7 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        create("ft") {
-            from("dev.kikugie.fletching-table:fletching-table.catalog:0.2-SNAPSHOT")
-            version("fletching-table", "0.2.0-alpha.11")
-        }
+        create("ft") { from("dev.kikugie.fletching-table:fletching-table.catalog:0.2-SNAPSHOT") }
     }
 }
 
@@ -27,8 +24,8 @@ dependencyResolutionManagement {
 plugins {
     // stonecutter template says sometimes gradle doesn't work without this?
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.kikugie.stonecutter") version "0.9.8"
-    id("dev.kikugie.loom-back-compat") version "0.4.2"
+    id("dev.kikugie.stonecutter") version "0.10"
+    id("dev.kikugie.loom-back-compat") version "0.4.3"
 }
 
 

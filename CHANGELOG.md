@@ -31,6 +31,7 @@
 - Cobblestone -> Gravel -> Sand stonecutter recipes
 ### Fixed
 ### Changed
+- Bump Stonecutter to 0.10.0, Gradle to 9.2.2 and other versions
 
 ## [4.1.0] - 2026-11-13
 ### Added

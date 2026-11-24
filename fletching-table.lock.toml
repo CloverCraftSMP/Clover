@@ -1,0 +1,99 @@
+# =#= Fletching Table dependency lock file =#=
+# This file is used to remember versions pulled with `fletchingTable.modrinth()`/`.curseforge()`.
+# It is recommended to commit it to the repository. To manage it, you can:
+# - Delete a mod's `[[slug]]` entry to pull a new version.
+# - Run `pruneDependencyLock` task to remove unused entries.
+# - Run `updateDependencyLock` task to fetch newest versions.
+# - Set `dev.kikugie.fletching-table.lock-file=custom-name.toml` property to change the filename.
+# - Set `dev.kikugie.fletching-table.dynamic-dependencies=true` property to disable this feature.
+
+[[clutterbestiary]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/FkbDiLgR/version/SMLsIJmB
+  "maven.modrinth:FkbDiLgR:SMLsIJmB"
+]
+
+[[fabric-api]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/P7dR8mSH/version/5SwzqWUu
+  "maven.modrinth:P7dR8mSH:5SwzqWUu"
+]
+
+[[fabric-api]]
+key = { platform = "modrinth", versions = [ "26.1.2" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/P7dR8mSH/version/3dM0X6ou
+  "maven.modrinth:P7dR8mSH:3dM0X6ou"
+]
+
+[[horseman]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/qIv5FhAA/version/Y70eYqh0
+  "maven.modrinth:qIv5FhAA:Y70eYqh0"
+]
+
+[[larion-worldgen]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/rctNbbuL/version/ojlLh0uS
+  "maven.modrinth:rctNbbuL:ojlLh0uS"
+]
+
+[[modpack-checker]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/LbG0j53h/version/k46pBcqe
+  "maven.modrinth:LbG0j53h:k46pBcqe"
+]
+
+[[simple-copper-pipes]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/9r4ZkgSN/version/OiCkwg79
+  "maven.modrinth:9r4ZkgSN:OiCkwg79"
+]
+
+[[simple-copper-pipes]]
+key = { platform = "modrinth", versions = [ "26.1.2" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/9r4ZkgSN/version/bqQeamhf
+  "maven.modrinth:9r4ZkgSN:bqQeamhf"
+]
+
+[[status]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/b93awgkg/version/nHVFRSfp
+  "maven.modrinth:b93awgkg:nHVFRSfp"
+]
+
+[[status]]
+key = { platform = "modrinth", versions = [ "26.1.2" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/b93awgkg/version/TSYQAWsV
+  "maven.modrinth:b93awgkg:TSYQAWsV"
+]
+
+[[supplementaries]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/fFEIiSDQ/version/RLkOW7T7
+  "maven.modrinth:fFEIiSDQ:RLkOW7T7"
+]
+
+[[tide]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/die1AF7i/version/ztNu3GtG
+  "maven.modrinth:die1AF7i:ztNu3GtG"
+]
+
+[[vanillabackport]]
+key = { platform = "modrinth", versions = [ "1.21.1" ], loaders = [ "FABRIC" ] }
+result = [
+  # https://modrinth.com/project/6xwxDTgf/version/pdLJZwZ1
+  "maven.modrinth:6xwxDTgf:pdLJZwZ1"
+]

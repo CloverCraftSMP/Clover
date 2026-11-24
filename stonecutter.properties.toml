@@ -6,8 +6,8 @@ mod.version = "4.1.2"
 publish.modrinth = "SnT761HH"
 publish.github_repo = "CloverCraftSMP/Clover"
 
-deps.fabric_loader = "0.19.3"
-loomx.loom_version = "1.18-SNAPSHOT"
+deps.fabric_loader = "0.20.1"
+loomx.loom_version = "1.19-SNAPSHOT"
 deps.mixin_squared = "0.3.7-beta.3"
 deps.mixinconstraints = "1.1.0"
 deps.vineflower_source_decomp = "1.12.0"
@@ -36,5 +36,5 @@ deps.yacl = "3.8.2+1.21.1-fabric"
 mod.mc_compat = "~26.1"
 mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 
-deps.fabric_api = "0.155.2+26.1.2"
+deps.fabric_api = "0.155.3+26.1.2"
 deps.yacl = "3.9.7+26.1-fabric"
