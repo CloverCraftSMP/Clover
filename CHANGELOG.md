@@ -23,6 +23,7 @@
 - Saving a schematic containing a copper pipe no longer crashes the game
 ### Changed
 - Refactored generated recipes into new subfolders for neatnexss
+- Bump Stonecutter to 0.10.0, Gradle to 9.2.2 and other versions
 
 ## [4.1.1] - 2026-11-17
 ### Added
@@ -31,7 +32,6 @@
 - Cobblestone -> Gravel -> Sand stonecutter recipes
 ### Fixed
 ### Changed
-- Bump Stonecutter to 0.10.0, Gradle to 9.2.2 and other versions
 
 ## [4.1.0] - 2026-11-13
 ### Added
