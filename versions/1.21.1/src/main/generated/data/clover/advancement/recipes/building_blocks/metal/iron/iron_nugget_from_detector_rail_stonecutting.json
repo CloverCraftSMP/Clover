@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_detector_rail": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:detector_rail"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:metal/iron/iron_nugget_from_detector_rail_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_detector_rail"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:metal/iron/iron_nugget_from_detector_rail_stonecutting"
+    ]
+  }
+}

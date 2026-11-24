@@ -1,5 +1,7 @@
 package com.clovercraftsmp.clover.datagen;
 
+import com.clovercraftsmp.clover.datagen.providers.CloverBlockTagProvider;
+import com.clovercraftsmp.clover.datagen.providers.CloverEntityLootProvider;
 import com.clovercraftsmp.clover.datagen.providers.CloverRecipeProvider;
 import com.clovercraftsmp.clover.datagen.providers.StructureProvider;
 import com.clovercraftsmp.clover.structure.ModStructures;
@@ -21,6 +23,8 @@ public class CloverDataGenerator implements DataGeneratorEntrypoint {
             return new CloverRecipeProvider(output, registriesFuture);
         });
         pack.addProvider(StructureProvider::new);
+        pack.addProvider(CloverBlockTagProvider::new);
+        pack.addProvider(CloverEntityLootProvider::new);
     }
 
     @Override

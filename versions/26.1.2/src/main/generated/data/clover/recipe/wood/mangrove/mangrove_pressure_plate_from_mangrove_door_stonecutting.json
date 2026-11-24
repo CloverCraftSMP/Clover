@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:mangrove_door",
+  "result": {
+    "id": "minecraft:mangrove_pressure_plate"
+  }
+}

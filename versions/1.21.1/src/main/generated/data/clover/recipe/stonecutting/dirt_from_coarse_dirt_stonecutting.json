@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:coarse_dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:dirt"
+  }
+}

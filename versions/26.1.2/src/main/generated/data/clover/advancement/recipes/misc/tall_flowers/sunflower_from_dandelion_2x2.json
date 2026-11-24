@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dandelion": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dandelion"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:tall_flowers/sunflower_from_dandelion_2x2"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dandelion"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:tall_flowers/sunflower_from_dandelion_2x2"
+    ]
+  }
+}

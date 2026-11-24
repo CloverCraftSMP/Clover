@@ -1,13 +1,17 @@
 package com.clovercraftsmp.clover;
 
 //? if <=1.21.1 {
-
 /*import com.clovercraftsmp.clover.util.LootTableUtil;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.world.level.GameRules;
-
 *///?}
+
+//? if >= 26.1 {
+import java.util.List;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
+//? }
 
 import com.clovercraftsmp.clover.companion.CcbotClient;
 import com.clovercraftsmp.clover.config.CloverConfig;
@@ -56,6 +60,23 @@ public class Clover implements ModInitializer {
         PayloadTypeRegistry.clientboundPlay().register(ClientboundRemoveNoSleepPacket.TYPE, ClientboundRemoveNoSleepPacket.CODEC);
 
         Filter.registerFilters();
+
+        // I can't depend on backport for datagen because it breaks Carpet,
+        // which I need during dev tests to ensure player drops work.
+        // This is the dumbest workaround in the codebase by far...
+        //? if >= 26.1 {
+        if (System.getProperty("fabric-api.datagen") != null) {
+            for (String name : List.of(
+                    "poplar_log", "stripped_poplar_log", "poplar_wood", "stripped_poplar_wood",
+                    "poplar_planks", "poplar_stairs", "poplar_slab", "poplar_fence", "poplar_fence_gate",
+                    "poplar_door", "poplar_trapdoor", "poplar_button", "poplar_pressure_plate",
+                    "poplar_sign", "poplar_hanging_sign", "poplar_shelf")) {
+                ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.withDefaultNamespace(name));
+                Registry.register(BuiltInRegistries.ITEM, key, new Item(new Item.Properties().setId(key)));
+            }
+        }
+        //? }
+        // Please forgive me, Syfe... I'm just too tired to do this "correctly"...
     }
 
     /**

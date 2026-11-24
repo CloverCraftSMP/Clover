@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_birch_pressure_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:birch_pressure_plate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:wood/birch/birch_sign_from_birch_pressure_plate_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_birch_pressure_plate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:wood/birch/birch_sign_from_birch_pressure_plate_stonecutting"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_andesite_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:andesite_stairs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:stone/andesite/polished_andesite_from_andesite_stairs_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_andesite_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:stone/andesite/polished_andesite_from_andesite_stairs_stonecutting"
+    ]
+  }
+}

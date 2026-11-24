@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:detector_rail",
+  "result": {
+    "count": 5,
+    "id": "minecraft:iron_nugget"
+  }
+}

@@ -1,0 +1,702 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "entity": "this",
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "block.minecraft.player_head.named",
+                "with": [
+                  {
+                    "selector": "@s"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": "this",
+              "function": "minecraft:fill_player_head"
+            }
+          ],
+          "name": "minecraft:player_head"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;-503438495,-1794226230,-1386364414,-1811847477]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:item_name": "{\"extra\":[{\"color\":\"#09450F\",\"text\":\"T\"},{\"color\":\"#17561D\",\"text\":\"u\"},{\"color\":\"#26672B\",\"text\":\"r\"},{\"color\":\"#347839\",\"text\":\"t\"},{\"color\":\"#438947\",\"text\":\"l\"},{\"color\":\"#519A55\",\"text\":\"e \"},{\"color\":\"#60AA62\",\"text\":\"S\"},{\"color\":\"#6EBB70\",\"text\":\"c\"},{\"color\":\"#7DCC7E\",\"text\":\"u\"},{\"color\":\"#8BDD8C\",\"text\":\"t\"},{\"color\":\"#A8FFA8\",\"text\":\"e\"}],\"text\":\"\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"extra\":[{\"color\":\"gray\",\"italic\":false,\"translate\":\"enchantment.minecraft.luck_of_the_sea\"},\" \",{\"color\":\"gray\",\"italic\":false,\"translate\":\"enchantment.level.10\"}],\"text\":\"\"}",
+                  "{\"bold\":true,\"color\":\"dark_green\",\"text\":\"a scute from THE turtle\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:enchantment_glint_override": true
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:food": {
+                  "can_always_eat": true,
+                  "eat_seconds": 2.0,
+                  "effects": [
+                    {
+                      "effect": {
+                        "amplifier": 4,
+                        "duration": 200,
+                        "id": "minecraft:slowness",
+                        "show_icon": true
+                      }
+                    }
+                  ],
+                  "nutrition": 0,
+                  "saturation": 0.0
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:turtle_scute"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;297415275,-1350416151,-1704055785,-1528056649]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": "{\"bold\":true,\"color\":\"gold\",\"text\":\"Cheese...?\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"color\":\"yellow\",\"text\":\"Is it... pulsating?\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:food": {
+                  "can_always_eat": true,
+                  "eat_seconds": 0.5,
+                  "effects": [
+                    {
+                      "effect": {
+                        "amplifier": 2,
+                        "duration": 50,
+                        "id": "minecraft:wither",
+                        "show_icon": true
+                      },
+                      "probability": 0.7
+                    }
+                  ],
+                  "nutrition": 3,
+                  "saturation": 2.0
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:horn_coral_block"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;-759242715,683232587,-1524557418,833102294]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:damage": 58
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:item_name": "{\"bold\":true,\"color\":\"gold\",\"italic\":true,\"text\":\"STRIKE THE EARTH!\"}"
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:wooden_pickaxe"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;513867943,-2135080547,-2036246243,-1168784761]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:item_name": "{\"bold\":true,\"color\":\"white\",\"text\":\"Snov Block\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"color\":\"dark_red\",\"italic\":true,\"text\":\"feel snov´s pain around rat\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:enchantment_glint_override": true
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:food": {
+                  "can_always_eat": true,
+                  "eat_seconds": 1.0,
+                  "effects": [
+                    {
+                      "effect": {
+                        "amplifier": -1,
+                        "duration": 2,
+                        "id": "minecraft:levitation",
+                        "show_icon": true
+                      }
+                    },
+                    {
+                      "effect": {
+                        "amplifier": 4,
+                        "duration": 140,
+                        "id": "minecraft:blindness",
+                        "show_icon": true
+                      }
+                    }
+                  ],
+                  "nutrition": 0,
+                  "saturation": 0.0
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:snow_block"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;1138116879,-1478671454,-1523790744,-1849647247]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_name": "{\"bold\":true,\"color\":\"light_purple\",\"italic\":true,\"text\":\"Crystal Shard\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"color\":\"dark_purple\",\"italic\":true,\"text\":\"A thunderous sound shakes the ground,\"}",
+                  "{\"color\":\"dark_purple\",\"italic\":true,\"text\":\"Where giants' shadows linger 'round.\"}",
+                  "{\"color\":\"dark_purple\",\"italic\":true,\"text\":\"A weary march, a heavy cost,\"}",
+                  "{\"color\":\"dark_purple\",\"italic\":true,\"text\":\"Innocence precious, sadly lost.\"}",
+                  "{\"bold\":true,\"color\":\"light_purple\",\"text\":\"This shard shines brighter than anything you know.\"}",
+                  "\"     \"",
+                  "{\"color\":\"white\",\"italic\":true,\"text\":\"https://youtu.be/j3j7i7UG-9c\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:enchantment_glint_override": true
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:amethyst_shard"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;292263101,275270513,-1700104861,-516713982]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": "{\"color\":\"dark_purple\",\"text\":\"Ender's Eye\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"extra\":[{\"color\":\"#D359FF\",\"text\":\"A \"},{\"color\":\"#CF57F9\",\"text\":\"t\"},{\"color\":\"#CA56F4\",\"text\":\"w\"},{\"color\":\"#C654EE\",\"text\":\"i\"},{\"color\":\"#C253E8\",\"text\":\"s\"},{\"color\":\"#BD51E3\",\"text\":\"t\"},{\"color\":\"#B950DD\",\"text\":\"e\"},{\"color\":\"#B44ED7\",\"text\":\"d \"},{\"color\":\"#B04DD2\",\"text\":\"e\"},{\"color\":\"#AC4BCC\",\"text\":\"y\"},{\"color\":\"#A749C6\",\"text\":\"e \"},{\"color\":\"#A348C1\",\"text\":\"f\"},{\"color\":\"#9F46BB\",\"text\":\"r\"},{\"color\":\"#9A45B5\",\"text\":\"o\"},{\"color\":\"#9643B0\",\"text\":\"m \"},{\"color\":\"#9142AA\",\"text\":\"a \"},{\"color\":\"#8D40A4\",\"text\":\"w\"},{\"color\":\"#893F9F\",\"text\":\"a\"},{\"color\":\"#843D99\",\"text\":\"r\"},{\"color\":\"#803B93\",\"text\":\"p\"},{\"color\":\"#7C3A8E\",\"text\":\"e\"},{\"color\":\"#773888\",\"text\":\"d \"},{\"color\":\"#733782\",\"text\":\"m\"},{\"color\":\"#6E357D\",\"text\":\"i\"},{\"color\":\"#6A3477\",\"text\":\"n\"},{\"color\":\"#663271\",\"text\":\"d\"},{\"color\":\"#5D2F66\",\"text\":\".\"}],\"text\":\"\"}",
+                  "{\"extra\":[{\"color\":\"#D359FF\",\"text\":\"S\"},{\"color\":\"#CF58FA\",\"text\":\"o\"},{\"color\":\"#CC56F5\",\"text\":\"m\"},{\"color\":\"#C855F1\",\"text\":\"e\"},{\"color\":\"#C454EC\",\"text\":\"t\"},{\"color\":\"#C152E7\",\"text\":\"i\"},{\"color\":\"#BD51E2\",\"text\":\"m\"},{\"color\":\"#B950DE\",\"text\":\"e\"},{\"color\":\"#B64FD9\",\"text\":\"s\"},{\"color\":\"#B24DD4\",\"text\":\", \"},{\"color\":\"#AE4CCF\",\"text\":\"i\"},{\"color\":\"#AA4BCA\",\"text\":\"t \"},{\"color\":\"#A749C6\",\"text\":\"f\"},{\"color\":\"#A348C1\",\"text\":\"l\"},{\"color\":\"#9F47BC\",\"text\":\"a\"},{\"color\":\"#9C45B7\",\"text\":\"s\"},{\"color\":\"#9844B3\",\"text\":\"h\"},{\"color\":\"#9443AE\",\"text\":\"e\"},{\"color\":\"#9141A9\",\"text\":\"s \"},{\"color\":\"#8D40A4\",\"text\":\"b\"},{\"color\":\"#893F9F\",\"text\":\"e\"},{\"color\":\"#863D9B\",\"text\":\"y\"},{\"color\":\"#823C96\",\"text\":\"o\"},{\"color\":\"#7E3B91\",\"text\":\"n\"},{\"color\":\"#7B3A8C\",\"text\":\"d \"},{\"color\":\"#773887\",\"text\":\"t\"},{\"color\":\"#733783\",\"text\":\"h\"},{\"color\":\"#6F367E\",\"text\":\"e \"},{\"color\":\"#6C3479\",\"text\":\"s\"},{\"color\":\"#683374\",\"text\":\"k\"},{\"color\":\"#643270\",\"text\":\"y\"},{\"color\":\"#5D2F66\",\"text\":\".\"}],\"text\":\"\"}",
+                  "{\"extra\":[{\"color\":\"#D359FF\",\"text\":\"W\"},{\"color\":\"#CF58FA\",\"text\":\"h\"},{\"color\":\"#CB56F4\",\"text\":\"a\"},{\"color\":\"#C755EF\",\"text\":\"t \"},{\"color\":\"#C353EA\",\"text\":\"m\"},{\"color\":\"#BF52E5\",\"text\":\"a\"},{\"color\":\"#BB50DF\",\"text\":\"y \"},{\"color\":\"#B74FDA\",\"text\":\"b\"},{\"color\":\"#B24DD5\",\"text\":\"r\"},{\"color\":\"#AE4CD0\",\"text\":\"e\"},{\"color\":\"#AA4BCA\",\"text\":\"a\"},{\"color\":\"#A649C5\",\"text\":\"k \"},{\"color\":\"#A248C0\",\"text\":\"h\"},{\"color\":\"#9E46BA\",\"text\":\"i\"},{\"color\":\"#9A45B5\",\"text\":\"m\"},{\"color\":\"#9643B0\",\"text\":\", \"},{\"color\":\"#9242AB\",\"text\":\"o\"},{\"color\":\"#8E40A5\",\"text\":\"r \"},{\"color\":\"#8A3FA0\",\"text\":\"s\"},{\"color\":\"#863D9B\",\"text\":\"e\"},{\"color\":\"#823C95\",\"text\":\"t \"},{\"color\":\"#7E3B90\",\"text\":\"h\"},{\"color\":\"#79398B\",\"text\":\"i\"},{\"color\":\"#753886\",\"text\":\"m \"},{\"color\":\"#713680\",\"text\":\"f\"},{\"color\":\"#6D357B\",\"text\":\"r\"},{\"color\":\"#693376\",\"text\":\"e\"},{\"color\":\"#653271\",\"text\":\"e\"},{\"color\":\"#5D2F66\",\"text\":\"?\"}],\"text\":\"\"}",
+                  "{\"extra\":[{\"color\":\"#D359FF\",\"text\":\".\"},{\"color\":\"#D058FB\",\"text\":\".\"},{\"color\":\"#CC57F6\",\"text\":\".\"},{\"color\":\"#C955F2\",\"text\":\"i\"},{\"color\":\"#C554ED\",\"text\":\"t \"},{\"color\":\"#C253E9\",\"text\":\"s\"},{\"color\":\"#BE52E4\",\"text\":\"e\"},{\"color\":\"#BB50E0\",\"text\":\"e\"},{\"color\":\"#B74FDB\",\"text\":\"m\"},{\"color\":\"#B44ED7\",\"text\":\"s \"},{\"color\":\"#B04DD2\",\"text\":\"t\"},{\"color\":\"#AD4BCE\",\"text\":\"o \"},{\"color\":\"#A94AC9\",\"text\":\"s\"},{\"color\":\"#A649C5\",\"text\":\"t\"},{\"color\":\"#A248C0\",\"text\":\"a\"},{\"color\":\"#9F46BC\",\"text\":\"r\"},{\"color\":\"#9B45B7\",\"text\":\"t \"},{\"color\":\"#9844B3\",\"text\":\"w\"},{\"color\":\"#9543AE\",\"text\":\"i\"},{\"color\":\"#9142AA\",\"text\":\"t\"},{\"color\":\"#8E40A5\",\"text\":\"h \"},{\"color\":\"#8A3FA1\",\"text\":\"t\"},{\"color\":\"#873E9C\",\"text\":\"h\"},{\"color\":\"#833D98\",\"text\":\"e \"},{\"color\":\"#803B93\",\"text\":\"l\"},{\"color\":\"#7C3A8F\",\"text\":\"e\"},{\"color\":\"#79398A\",\"text\":\"t\"},{\"color\":\"#753886\",\"text\":\"t\"},{\"color\":\"#723681\",\"text\":\"e\"},{\"color\":\"#6E357D\",\"text\":\"r \"},{\"color\":\"#6B3478\",\"text\":\"\\\"\"},{\"color\":\"#673374\",\"text\":\"G\"},{\"color\":\"#64316F\",\"text\":\"\\\"\"},{\"color\":\"#5D2F66\",\"text\":\".\"}],\"text\":\"\"}",
+                  "{\"color\":\"dark_aqua\",\"font\":\"minecraft:illageralt\",\"text\":\"Auram Radio Cognitio\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:food": {
+                  "can_always_eat": true,
+                  "eat_seconds": 5.0,
+                  "effects": [
+                    {
+                      "effect": {
+                        "amplifier": 5,
+                        "duration": 666,
+                        "id": "minecraft:darkness",
+                        "show_icon": true
+                      },
+                      "probability": 0.9
+                    },
+                    {
+                      "effect": {
+                        "amplifier": 1,
+                        "duration": 576,
+                        "id": "minecraft:mining_fatigue",
+                        "show_icon": true
+                      },
+                      "probability": 0.9
+                    }
+                  ],
+                  "nutrition": 1,
+                  "saturation": 2.9
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:ender_eye"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;-1628703589,-1279703950,-1709085947,1899175976]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 64.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "components": {
+                "minecraft:custom_name": "{\"bold\":false,\"color\":\"gold\",\"italic\":false,\"text\":\"CloverCoin\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"color\":\"gray\",\"italic\":false,\"text\":\"A leaf removed from a four-leaf clover.\"}",
+                  "{\"color\":\"gray\",\"italic\":false,\"text\":\"On its own, virtually useless, \"}",
+                  "{\"color\":\"gray\",\"extra\":[{\"extra\":[{\"color\":\"#FF5555\",\"text\":\"C\"},{\"color\":\"#FFFFFF\",\"text\":\"l\"},{\"color\":\"#FF5555\",\"text\":\"o\"},{\"color\":\"#FFFFFF\",\"text\":\"v\"},{\"color\":\"#FF5555\",\"text\":\"e\"},{\"color\":\"#FFFFFF\",\"text\":\"r \"},{\"color\":\"#FF5555\",\"text\":\"C\"},{\"color\":\"#FFFFFF\",\"text\":\"a\"},{\"color\":\"#FF5555\",\"text\":\"r\"},{\"color\":\"#FFFFFF\",\"text\":\"n\"},{\"color\":\"#FF5555\",\"text\":\"i\"},{\"color\":\"#FFFFFF\",\"text\":\"v\"},{\"color\":\"#FF5555\",\"text\":\"a\"},{\"color\":\"#FFFFFF\",\"text\":\"l\"}],\"italic\":false,\"text\":\"\"},{\"color\":\"gray\",\"italic\":false,\"text\":\".\"}],\"italic\":false,\"text\":\"but a valuable commodity when used at the \"}",
+                  "{\"color\":\"gray\",\"italic\":false,\"text\":\"Spend wisely.\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:rarity": "uncommon"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "clover:verified_owner": [
+                    -1628703589,
+                    -1279703950,
+                    -1709085947,
+                    1899175976
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:lily_pad"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;1184717274,391399364,-1323150380,2108006273]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_name": "{\"bold\":true,\"color\":\"light_purple\",\"italic\":false,\"text\":\"Fragment of Memory\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "\"A strange energy swirls inside...\"",
+                  "{\"color\":\"gray\",\"italic\":false,\"text\":\"A memorial for those we've lost\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:amethyst_shard"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;1330932179,1378569208,-1388153997,-320523906]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": "{\"bold\":true,\"color\":\"red\",\"text\":\"Tohsaka Heirloom Pendant\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"italic\":false,\"text\":\"   It once held ten years of mana,\"}",
+                  "{\"italic\":false,\"text\":\"    spent in a single night to save\"}",
+                  "{\"italic\":false,\"text\":\"        a life that wasn't hers.\"}",
+                  "{\"italic\":false,\"text\":\"     Its magic was spent long ago.\"}",
+                  "{\"italic\":false,\"text\":\"                 ... mostly.\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:rarity": "epic"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:enchantment_glint_override": true
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:max_stack_size": 1
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:max_damage": 100
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:damage": 95
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "syfe_pendant": 1
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:heart_of_the_sea"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "attacker",
+          "predicate": {
+            "type": "minecraft:player"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "nbt": "{UUID:[I;-1825426840,-1590278031,-1465693437,1298904881]}"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_name": "{\"color\":\"red\",\"text\":\"'98 Toyota Corolla Driveshaft\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:lore": [
+                  "{\"extra\":[{\"color\":\"gray\",\"italic\":false,\"translate\":\"enchantment.minecraft.unbreaking\"},\" \",{\"color\":\"gray\",\"italic\":false,\"translate\":\"enchantment.level.3\"}],\"text\":\"\"}",
+                  "{\"extra\":[{\"color\":\"gray\",\"italic\":false,\"translate\":\"enchantment.minecraft.mending\"}],\"text\":\"\"}",
+                  "{\"bold\":true,\"color\":\"red\",\"italic\":true,\"text\":\"Driveshaft for a 98' Toyota Corolla.\"}",
+                  "{\"bold\":true,\"color\":\"dark_red\",\"italic\":true,\"text\":\"Has been used for over 1 million miles.\"}",
+                  "{\"bold\":true,\"color\":\"dark_red\",\"italic\":true,\"text\":\"Will last its new owner a million more.\"}"
+                ]
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "minecraft:enchantment_glint_override": true
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:chain"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

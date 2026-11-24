@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:acacia_trapdoor",
+  "result": {
+    "id": "minecraft:acacia_pressure_plate"
+  }
+}

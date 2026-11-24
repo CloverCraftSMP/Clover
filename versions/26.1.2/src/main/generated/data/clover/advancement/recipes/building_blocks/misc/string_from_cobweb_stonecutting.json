@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobweb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cobweb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:misc/string_from_cobweb_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cobweb"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:misc/string_from_cobweb_stonecutting"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cauldron",
+  "result": {
+    "count": 7,
+    "id": "minecraft:iron_ingot"
+  }
+}

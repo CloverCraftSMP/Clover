@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:oxidized_copper_grate",
+  "result": {
+    "id": "minecraft:oxidized_copper_trapdoor"
+  }
+}

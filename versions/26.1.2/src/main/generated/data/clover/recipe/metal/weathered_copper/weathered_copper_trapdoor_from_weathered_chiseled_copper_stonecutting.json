@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:weathered_chiseled_copper",
+  "result": {
+    "id": "minecraft:weathered_copper_trapdoor"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_oak_sign": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:oak_sign"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:wood/oak/oak_planks_from_oak_sign_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_oak_sign"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:wood/oak/oak_planks_from_oak_sign_stonecutting"
+    ]
+  }
+}

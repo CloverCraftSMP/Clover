@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:iron_trapdoor",
+  "result": {
+    "id": "minecraft:heavy_weighted_pressure_plate"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:spruce_sign"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:spruce_pressure_plate"
+  }
+}

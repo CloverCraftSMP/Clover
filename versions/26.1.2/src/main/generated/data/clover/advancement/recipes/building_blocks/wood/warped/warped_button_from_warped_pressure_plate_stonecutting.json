@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:wood/warped/warped_button_from_warped_pressure_plate_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warped_pressure_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:warped_pressure_plate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_warped_pressure_plate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:wood/warped/warped_button_from_warped_pressure_plate_stonecutting"
+    ]
+  }
+}

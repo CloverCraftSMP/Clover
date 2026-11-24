@@ -1,0 +1,40 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "drops_backport"
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_poplar_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stripped_poplar_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:wood/poplar/poplar_button_from_stripped_poplar_log_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_poplar_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:wood/poplar/poplar_button_from_stripped_poplar_log_stonecutting"
+    ]
+  }
+}

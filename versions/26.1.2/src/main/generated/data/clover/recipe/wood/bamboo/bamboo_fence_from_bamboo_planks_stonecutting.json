@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:bamboo_planks",
+  "result": {
+    "id": "minecraft:bamboo_fence"
+  }
+}

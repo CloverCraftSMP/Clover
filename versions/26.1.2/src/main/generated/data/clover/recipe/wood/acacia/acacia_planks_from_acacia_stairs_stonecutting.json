@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:acacia_stairs",
+  "result": {
+    "id": "minecraft:acacia_planks"
+  }
+}

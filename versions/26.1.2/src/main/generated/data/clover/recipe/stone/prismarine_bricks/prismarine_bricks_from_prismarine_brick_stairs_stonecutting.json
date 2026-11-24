@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:prismarine_brick_stairs",
+  "result": {
+    "id": "minecraft:prismarine_bricks"
+  }
+}

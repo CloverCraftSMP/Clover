@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:minecart",
+  "result": {
+    "count": 5,
+    "id": "minecraft:iron_ingot"
+  }
+}

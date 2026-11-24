@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:oak_trapdoor"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:oak_pressure_plate"
+  }
+}

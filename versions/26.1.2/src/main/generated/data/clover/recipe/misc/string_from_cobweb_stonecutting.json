@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cobweb",
+  "result": {
+    "count": 9,
+    "id": "minecraft:string"
+  }
+}

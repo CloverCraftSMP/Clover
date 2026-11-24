@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_powered_rail": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:powered_rail"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clover:metal/gold/gold_nugget_from_powered_rail_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_powered_rail"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clover:metal/gold/gold_nugget_from_powered_rail_stonecutting"
+    ]
+  }
+}
