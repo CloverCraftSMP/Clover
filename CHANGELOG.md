@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+
+## [4.1.2] - 2026-11-24
+### Added
 - Ported all Mastercutter recipes to Clover
   - Can I please have a nap now? -Colonel
 - Logs can now be crafted directly into sticks
